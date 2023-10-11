@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/discount-smoke/static/css/main.0454b0c8.css",
+    "main.js": "/discount-smoke/static/js/main.4a73d130.js",
+    "static/js/787.4e5300e2.chunk.js": "/discount-smoke/static/js/787.4e5300e2.chunk.js",
+    "static/media/topbackground3.png": "/discount-smoke/static/media/topbackground3.30d7cdb232901922ec36.png",
+    "static/media/topbackground4.png": "/discount-smoke/static/media/topbackground4.56f8ab778748747ee85c.png",
+    "static/media/topbackground1.png": "/discount-smoke/static/media/topbackground1.31030b06b0acf6d0dd31.png",
+    "static/media/topbackground2.png": "/discount-smoke/static/media/topbackground2.ae7fc918a26387ab3980.png",
+    "static/media/7.png": "/discount-smoke/static/media/7.13cf0ba857abe9fbbc17.png",
+    "static/media/logoWithoutBackground.png": "/discount-smoke/static/media/logoWithoutBackground.8c7a8e3ec4261845a1b2.png",
+    "static/media/health tips.png": "/discount-smoke/static/media/health tips.589718fb6e37839ca57c.png",
+    "static/media/pagenotfound.png": "/discount-smoke/static/media/pagenotfound.24a76972912dba9ef1db.png",
+    "static/media/brandLogo1.png": "/discount-smoke/static/media/brandLogo1.7a034da509eb27fc630c.png",
+    "static/media/brandLogo5.png": "/discount-smoke/static/media/brandLogo5.61e94055e82532f6cee6.png",
+    "static/media/underConstruction.svg": "/discount-smoke/static/media/underConstruction.4cb984377c1d1d787ca759f54c4e01f4.svg",
+    "static/media/brandLogo4.png": "/discount-smoke/static/media/brandLogo4.39e98482ec021bf41c38.png",
+    "static/media/logoVerticalWithoutBackground.png": "/discount-smoke/static/media/logoVerticalWithoutBackground.c07249d234d322ca0c3e.png",
+    "static/media/brandLogo2.png": "/discount-smoke/static/media/brandLogo2.5bb2c7b5922e4ee7ce4f.png",
+    "static/media/brandLogo3.png": "/discount-smoke/static/media/brandLogo3.fb3310ccf75d8a9d9e50.png",
+    "static/media/brandLogo6.png": "/discount-smoke/static/media/brandLogo6.c3b5b40953368a56bda7.png",
+    "static/media/imageAlternate.svg": "/discount-smoke/static/media/imageAlternate.9d6c5072cda9849040e07a9218706620.svg",
+    "static/media/notloggedin.svg": "/discount-smoke/static/media/notloggedin.ea005d8d17ab00871feb339a217f7f7f.svg",
+    "static/media/maleAvatar.svg": "/discount-smoke/static/media/maleAvatar.f6e9fbfb7ee0984f6aa33d165d360fea.svg",
+    "index.html": "/discount-smoke/index.html",
+    "main.0454b0c8.css.map": "/discount-smoke/static/css/main.0454b0c8.css.map",
+    "main.4a73d130.js.map": "/discount-smoke/static/js/main.4a73d130.js.map",
+    "787.4e5300e2.chunk.js.map": "/discount-smoke/static/js/787.4e5300e2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0454b0c8.css",
+    "static/js/main.4a73d130.js"
+  ]
+}
