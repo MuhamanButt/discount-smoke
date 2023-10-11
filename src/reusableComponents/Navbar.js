@@ -145,7 +145,7 @@ const MyNavbar = ({ status }) => {
                         className="position-absolute top-50 start-0 translate-middle badge rounded-pill bg-danger"
                         style={{ zIndex: "20" }}
                       >
-                        {numberOfMessages+1}
+                        {numberOfMessages}
                         <span className="visually-hidden">unread messages</span>
                       </span>
                     ) : (
