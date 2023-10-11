@@ -1,0 +1,35 @@
+.nav-btn{
+    color: black !important;
+    background-color: transparent !important;
+    border: none !important;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px;
+    width: auto;
+}
+.navbar-row{
+    background-color: #D3D3D3 ;
+}
+.carousel-control-next-icon,.carousel-control-prev-icon{
+    display: none !important;
+}
+@media screen and (max-width:920px)
+{
+    .nav-btn{
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width:480px)
+{
+    .nav-btn{
+        font-size: 6px !important;
+    }
+}
+
+.nav-btn:hover{
+    background-color: #05225C !important;
+    border-radius: 10px;
+    font-weight: 400;
+    color: white !important;
+}

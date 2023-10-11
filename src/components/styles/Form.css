@@ -1,0 +1,77 @@
+.FormLabels{
+    font-weight: 700;
+    font-size: 22px;
+    color: #05225C;
+}
+.form-control,.dropdown-item{
+  font-size: 12px !important;
+}
+#input-group-dropdown
+{
+    background-color: #05225C !important;
+    color: rgb(255, 255, 255) !important;
+    font-size: 10px !important;
+}
+.dropdown-item{
+    color: white !important;
+}
+.dropdown-item:hover{
+  background-color: #05225C !important;
+}
+.drop-shadow{
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.ButtonHover:hover {
+    color: white;
+    background-color: #062368 !important;
+    transition: all 0.3s;
+    position: relative;
+  }
+.ButtonHover {
+    color: #fff;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .ButtonHover span {
+    transition: all 0.3s;
+  }
+  .ButtonHover::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: rgba(255, 255, 255, 0.5);
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+    transform: scale(0.1, 1);
+  }
+  .ButtonHover:hover span {
+    letter-spacing: 2px;
+  }
+  .ButtonHover:hover::before {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  .ButtonHover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .ButtonHover:hover::after {
+    opacity: 0;
+    transform: scale(0.1, 1);
+  }

@@ -1,0 +1,28 @@
+.OurBrands{
+    background-color: #D3D3D3;
+    padding-bottom: 30px;
+}
+@media screen and (max-width:768px){
+    .OurBrands{
+        padding-bottom:15px;
+    }
+}
+@media screen and (max-width:480px){
+    .OurBrands{
+        padding-bottom:10px;
+    }
+}
+@media screen and (max-width:350px){
+    .OurBrands{
+        padding-bottom:5px;
+    }
+}
+@media screen and (min-width:900px){
+    .ourbrands-image{
+        width: 80%;
+    }
+}
+
+.ourbrands-image{
+    width: 100%;
+}

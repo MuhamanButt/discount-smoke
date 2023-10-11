@@ -1,0 +1,28 @@
+@media screen and (max-width: 450px) {
+  .message-table-header {
+    font-size: 12px;
+  }
+}
+.navbtn {
+  text-decoration: none;
+  color: #030f2b;
+  font-weight: 600;
+  padding-bottom: 3px;
+  transition: border-bottom 0.5s ease; /* Add other styles you want to transition here */
+}/* Add the transition property to the .navbtn class */
+
+  
+  /* Override the transition for the .navbtn-active class */
+  .navbtn-active {
+    border-bottom: 1px solid black;
+    transition: none; /* Disable the transition for .navbtn-active */
+  }
+  
+.message-table-header th {
+  color: #05225C !important;
+}
+
+.navbtn:hover{
+    cursor: pointer;
+    font-weight: 700;
+}

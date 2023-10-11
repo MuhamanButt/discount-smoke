@@ -1,0 +1,71 @@
+.pc-img {
+  border-radius: 15px;
+  object-fit: contain !important;
+  max-height: 100%;
+  margin: auto 0px;
+}
+.pc-productName {
+  font-weight: 800;
+  color: #05225c;
+  font-size: 32px;
+}
+.pc-brandName {
+  color: #05225c;
+  font-size: 20px;
+}
+.pc-text {
+  font-size: 14px;
+  color: #05225c;
+}
+.pc-subHeading {
+  font-weight: 700;
+  color: #05225c;
+  font-size: 26px;
+}
+.flavorButtons {
+  border: 1px solid #9b9b9b;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+/*------------------------------------------*/
+@media screen and (max-width: 992px) and (min-width: 768px) {
+  .pc-productName {
+    font-size: 26px;
+  }
+  .pc-brandName {
+    font-size: 14px;
+  }
+  .pc-text {
+    font-size: 10px;
+  }
+  .pc-subHeading {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 568px) {
+  .pc-features {
+    font-size: 8px;
+  }
+  .pc-productName {
+    font-size: 16px;
+  }
+  .pc-brandName {
+    font-size: 10px;
+  }
+  .pc-text {
+    font-size: 8px;
+  }
+  .pc-subHeading {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .pc-img {
+    max-height: 100%;
+    width: 100%;
+  }
+}

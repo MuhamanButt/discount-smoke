@@ -1,0 +1,6 @@
+.searchbar-item:hover{
+    background-color: #dcdcdc !important;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}

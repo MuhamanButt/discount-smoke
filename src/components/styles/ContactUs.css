@@ -1,0 +1,32 @@
+.contactUs-description{
+    text-align: center;
+}
+.send-msg-btn{
+    background-color: #00bc00 !important;
+    width: 50% !important;
+}
+@media screen and (max-width:768px)
+{
+    .contactUs-description{
+        font-size: 8px;
+    }
+}
+@media screen and (max-width:300px)
+{
+    .contactUs-description{
+        font-size: 6px;
+    }
+}
+@media screen and (max-width:576px)
+{
+    .send-msg-btn{
+        background-color: #00bc00 !important;
+        font-size: 10px !important;
+    }
+    .c-formLabels{
+        font-size: 15px !important;
+    }
+    .c-formText::placeholder{
+        font-size: 8px !important;
+    }
+}
