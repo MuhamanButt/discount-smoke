@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import ExcelJS from "exceljs";
+
 import { useSelector } from "react-redux";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
@@ -252,7 +254,7 @@ export const FirebaseProvider = (props) => {
     return dataArray;
   };
   const getAllData = async () => {
-    console.log("hello")
+    console.log("hello");
     try {
       const categories = [
         "Starter Devices",
@@ -270,26 +272,275 @@ export const FirebaseProvider = (props) => {
         "Chewing Tobacco",
         "Disposable Vapes",
         "Candles And Incense",
-        "Cigarette Machines"
+        "Cigarette Machines",
       ];
-  
+
       // Fetch data for all categories concurrently
       const categoryData = await Promise.all(
         categories.map(async (category) => {
           return await getProductsByCategory(category);
         })
       );
-  
+
       // Merge all category data into a single array
       const AllData = categoryData.reduce((acc, data) => {
         return acc.concat(data);
       }, []);
-  
+
       return AllData;
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
     }
+  };
+
+  
+  //!--------------------------------------------------------BACKUP
+  const downloadAllOffersToExcel = async () => {
+    const data = await getOffers();
+    console.log(data[0]);
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("My Sheet");
+
+    sheet.columns = [
+      {
+        header: "ExpirationTime",
+        key: "ExpirationTime",
+        width: 10,
+      },
+      {
+        header: "OfferDescription",
+        key: "OfferDescription",
+        width: 80,
+      },
+      {
+        header: "Id",
+        key: "id",
+        width: 30,
+      },
+      {
+        header: "ProductName",
+        key: "ProductName",
+        width: 40,
+      },
+      {
+        header: "Category",
+        key: "category",
+        width: 20,
+      },
+      {
+        header: "ListingDate",
+        key: "listingDate",
+        width: 20,
+      },
+      {
+        header: "Description",
+        key: "Description",
+        width: 80,
+      },
+      {
+        header: "Brand",
+        key: "selectedBrand",
+        width: 20,
+      },
+      {
+        header: "Flavors",
+        key: "selectedFlavors",
+        width: 60,
+      },
+      {
+        header: "Features",
+        key: "Features",
+        width: 100,
+      },
+      {
+        header: "pictureURL",
+        key: "pictureURL",
+        width: 100,
+      },
+    ];
+    data?.map((product) => {
+      sheet.addRow({
+        id: product?.identity, // Use "id" to match the key in columns
+        ProductName: product?.ProductName,
+        category: product?.category,
+        listingDate: product?.listingDate,
+        Description: product?.Description,
+        selectedBrand: product?.selectedBrand,
+        selectedFlavors: product?.selectedFlavors.join(", "),
+        Features: product?.Features,
+        ExpirationTime: product?.ExpirationTime,
+        OfferDescription: product?.OfferDescription,
+      });
+    });
+
+    workbook.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheet.sheet",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "offers.xlsx";
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+    });
+  };
+  const downloadAllDataToExcel = async () => {
+    const data = await getAllData();
+    console.log(data[0]);
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("My Sheet");
+
+    sheet.columns = [
+      {
+        header: "Id",
+        key: "id",
+        width: 30,
+      },
+      {
+        header: "ProductName",
+        key: "ProductName",
+        width: 40,
+      },
+      {
+        header: "Category",
+        key: "category",
+        width: 20,
+      },
+      {
+        header: "ListingDate",
+        key: "listingDate",
+        width: 20,
+      },
+      {
+        header: "Description",
+        key: "Description",
+        width: 80,
+      },
+      {
+        header: "Brand",
+        key: "selectedBrand",
+        width: 20,
+      },
+      {
+        header: "Flavors",
+        key: "selectedFlavors",
+        width: 60,
+      },
+      {
+        header: "Features",
+        key: "Features",
+        width: 100,
+      },
+      {
+        header: "pictureURL",
+        key: "pictureURL",
+        width: 100,
+      },
+    ];
+    data?.map((product) => {
+      sheet.addRow({
+        id: product?.identity, // Use "id" to match the key in columns
+        ProductName: product?.ProductName,
+        category: product?.category,
+        listingDate: product?.listingDate,
+        Description: product?.Description,
+        selectedBrand: product?.selectedBrand,
+        selectedFlavors: product?.selectedFlavors.join(", "),
+        Features: product?.Features,
+        pictureURL: "",
+      });
+    });
+
+    workbook.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheet.sheet",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "products.xlsx";
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+    });
+  };
+  const downloadAllMessagesToExcel = async () => {
+    let data = [];
+
+    const messagesCollectionRef = collection(firestore, "Messages");
+    try {
+      const results = await getDocs(messagesCollectionRef);
+      results.forEach((doc) => {
+        data.push(doc.data());
+      });
+    } catch (error) {
+      console.error("Error fetching messages: ", error);
+    }
+
+    console.log(data[0]);
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("My Sheet");
+    sheet.columns = [
+      {
+        header: "Id",
+        key: "id",
+        width: 20,
+      },
+      {
+        header: "Name",
+        key: "Name",
+        width: 20,
+      },
+      {
+        header: "Email",
+        key: "Email",
+        width: 20,
+      },
+      {
+        header: "Status",
+        key: "Status",
+        width: 20,
+      },
+      {
+        header: "TimeStamp",
+        key: "TimeStamp",
+        width: 20,
+      },
+      {
+        header: "ContactNo",
+        key: "ContactNo",
+        width: 20,
+      },
+      {
+        header: "Description",
+        key: "Description",
+        width: 60,
+      },
+    ];
+    data?.map((message) => {
+      sheet.addRow({
+        id: message?.id, // Use "id" to match the key in columns
+        Name: message?.Name,
+        Email: message?.Email,
+        Status: message?.Status,
+        TimeStamp: message?.TimeStamp,
+        ContactNo: message?.ContactNo,
+        Description: message?.Description,
+      });
+    });
+
+    workbook.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheet.sheet",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "messages.xlsx";
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+    });
   };
   //!--------------------------------------------------------ADDING DOC
   const addNewFlavor = async (flavorName) => {
@@ -576,6 +827,9 @@ export const FirebaseProvider = (props) => {
     markMessageAsNew,
     deleteMessageByIdentity,
     getAllData,
+    downloadAllDataToExcel,
+    downloadAllOffersToExcel,
+    downloadAllMessagesToExcel,
   };
 
   return (

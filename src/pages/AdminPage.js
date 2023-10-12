@@ -10,6 +10,9 @@ import { useFirebase } from "../context/firebase";
 import MyButton from "../reusableComponents/MyButton";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import AdminAccordionDownload from "../components/AdminAccordionDownload";
+import AdminAccordionBackup from "../components/AdminAccordionBackup";
 const AdminPage = () => {
   const firebase = useFirebase();
   const navigate = useNavigate();
@@ -33,6 +36,10 @@ const AdminPage = () => {
               <AdminAccordionAddExtras />
               <br />
               <AdminAccordionViewInbox />
+              <br />
+              <AdminAccordionDownload/>
+              <br />
+              <AdminAccordionBackup/>
               <br />
               <br />
             </div>
