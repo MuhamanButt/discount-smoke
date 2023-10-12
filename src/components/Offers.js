@@ -50,13 +50,13 @@ const Offers = () => {
     calculateRemainingTime(timestamp, identity);
     const currentTime = new Date().getTime();
     const timeDifference = timestamp - currentTime;
-    return Math.floor((timeDifference % 86400000) / 3600000);
+    return (Math.floor(timeDifference / 3600000)-(Math.floor(timeDifference / 86400000)*24));
   };
   const getMins = (timestamp, identity) => {
     calculateRemainingTime(timestamp, identity);
     const currentTime = new Date().getTime();
     const timeDifference = timestamp - currentTime;
-    return Math.floor((timeDifference % 3600000) / 60000);
+    return (Math.floor(timeDifference / 60000)-((Math.floor(timeDifference / 3600000)*60)));
   };
   const calculateRemainingTime = async (timestamp, identity) => {
     const currentTime = new Date().getTime();

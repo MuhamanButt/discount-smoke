@@ -48,17 +48,18 @@ const UpdateOffer = () => {
     console.log(expirationDate);
     return expirationTime;
   }
+  
   function calculateRemainingHours(timestamp) {
     const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / (1000 * 60 * 60));
+    return (Math.floor(timeDifference / 3600000)-(Math.floor(timeDifference / 86400000)*24));
   }
   function calculateRemainingDays(timestamp) {
     const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    return Math.floor(timeDifference / 86400000);
   }
   function calculateRemainingMinutes(timestamp) {
     const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / (1000 * 60));
+    return (Math.floor(timeDifference / 60000)-((Math.floor(timeDifference / 3600000)*60)));
   }
   const setDataViaCheck = (value, limit, callBack) => {
     if (value.length <= limit) {

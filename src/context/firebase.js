@@ -254,7 +254,6 @@ export const FirebaseProvider = (props) => {
     return dataArray;
   };
   const getAllData = async () => {
-    console.log("hello");
     try {
       const categories = [
         "Starter Devices",
