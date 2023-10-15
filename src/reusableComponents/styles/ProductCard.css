@@ -38,7 +38,7 @@
   border: none !important;
 }
 .product-card-delete-btn {
-  background-color: rgb(137, 0, 0) !important;
+  background-color: #e23836 !important;
   text-align: start !important;
   color: white !important;
   width: 45%;
@@ -68,7 +68,7 @@
   
 }
 .product-card-delete-btn:hover {
-  background-color: #030f2b !important;
+  background-color: #8d1715 !important;
   color: white !important;
   border: 1px solid white !important;
 }

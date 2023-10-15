@@ -100,8 +100,7 @@ const MessageComponent = ({ data, index }) => {
         <Modal.Header
           closeButton
           style={{
-            background:
-              "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+            backgroundColor:"#e23737",
             color: "white",
           }}
         >
@@ -118,8 +117,7 @@ const MessageComponent = ({ data, index }) => {
             variant="danger"
             onClick={deleteMessage}
             style={{
-              background:
-                "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+              backgroundColor:"#e23737"
             }}
           >
             Delete
@@ -130,8 +128,7 @@ const MessageComponent = ({ data, index }) => {
         <Modal.Header
           closeButton
           style={{
-            background:
-              "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+            backgroundColor:"#e23737",
             color: "white",
           }}
         >
@@ -151,8 +148,7 @@ const MessageComponent = ({ data, index }) => {
             variant="danger"
             onClick={statusHandler}
             style={{
-              background:
-                "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+              backgroundColor:"#e23737",
             }}
           >
             Mark As {`${data.Status == "new" ? "viewed" : "new"}`}
@@ -238,7 +234,8 @@ const MessageComponent = ({ data, index }) => {
           </div>
         </Modal.Body>
       </Modal>
-      <tr id={`message-${data.id}`}>
+      <tr id={`message-${data.id}`}
+      >
         <td className=" contactUs-font">{index + 1}</td>
         
         <td className=" contactUs-font" colSpan="2">

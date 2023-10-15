@@ -100,8 +100,7 @@ const AdminAccordionMessageComponent = ({ data, index,inbox}) => {
         <Modal.Header
           closeButton
           style={{
-            background:
-              "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+            backgroundColor:"#e23737",
             color: "white",
           }}
         >
@@ -118,8 +117,7 @@ const AdminAccordionMessageComponent = ({ data, index,inbox}) => {
             variant="danger"
             onClick={deleteMessage}
             style={{
-              background:
-                "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+              backgroundColor:"#e23737",
             }}
           >
             Delete
@@ -130,8 +128,7 @@ const AdminAccordionMessageComponent = ({ data, index,inbox}) => {
         <Modal.Header
           closeButton
           style={{
-            background:
-              "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+            backgroundColor:"#e23737",
             color: "white",
           }}
         >
@@ -151,8 +148,7 @@ const AdminAccordionMessageComponent = ({ data, index,inbox}) => {
             variant="danger"
             onClick={statusHandler}
             style={{
-              background:
-                "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+              backgroundColor:"#e23737",
             }}
           >
             Mark As {`${data.Status == "new" ? "viewed" : "new"}`}

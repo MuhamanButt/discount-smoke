@@ -88,8 +88,7 @@ const ProductCard = ({ product }) => {
             <Modal.Header
               closeButton
               style={{
-                background:
-                  "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+                backgroundColor:"#e23737",
                 color: "white",
               }}
             >
@@ -108,8 +107,7 @@ const ProductCard = ({ product }) => {
                 variant="danger"
                 onClick={deleteProduct}
                 style={{
-                  background:
-                    "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+                  backgroundColor:"#e23737",
                 }}
               >
                 Delete
@@ -160,6 +158,7 @@ const ProductCard = ({ product }) => {
           <Button
             className="product-card-delete-btn btn-one "
             onClick={deleteHandler}
+            style={{backgroundColor:"#e23836 !important"}}
           >
             <i className="fa-solid fa-trash me-4"></i>
             Delete
@@ -167,6 +166,7 @@ const ProductCard = ({ product }) => {
           <Button
             className="product-card-update-btn btn-one"
             onClick={updateHandler}
+            style={{backgroundColor:"#3eaa24 !important"}}
           >
             <i class="fa-solid fa-pen me-4"></i>
             Update

@@ -101,8 +101,7 @@ const Offers = () => {
             <Modal.Header
               closeButton
               style={{
-                background:
-                  "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
+                backgroundColor:"#e23737",
                 color: "white",
               }}
             >
@@ -119,8 +118,7 @@ const Offers = () => {
                 variant="danger"
                 onClick={deleteOffer}
                 style={{
-                  background:
-                    "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
+                  backgroundColor:"#e23737",
                 }}
               >
                 Delete
@@ -216,7 +214,7 @@ const Offers = () => {
                                 <div className="col-5 col-sm-4 col-md-3">
                                   <Button
                                     style={{
-                                      backgroundColor: "#880000",
+                                      backgroundColor: "#e23737",
                                       width: "100%",
                                       marginRight: "5px",
                                     }}
@@ -229,7 +227,7 @@ const Offers = () => {
                                 <div className="col-6 col-sm-5 col-md-3">
                                   <Button
                                     style={{
-                                      backgroundColor: "#030F2B",
+                                      backgroundColor: "#3eaa24",
                                       width: "100%",
                                       marginLeft: "5px",
                                     }}
