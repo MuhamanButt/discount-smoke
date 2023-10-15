@@ -120,10 +120,10 @@ const MyNavbar = ({ status }) => {
                     </Dropdown.Toggle>
                     <Dropdown.Menu show={showDropdown}>
                       <Dropdown.Item onClick={() => navigate("/adminPage")}>
-                      <i class="fa-solid fa-user me-3"></i>Profile
+                      <i className="fa-solid fa-user me-3"></i>Profile
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => navigate("/messages/new")}>
-                        <i class="fa-solid fa-message me-3"></i>Inbox
+                        <i className="fa-solid fa-message me-3"></i>Inbox
                         {numberOfMessages != 0 ? (
                       <span
                         className="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger"

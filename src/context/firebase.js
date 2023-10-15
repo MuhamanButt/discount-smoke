@@ -40,6 +40,7 @@ import { saveAs } from "file-saver";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginAdmin, logoutAdmin } from "../redux/Admin/adminAction";
+import { useCloudinary } from "./cloudinary";
 const firebaseConfig = {
   apiKey: "AIzaSyD-9RCWCREi46zbrVAdasj0TxSW3yzP_rg",
   authDomain: "discount-smoke.firebaseapp.com",
@@ -61,6 +62,7 @@ const flavorsCollectionRef = collection(firestore, "flavors");
 const brandsCollectionRef = collection(firestore, "brands");
 
 export const FirebaseProvider = (props) => {
+  const cloudinary=useCloudinary();
   const dispatch = useDispatch();
   //!--------------------------------------------------------AUTHENTICATION
   const loginAdminWithEmailAndPassword = async (email, password) => {
@@ -592,6 +594,7 @@ export const FirebaseProvider = (props) => {
         pictureURL,
         category,
       });
+      await cloudinary.uploadImage(Image,id);
       return true;
     } catch (error) {
       console.log(error);
@@ -628,6 +631,7 @@ export const FirebaseProvider = (props) => {
         ExpirationTime,
         pictureURL,
       });
+      await cloudinary.uploadImage(Image,id);
       return true;
     } catch (error) {
       console.log(error);
@@ -662,6 +666,7 @@ export const FirebaseProvider = (props) => {
         const imageRef = ref(storage, `uploads/images/${id}`);
         const uploadResult = await uploadBytes(imageRef, Image);
         pictureURL = await getDownloadURL(uploadResult.ref);
+        await cloudinary.uploadImage(Image,identity);
       }
 
       const productData = {
@@ -709,6 +714,7 @@ export const FirebaseProvider = (props) => {
         const imageRef = ref(storage, `uploads/images/${id}`);
         const uploadResult = await uploadBytes(imageRef, Image);
         pictureURL = await getDownloadURL(uploadResult.ref);
+        await cloudinary.uploadImage(Image,identity);
       }
 
       const offerData = {
@@ -745,6 +751,8 @@ export const FirebaseProvider = (props) => {
 
       await deleteDoc(docRef);
       deleteImage(id);
+      
+      await cloudinary.deleteImage(identity);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -788,6 +796,7 @@ export const FirebaseProvider = (props) => {
   const deleteImage = async (imageName) => {
     const imagePath = `uploads/images/${imageName}`;
     const imageRef = ref(storage, imagePath);
+    await cloudinary.deleteImage(imageName);
 
     // Delete the image
     deleteObject(imageRef)

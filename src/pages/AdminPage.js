@@ -20,6 +20,7 @@ const AdminPage = () => {
   const logoutHandler = async () => {
     await firebase.signoutAdmin();
   };
+  
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />
@@ -37,9 +38,9 @@ const AdminPage = () => {
               <br />
               <AdminAccordionViewInbox />
               <br />
-              <AdminAccordionDownload/>
+              <AdminAccordionDownload />
               <br />
-              <AdminAccordionBackup/>
+              <AdminAccordionBackup />
               <br />
               <br />
             </div>

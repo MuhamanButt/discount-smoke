@@ -45,7 +45,6 @@ const UpdateOffer = () => {
     const daysInMillis = days * 24 * 60 * 60 * 1000;
     const expirationTime = Date.now() + hoursInMillis + daysInMillis;
     const expirationDate = new Date(expirationTime);
-    console.log(expirationDate);
     return expirationTime;
   }
   
