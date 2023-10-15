@@ -751,8 +751,6 @@ export const FirebaseProvider = (props) => {
 
       await deleteDoc(docRef);
       deleteImage(id);
-      
-      await cloudinary.deleteImage(identity);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -796,7 +794,6 @@ export const FirebaseProvider = (props) => {
   const deleteImage = async (imageName) => {
     const imagePath = `uploads/images/${imageName}`;
     const imageRef = ref(storage, imagePath);
-    await cloudinary.deleteImage(imageName);
 
     // Delete the image
     deleteObject(imageRef)

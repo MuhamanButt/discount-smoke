@@ -43,9 +43,30 @@ const OurProducts = () => {
     }
     fetch();
   }, [selectedProduct, starterDevicesProducts]);
-  const changeHandler = (str) => {
-    setselectedProduct(str);
-  };
+  useEffect(()=>{
+    changeHandler(selectedProduct);
+  },[])
+  function changeHandler(selectedOption) {
+    // Get all buttons with the "nav-btn" class
+    const buttons = document.querySelectorAll('.nav-btn');
+  
+    // Loop through all buttons and remove the "nav-btn-active" class
+    buttons.forEach((button) => {
+      button.classList.remove('nav-btn-active');
+    });
+  
+    // Find the button that was clicked and add the "nav-btn-active" class to it
+    buttons.forEach((button) => {
+      if (button.textContent.trim() === selectedOption) {
+        button.classList.add('nav-btn-active');
+      }
+    });
+  
+    setselectedProduct(selectedOption);
+  }
+  
+  
+  
   
   const determineItemsToMap = () => {
     const viewportWidth = window.innerWidth;

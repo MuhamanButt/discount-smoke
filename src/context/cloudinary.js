@@ -28,6 +28,7 @@ export const CloudinaryProvider = (props) => {
   };
   const deleteImage = (public_id) => {
     // Make a DELETE request to Cloudinary to delete the image by public_id
+    
     Axios.delete(
       `https://api.cloudinary.com/v1_1/dmlxb4ea9/image/destroy/${public_id}`,
       {
