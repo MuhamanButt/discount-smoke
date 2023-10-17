@@ -57,11 +57,11 @@ const firestore = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
 
 export const useFirebase = () => useContext(firebaseContext);
-
 const flavorsCollectionRef = collection(firestore, "flavors");
 const brandsCollectionRef = collection(firestore, "brands");
 
 export const FirebaseProvider = (props) => {
+  const [loaderPercentage, setloaderPercentage] = useState(15);
   const cloudinary=useCloudinary();
   const dispatch = useDispatch();
   //!--------------------------------------------------------AUTHENTICATION
@@ -835,6 +835,7 @@ export const FirebaseProvider = (props) => {
     downloadAllDataToExcel,
     downloadAllOffersToExcel,
     downloadAllMessagesToExcel,
+    loaderPercentage
   };
 
   return (

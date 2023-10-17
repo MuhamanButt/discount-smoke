@@ -1,9 +1,12 @@
-import React from "react";
+import React, { createContext } from "react";
+import MyProgressBar from "./ProgressBar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./styles/Navbar.css";
+import ProgressBar from "react-bootstrap/ProgressBar";
+
 import { NavLink } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import navbarlogo from "./assets/logoWithoutBackground.png";
@@ -120,24 +123,27 @@ const MyNavbar = ({ status }) => {
                     </Dropdown.Toggle>
                     <Dropdown.Menu show={showDropdown}>
                       <Dropdown.Item onClick={() => navigate("/adminPage")}>
-                      <i className="fa-solid fa-user me-3"></i>Profile
+                        <i className="fa-solid fa-user me-3"></i>Profile
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => navigate("/messages/new")}>
                         <i className="fa-solid fa-message me-3"></i>Inbox
                         {numberOfMessages != 0 ? (
-                      <span
-                        className="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger"
-                        style={{ zIndex: "20" }}
-                      >
-                        {numberOfMessages}
-                        <span className="visually-hidden">unread messages</span>
-                      </span>
-                    ) : (
-                      ""
-                    )}
+                          <span
+                            className="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger"
+                            style={{ zIndex: "20" }}
+                          >
+                            {numberOfMessages}
+                            <span className="visually-hidden">
+                              unread messages
+                            </span>
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </Dropdown.Item>
                       <Dropdown.Item onClick={logoutHandler}>
-                      <i class="fa-solid fa-right-from-bracket me-3"></i>Logout
+                        <i className="fa-solid fa-right-from-bracket me-3"></i>
+                        Logout
                       </Dropdown.Item>
                     </Dropdown.Menu>
                     {numberOfMessages != 0 ? (
@@ -361,6 +367,7 @@ const MyNavbar = ({ status }) => {
             </Navbar>
           </div>
         </div>
+        
       </div>
     </div>
   );

@@ -24,6 +24,9 @@
   color: #880000 !important;
 }
 
+.progressBar{
+  height: 5px !important;
+}
 
 
 .drop-shadow{

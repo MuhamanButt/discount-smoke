@@ -15,6 +15,7 @@ import Loader from "../reusableComponents/Loader";
 import LoaderDark from "../reusableComponents/LoaderDark";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useCloudinary } from "../context/cloudinary";
+import ProgressBar from "../reusableComponents/ProgressBar";
 const MyForm = ({ category }) => {
   const [Data, setData] = useState({});
   const [ProductName, setProductName] = useState();
@@ -99,9 +100,11 @@ setImage("")
   }, [selectedFlavors,showToast1,showToast2]);
   return (
     <div>
+     
       {LoaderState ? (
         <FormPageSkeleton></FormPageSkeleton>
       ) : (
+        
         <Form>
           
           <MyToast text={"Please fill All Required Fields"} showHandler={showToast2}></MyToast>
