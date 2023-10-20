@@ -77,6 +77,7 @@ const App = () => {
           <Route path="*" element={<NoMatchPage/>}></Route>
         </Routes>
       </BrowserRouter>
+      
     </div>
   )
 }

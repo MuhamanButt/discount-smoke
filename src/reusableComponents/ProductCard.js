@@ -168,7 +168,7 @@ const ProductCard = ({ product }) => {
             onClick={updateHandler}
             style={{backgroundColor:"#3eaa24 !important"}}
           >
-            <i class="fa-solid fa-pen me-4"></i>
+            <i className="fa-solid fa-pen me-4"></i>
             Update
           </Button>
         </Offcanvas.Body>
