@@ -60,7 +60,6 @@
   .product-card {
     height: 290px !important;
   }
-
 }
 @media screen and (max-width: 680px) {
   .product-card-img {
@@ -69,7 +68,6 @@
   .product-card {
     height: 280px !important;
   }
-
 }
 @media screen and (max-width: 380px) {
   .product-card-brandName {
@@ -87,7 +85,7 @@
   .product-card-img {
     height: 80px !important;
   }
-  .product-card-btn{
+  .product-card-btn {
     width: 100% !important;
   }
 }

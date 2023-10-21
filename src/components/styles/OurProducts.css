@@ -1,40 +1,38 @@
-.nav-btn{
-    color: black !important;
-    background-color: transparent !important;
-    border: none !important;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 10px;
-    width: auto;
-    flex:auto;
+.nav-btn {
+  color: black !important;
+  background-color: transparent !important;
+  border: none !important;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px;
+  width: auto;
+  flex: auto;
 }
-.navbar-row{
-    background-color: #D3D3D3 ;
+.navbar-row {
+  background-color: #d3d3d3;
 }
-.carousel-control-next-icon,.carousel-control-prev-icon{
-    display: none !important;
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  display: none !important;
 }
-@media screen and (max-width:920px)
-{
-    .nav-btn{
-        font-size: 10px !important;
-    }
-}
-
-@media screen and (max-width:480px)
-{
-    .nav-btn{
-        font-size: 6px !important;
-    }
+@media screen and (max-width: 920px) {
+  .nav-btn {
+    font-size: 10px !important;
+  }
 }
 
-.nav-btn-active{
-    background-color: #05225C !important;
-    border-radius: 10px;
-    font-weight: 400;
-    color: white !important;
+@media screen and (max-width: 480px) {
+  .nav-btn {
+    font-size: 6px !important;
+  }
 }
 
+.nav-btn-active {
+  background-color: #05225c !important;
+  border-radius: 10px;
+  font-weight: 400;
+  color: white !important;
+}
 
 /* 
 ========================
@@ -42,49 +40,49 @@
 ========================
 */
 .nav-btn {
-    color: #fff;
-    transition: all 0.3s;
-    position: relative;
-  }
-  .nav-btn span {
-    transition: all 0.3s;
-  }
-  .nav-btn::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-top-color: #05225C;
-    border-bottom-color: #05225C;
-    transform: scale(0.1, 1);
-  }
-  .nav-btn:hover span {
-    letter-spacing: 2px;
-  }
-  .nav-btn:hover::before {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-  .nav-btn::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    transition: all 0.3s;
-  }
-  .nav-btn:hover::after {
-    opacity: 0;
-    transform: scale(0.1, 1);
-  }
+  color: #fff;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-btn span {
+  transition: all 0.3s;
+}
+.nav-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: #05225c;
+  border-bottom-color: #05225c;
+  transform: scale(0.1, 1);
+}
+.nav-btn:hover span {
+  letter-spacing: 2px;
+}
+.nav-btn:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.nav-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.nav-btn:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}

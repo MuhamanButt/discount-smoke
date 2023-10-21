@@ -32,7 +32,7 @@ const SideBarAccordion = () => {
       <Accordion defaultActiveKey="0" className="dark-accordion">
         <Accordion.Item eventKey="0">
           <Accordion.Header className="sidebar-accordion-heading">
-          <i className="fa-solid fa-cart-shopping me-4"></i>Our Products
+            <i className="fa-solid fa-cart-shopping me-4"></i>Our Products
           </Accordion.Header>
           <Accordion.Body>
             <ListGroup>

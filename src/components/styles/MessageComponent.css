@@ -1,48 +1,50 @@
-.message-status-btn{
-    background-color: #05225C !important;
+.message-status-btn {
+  background-color: #05225c !important;
 }
-.message-row{
-    background-color: white;
-    border: 1px solid #D3D3D3;
-    border-radius: 10px;
+.message-row {
+  background-color: white;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
 }
-.message-status-btn{
-    width: 100%;
+.message-status-btn {
+  width: 100%;
 }
-.contactUs-body,.contactUs-font{
-font-size: 12px !important;
+.contactUs-body,
+.contactUs-font {
+  font-size: 12px !important;
 }
-.contactUs-body tr td{
-    align-self: center;
+.contactUs-body tr td {
+  align-self: center;
 }
-.card-title{
-    color: #05225C !important;
+.card-title {
+  color: #05225c !important;
 }
-.card-body{
-    background-color:white !important ;
-    border-radius: 5px !important;
+.card-body {
+  background-color: white !important ;
+  border-radius: 5px !important;
 }
 /* MyTable.css */
 @media screen and (max-width: 991px) {
-    .hide-on-small-screen {
-      display: none !important;
-    }
+  .hide-on-small-screen {
+    display: none !important;
   }
-  
-@media screen and (max-width:576px){
-    .card-body,.card-body h5{
-        font-size: 10px !important;
-    }
-}
-@media screen and (max-width:440px){
-    .message-status-btn{
-        font-size: 8px !important;
-        padding: 4px !important;
-    }
 }
 
-@media screen and (max-width:576px){
-    .contactUs-font{
-        font-size: 8px !important;
-        }
+@media screen and (max-width: 576px) {
+  .card-body,
+  .card-body h5 {
+    font-size: 10px !important;
+  }
+}
+@media screen and (max-width: 440px) {
+  .message-status-btn {
+    font-size: 8px !important;
+    padding: 4px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .contactUs-font {
+    font-size: 8px !important;
+  }
 }

@@ -1,42 +1,42 @@
-.AccordionBtn{
-    width: 100% !important;
-    background-color: white !important;
-    border: 1px solid #D3D3D3 !important;
-    color: black !important;
-    margin-top: 5px;
+.AccordionBtn {
+  width: 100% !important;
+  background-color: white !important;
+  border: 1px solid #d3d3d3 !important;
+  color: black !important;
+  margin-top: 5px;
 }
-.AccordionBtn:hover{
-    font-weight: 700 !important;
-    background-color:#ececec !important;
+.AccordionBtn:hover {
+  font-weight: 700 !important;
+  background-color: #ececec !important;
 }
-.myAccordion{
-    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.444));
+.myAccordion {
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.444));
 }
-.AccordionBtn{
-    width: 100% !important;
-    background-color: white !important;
-    border: 1px solid #D3D3D3 !important;
-    color: black !important;
-    margin-top: 5px;
-}
-
-@media screen and (max-width:1070px) and (min-width:992px){
-    .AccordionBtn{
-       font-size: 10px !important;
-    }
+.AccordionBtn {
+  width: 100% !important;
+  background-color: white !important;
+  border: 1px solid #d3d3d3 !important;
+  color: black !important;
+  margin-top: 5px;
 }
 
-@media screen and (max-width:840px){
-    .AccordionBtn{
-       font-size: 10px !important;
-    }
+@media screen and (max-width: 1070px) and (min-width: 992px) {
+  .AccordionBtn {
+    font-size: 10px !important;
+  }
 }
 
-.viewAllButton{
-    color:black;
-    text-decoration: none !important;
+@media screen and (max-width: 840px) {
+  .AccordionBtn {
+    font-size: 10px !important;
+  }
 }
-.viewAllButton:hover{
-    cursor: pointer;
-    font-weight: 500;
+
+.viewAllButton {
+  color: black;
+  text-decoration: none !important;
+}
+.viewAllButton:hover {
+  cursor: pointer;
+  font-weight: 500;
 }

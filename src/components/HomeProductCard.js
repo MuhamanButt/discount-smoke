@@ -1,39 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import LoaderDark from "../reusableComponents/LoaderDark";
-import './styles/HomeProductCard.css'
-import '../skeletons/styles/ProductPageSkeleton.css'
-import alternate from './assets/imageAlternate.svg'
+import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
+import alternate from "./assets/imageAlternate.svg";
+import "../skeletons/styles/ProductPageSkeleton.css";
+
 const HomeProductCard = ({ product }) => {
-    const firebase = useFirebase();
-    const [imageURL, setimageURL] = useState('');
-    const [LoaderState, setLoaderState] = useState(true);
-    useEffect(() => {
-        
-        const fetch = async () => {
-          setLoaderState(true);
-          try {
-            const image = await firebase.getImageURL(product.identity);
-            setimageURL(image);
-            setTimeout(() => setLoaderState(false), 200);
-          } catch (error) {
-            console.error("Error fetching image:", error);
-          }
-        };
-        fetch();
-      }, [imageURL,product]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const firebase = useFirebase();
+  const [imageURL, setimageURL] = useState("");
+  const [LoaderState, setLoaderState] = useState(true);
+  const viewHandler = () => {
+    console.log("clicked");
+    dispatch(setProductInfo({ product }));
+    navigate(`/product/view/${product.identity}`);
+  };
+  useEffect(() => {
+    const fetch = async () => {
+      setLoaderState(true);
+      try {
+        const image = await firebase.getImageURL(product.identity);
+        setimageURL(image);
+        setTimeout(() => setLoaderState(false), 200);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+    fetch();
+  }, [imageURL, product]);
   return (
     <div className="col-6 col-sm-4 col-md-3">
-      <Card className="product-card">
+      <Card className="product-card" onClick={viewHandler}>
         {LoaderState ? (
           <Card.Img
-          variant="top"
-          className="product-card-img w-50 mx-auto my-auto"
-          src={alternate} // Use the stored imageURL
-        />
+            variant="top"
+            className="product-card-img w-50 mx-auto my-auto"
+            src={alternate} // Use the stored imageURL
+          />
         ) : (
           <Card.Img
             variant="top"
@@ -42,7 +48,10 @@ const HomeProductCard = ({ product }) => {
           />
         )}
 
-        <Card.Body className="product-card-body d-flex flex-column justify-content-between">
+        <Card.Body
+          className="product-card-body d-flex flex-column justify-content-between"
+          onClick={viewHandler}
+        >
           <div>
             <Card.Title className="product-card-color">
               <h4 className="product-card-heading">

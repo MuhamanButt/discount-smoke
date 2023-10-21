@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import LoaderDark from "../reusableComponents/LoaderDark";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
 import { useFirebase } from "../context/firebase";
 import "./styles/ProductViewPage.css";
-import FlavorButton from "../reusableComponents/FlavorButton";
+import MessageShortcut from "../reusableComponents/MessageShortcut";
 import HrTag from "../reusableComponents/HrTag";
 const ProductViewPage = () => {
   const firebase = useFirebase();
@@ -16,7 +15,6 @@ const ProductViewPage = () => {
   const [ImageURL, setImageURL] = useState(null);
   const [LoaderState, setLoaderState] = useState(true);
   const productInfo = useSelector((state) => state.productInfo.productInfo);
-  const [FlavorIsAvailable, setFlavorIsAvailable] = useState(false);
 
   const getFeatures = () => {
     if (Product.Features) {
@@ -64,6 +62,7 @@ const ProductViewPage = () => {
   return (
     <>
       <div style={{ backgroundColor: "#efefef" }}>
+      <MessageShortcut></MessageShortcut>
         <MyNavbar status={true}></MyNavbar>
         <Title name={Product.ProductName}></Title>
         <div className="row m-0">

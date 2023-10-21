@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import Heading from "../reusableComponents/Heading";
-import "./styles/ContactUs.css";
-import { useState } from "react";
-import { Form } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form,Button} from "react-bootstrap";
 import MyToast from "../reusableComponents/Toast";
 import { useFirebase } from "../context/firebase";
+import packageImage from "./assets/package.svg";
+import "./styles/ContactUs.css";
+
 const ContactUs = () => {
   const firebase = useFirebase();
   const [Email, setEmail] = useState("");
@@ -46,27 +45,32 @@ const ContactUs = () => {
     } else {
       setshowToast1(true);
     }
-  };
-  return (
+  };return (
     <div
       className="OurBrands overflow-x-hidden"
       style={{ backgroundColor: "white" }}
     >
       <div>
-        <div className="row justify-content-center">
-          <div className="col text-center">
-            <h1 className="Heading">WANT A SPECIFIC PRODUCT?</h1>
+        <div className="row m-0">
+        <div className="col-12 col-sm-6 mb-3 mb-0 text-center d-sm-none d-block">
+            <img src={packageImage} alt=""  className="package-image"/>
           </div>
-        </div>
-        <div className="row m-0" data-aos="fade-left">
-          <div className="col contactUs-description">
-            If you want a specific product contact us we will order that for
-            you.
+          <div className="col-12 col-sm-6 p-0 align-self-center" data-aos="fade-right">
+            <div className="row justify-content-center">
+              <div className="col">
+                <h1 className="Message-Heading">WANT A SPECIFIC PRODUCT?</h1>
+              </div>
+            </div>
+            <div className="row m-0">
+              <div className="col contactUs-description">
+                If you want a specific product contact us we will order that for
+                you.
+                We will contact you once shipment is arrived at the store.
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="row m-0" data-aos="fade-left">
-          <div className="col contactUs-description">
-            We will contact you once shipment is arrived at the store.
+          <div className="col-12 col-sm-6 text-center d-sm-block d-none align-self-center">
+            <img src={packageImage} alt=""  className="package-image"/>
           </div>
         </div>
 

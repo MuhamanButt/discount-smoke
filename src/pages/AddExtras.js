@@ -11,7 +11,6 @@ import './styles/AddExtras.css'
 
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
-import Loader from "../reusableComponents/Loader";
 import LoaderDark from "../reusableComponents/LoaderDark";
 
 const AddExtras = () => {

@@ -1,15 +1,10 @@
-import React from "react";
+import React,{ useState,useEffect } from "react";
 import "./styles/SearchBar.css";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import {InputGroup,Form} from "react-bootstrap";
+import { useSelector,useDispatch } from "react-redux";
 import { useFirebase } from "../context/firebase";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import SearchBarProductList from "./SearchBarProductList";
-import LoaderDark from "../reusableComponents/LoaderDark";
 import SideBarAccordion from "../reusableComponents/SideBarAccordion";
 const SearchBar = ({ inNavbar }) => {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import SearchBar from "../components/SearchBar";
@@ -6,21 +6,9 @@ import Footer from "../reusableComponents/Footer";
 import AdminAccordionAdd from "../components/AdminAccordionAdd";
 import AdminAccordionAddExtras from "../components/AdminAccordionAddExtras";
 import AdminAccordionViewInbox from "../components/AdminAccordionViewInbox";
-import { useFirebase } from "../context/firebase";
-import MyButton from "../reusableComponents/MyButton";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
 import AdminAccordionDownload from "../components/AdminAccordionDownload";
 import AdminAccordionBackup from "../components/AdminAccordionBackup";
 const AdminPage = () => {
-  const firebase = useFirebase();
-  const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.admin.adminIsLoggedIn);
-  const logoutHandler = async () => {
-    await firebase.signoutAdmin();
-  };
-  
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
 import { createContext } from "react";
 import Axios from "axios";
@@ -20,10 +20,14 @@ export const CloudinaryProvider = (props) => {
     });
   };
   const downloadImage = (public_id) => {
+    // Construct the Cloudinary URL to download the image
     const cloudinaryURL = `https://res.cloudinary.com/dmlxb4ea9/image/upload/${public_id}`;
+
+    // You can use this URL in an <img> tag or for other purposes to display or download the image.
     console.log("Downloading image:", cloudinaryURL);
   };
   const deleteImage = (public_id) => {
+    // Make a DELETE request to Cloudinary to delete the image by public_id
     
     Axios.delete(
       `https://api.cloudinary.com/v1_1/dmlxb4ea9/image/destroy/${public_id}`,

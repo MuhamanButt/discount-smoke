@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import LoaderDark from "../reusableComponents/LoaderDark";
-import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
-import { useFirebase } from "../context/firebase";
 import HomeProductCard from "./HomeProductCard";
 
 const OurProductSubcomponent = ({ dataToShow }) => {
   const [Products, setProducts] = useState(null);
-  const [LoaderState, setLoaderState] = useState(false);
-  const [imageURL, setImageURL] = useState([]); // Store image URLs here
-  const firebase = useFirebase();
 
   useEffect(() => {
     setProducts(dataToShow);
@@ -43,7 +36,10 @@ const OurProductSubcomponent = ({ dataToShow }) => {
               <Carousel.Item key={index} interval={1500}>
                 <div className="row m-0">
                   {group.map((product) => (
-                    <HomeProductCard product={product} key={`${product.identity}}`}></HomeProductCard>
+                    <HomeProductCard
+                      product={product}
+                      key={`${product.identity}}`}
+                    ></HomeProductCard>
                   ))}
                 </div>
               </Carousel.Item>

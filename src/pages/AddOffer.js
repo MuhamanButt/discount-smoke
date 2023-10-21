@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Button,
+  DropdownButton,
+  Dropdown,
+  InputGroup,
+  Form,
+} from "react-bootstrap";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
-import { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import "../components/styles/Form.css";
-import { Button } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import LoaderDark from "../reusableComponents/LoaderDark";
-import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import { useNavigate } from "react-router-dom";
+import "../components/styles/Form.css";
+
 const AddOffer = () => {
-  const navigate=useNavigate();
+  const formControlRef = useRef(null);
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
   const [Features, setFeatures] = useState();
@@ -31,7 +30,6 @@ const AddOffer = () => {
 
   const [showToast1, setShowToast1] = useState(false);
   const [showToast2, setShowToast2] = useState(false);
-  const [reRender, setreRender] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
   const firebase = useFirebase();
 
@@ -43,6 +41,25 @@ const AddOffer = () => {
     console.log(expirationDate);
     return expirationTime;
   }
+  const wrapSelectedTextWithAsterisks = (e) => {
+    // Check if the event's key is 'b' and Ctrl (or Command) key is pressed
+    if ((e.key === 'b' || e.key === 'B') && (e.ctrlKey || e.metaKey)) {
+      const formControl = formControlRef.current;
+      if (formControl) {
+        const selectionStart = formControl.selectionStart;
+        const selectionEnd = formControl.selectionEnd;
+        const inputValue = formControl.value;
+        const selectedText = inputValue.slice(selectionStart, selectionEnd);
+        const replacementText = `*${selectedText}*`;
+        const newValue =
+          inputValue.slice(0, selectionStart) + replacementText + inputValue.slice(selectionEnd);
+        setFeatures(newValue);
+        formControl.focus();
+        formControl.selectionStart = selectionStart;
+        formControl.selectionEnd = selectionStart + replacementText.length;
+      }
+    }
+  };
   const SubmitHandler = async () => {
     setShowToast2(false);
     setShowToast1(false);
@@ -111,6 +128,8 @@ const AddOffer = () => {
     );
   };
   useEffect(() => {
+    
+    document.addEventListener("keydown", wrapSelectedTextWithAsterisks);
     const fetch = async () => {
       setFlavors(await firebase.getFlavors());
       setBrands(await firebase.getBrands());
@@ -199,6 +218,7 @@ const AddOffer = () => {
                     <Form.Label className="FormLabels">Features</Form.Label>
                     <Form.Control
                       as="textarea"
+                      ref={formControlRef}
                       placeholder={"Enter Features..."}
                       value={Features}
                       style={{ height: "300px" }}
