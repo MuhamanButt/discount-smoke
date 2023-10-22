@@ -1,21 +1,21 @@
-.AgeConfirmationPage {
-  background-color: #030f2b;
-  height: 100vh;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+.AgeConfirmationPage{
+    background-color: #030F2B;
+    height: 100vh;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
-.AgeConfirmationPage-img {
-  height: 200px;
+.AgeConfirmationPage-img{
+    height: 200px;
 }
-.ageconfirmationtext p {
-  font-size: 16px;
+.ageconfirmationtext p{
+    font-size: 16px;
 }
-.buttonGroup {
-  width: 50%;
+.buttonGroup{
+    width: 50%;
 }
-@media screen and (min-width: 768px) {
-  .buttonGroup {
-    width: 25%;
-  }
+@media screen and (min-width:768px){
+    .buttonGroup{
+        width: 25%;
+    }
 }

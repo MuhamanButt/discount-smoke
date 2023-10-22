@@ -1,20 +1,27 @@
-import React,{ useState, useEffect }from "react";
-import SearchBar from "../components/SearchBar";
+import React from "react";
 import MyNavbar from "../reusableComponents/Navbar";
-import Footer from "../reusableComponents/Footer";
 import Title from "../reusableComponents/Title";
+import SearchBar from "../components/SearchBar";
+import Footer from "../reusableComponents/Footer";
 import { useSelector } from "react-redux";
 import { useFirebase } from "../context/firebase";
-import {Form, InputGroup, Dropdown, DropdownButton, Button} from "react-bootstrap";
+import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import "../components/styles/Form.css";
 import MyButton from "../reusableComponents/MyButton";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { useRef } from "react";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
+import Loader from "../reusableComponents/Loader";
+import LoaderDark from "../reusableComponents/LoaderDark";
 import MyToast from "../reusableComponents/Toast";
 import { useNavigate } from "react-router-dom";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import "../components/styles/Form.css";
 const UpdateProduct = () => {
-  const formControlRef = useRef(null);
   const navigate=useNavigate()
   const { productID, category } = useParams();
   const firebase = useFirebase();
@@ -64,25 +71,7 @@ const UpdateProduct = () => {
       setShowToast1(true);
     }
   };
-  const wrapSelectedTextWithAsterisks = (e) => {
-    // Check if the event's key is 'b' and Ctrl (or Command) key is pressed
-    if ((e.key === 'b' || e.key === 'B') && (e.ctrlKey || e.metaKey)) {
-      const formControl = formControlRef.current;
-      if (formControl) {
-        const selectionStart = formControl.selectionStart;
-        const selectionEnd = formControl.selectionEnd;
-        const inputValue = formControl.value;
-        const selectedText = inputValue.slice(selectionStart, selectionEnd);
-        const replacementText = `*${selectedText}*`;
-        const newValue =
-          inputValue.slice(0, selectionStart) + replacementText + inputValue.slice(selectionEnd);
-        setFeatures(newValue);
-        formControl.focus();
-        formControl.selectionStart = selectionStart;
-        formControl.selectionEnd = selectionStart + replacementText.length;
-      }
-    }
-  };
+  
 const clearAllFields=()=>{
   setProductName();
   setDescription();
@@ -112,7 +101,6 @@ const clearAllFields=()=>{
     );
   };
   useEffect(() => {
-    document.addEventListener("keydown", wrapSelectedTextWithAsterisks);
     const fetch = async () => {
       setLoaderState(true);
       const data = await firebase.getProductByIdentity(productID, category);
@@ -181,7 +169,6 @@ const clearAllFields=()=>{
                     <Form.Label className="FormLabels">Features</Form.Label>
                     <Form.Control
                       as="textarea"
-                      ref={formControlRef}
                       placeholder={"Enter Features..."}
                       value={Features}
                       style={{ height: "300px" }}

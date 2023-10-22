@@ -1,13 +1,16 @@
-import React from "react";
-import { Accordion, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+
+import React, { useEffect } from "react";
+import Accordion from "react-bootstrap/Accordion";
+import { NavLink } from "react-router-dom";
 import "./styles/SideBarAccordion.css";
-import "./styles/AdminAccordion.css";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import './styles/AdminAccordion.css'
 const AdminAccordionAddExtras = () => {
   const navigate = useNavigate();
-  const handler = (str) => {
-    navigate(str);
-  };
+const handler=(str)=>{
+  navigate(str)
+}
   return (
     <Accordion defaultActiveKey="1" className="dark-accordion myAccordion">
       <Accordion.Item eventKey="0">
@@ -37,3 +40,4 @@ const AdminAccordionAddExtras = () => {
 };
 
 export default AdminAccordionAddExtras;
+

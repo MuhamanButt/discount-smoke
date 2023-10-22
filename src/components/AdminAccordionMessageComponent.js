@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import Modal from "react-bootstrap/Modal";
 import "./styles/MessageComponent.css";
+import Accordion from "react-bootstrap/Accordion";
+import Modal from "react-bootstrap/Modal";
+import Table from "react-bootstrap/Table";
 
 const AdminAccordionMessageComponent = ({ data, index,inbox}) => {
   const [showAfterLG, setshowAfterLG] = useState(window.innerWidth >= 992);

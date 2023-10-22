@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import "./styles/MyButton.css";
 import Button from "react-bootstrap/Button";
-const MyButton = ({ outlined, text, handler, color, width }) => {
+const MyButton = ({ outlined, text, handler, color,width }) => {
   return (
     <div>
       {outlined ? (
         <Button
           variant="outline-primary"
           style={{ color: "white" }}
-          className={`MyButton ${width ? `w-${width}` : ``}`}
+          className={`MyButton ${width?(`w-${width}`):(``)}`}
           onClick={handler}
         >
           {text}
@@ -16,7 +16,7 @@ const MyButton = ({ outlined, text, handler, color, width }) => {
       ) : (
         <Button
           style={{ backgroundColor: color ? color : "#05225C" }}
-          className={`MyButton ${width ? `w-${width}` : ``}`}
+          className={`MyButton ${width?(`w-${width}`):(``)}`}
           onClick={handler}
         >
           {text}

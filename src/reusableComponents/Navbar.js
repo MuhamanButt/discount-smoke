@@ -367,6 +367,7 @@ const MyNavbar = ({ status }) => {
             </Navbar>
           </div>
         </div>
+        
       </div>
     </div>
   );

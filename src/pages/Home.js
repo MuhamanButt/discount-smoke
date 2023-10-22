@@ -13,7 +13,6 @@ import bg4 from "./assets/topbackground4.png";
 import OurProducts from "../components/OurProducts";
 import Modal from "react-bootstrap/Modal";
 import ContactUs from "../components/ContactUs";
-import MessageShortcut from "../reusableComponents/MessageShortcut";
 const Home = () => {
   const [backgroundImage, setBackgroundImage] = useState("");
   const [MessageModal, setMessageModal] = useState(false);
@@ -22,6 +21,9 @@ const Home = () => {
     const randomNumber = Math.floor(random * 4);
     return randomNumber;
   }
+  const showMessageModal = () => {
+setMessageModal(true);
+  };
   useEffect(() => {
     const backgroundImages = [bg1, bg2, bg3, bg4];
     let currentIndex = getRandomNumber();
@@ -47,12 +49,31 @@ const Home = () => {
           <Offers></Offers>
           <OurBrands></OurBrands>
           <OurProducts></OurProducts>
+          
           <Safety></Safety>
           <Footer />
-          <MessageShortcut></MessageShortcut>
         </div>
       </div>
-      
+      <Modal
+        show={MessageModal}
+        onHide={()=>setMessageModal(false)}
+        size="xl"
+        centered
+        backdrop={true}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+        <ContactUs></ContactUs>
+        </Modal.Body>
+      </Modal>
+      <div class="position-relative">
+        <div
+          class="position-fixed bottom-0 end-0 text-center me-3 mb-3"
+          onClick={showMessageModal}
+        >
+          <i className="fa-solid fa-message messaging-icon"></i>
+        </div>
+      </div>
     </>
   );
 };

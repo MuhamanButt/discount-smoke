@@ -88,7 +88,7 @@ const ProductCard = ({ product }) => {
             <Modal.Header
               closeButton
               style={{
-                backgroundColor: "#e23737",
+                backgroundColor:"#e23737",
                 color: "white",
               }}
             >
@@ -107,7 +107,7 @@ const ProductCard = ({ product }) => {
                 variant="danger"
                 onClick={deleteProduct}
                 style={{
-                  backgroundColor: "#e23737",
+                  backgroundColor:"#e23737",
                 }}
               >
                 Delete
@@ -123,62 +123,42 @@ const ProductCard = ({ product }) => {
         backdrop={true}
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title className="w-100"></Offcanvas.Title>
+          <Offcanvas.Title className="w-100">
+            
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="row m-0 justify-content-center">
-            <div className="col text-center align-self-center">
-              <img
-                src={ImageURL}
-                style={{
-                  height: "200px",
-                  maxWidth: "200px",
-                  borderRadius: "100%",
-                }}
-              />
-              <p style={{ fontWeight: "700", marginTop: "10px" }}>
-                {product.ProductName}
-              </p>
+        <div className="row m-0 justify-content-center">
+              <div className="col text-center align-self-center">
+                <img
+                  src={ImageURL}
+                  style={{ height: "200px", maxWidth: "200px",borderRadius:"100%" }}
+                />
+                <p style={{ fontWeight: "700", marginTop: "10px" }}>{product.ProductName}</p>
+              </div>
             </div>
-          </div>
-          <p style={{ fontSize: "12px" }}>
-            <strong>Identity : </strong>
-            {product.identity}
-          </p>
-          <p style={{ fontSize: "12px" }}>
-            <strong>Category : </strong>
-            {product.category}
-          </p>
-          <p style={{ fontSize: "12px" }}>
-            {" "}
-            <strong>Brand : </strong> {product.selectedBrand}
-          </p>
-          <p style={{ fontSize: "12px" }}>
-            <strong>Added On : </strong>
-            {timestampToDateTime(product.listingDate)}
-          </p>
-          <p style={{ fontSize: "12px" }}>
-            <strong>Description : </strong>
-            {product.Description}
-          </p>
-
-          {product.selectedFlavors && product.selectedFlavors.length > 0 ? (
-            <>
-              <p style={{ fontSize: "12px" }}>
-                <strong>Flavors : </strong>
-                {product.category}
-                {product.selectedFlavors.map((flavor, index) => (
-                  <span key={index}>{flavor} </span>
+          <p style={{fontSize:"12px"}}><strong>Identity : </strong>{product.identity}</p>
+          <p style={{fontSize:"12px"}}><strong>Category : </strong>{product.category}</p>
+          <p style={{fontSize:"12px"}}> <strong>Brand : </strong> {product.selectedBrand}</p>
+          <p style={{fontSize:"12px"}}><strong>Added On : </strong>{timestampToDateTime(product.listingDate)}</p>
+          <p style={{fontSize:"12px"}}><strong>Description : </strong>{product.Description}</p>
+          
+          {product.selectedFlavors &&
+            product.selectedFlavors.length > 0 ? (
+              <>
+                <p style={{fontSize:"12px"}}><strong>Flavors : </strong>{product.category}
+                {product.selectedFlavors.map((flavor,index) => (
+                  <span key={index}>{flavor}{' '}</span>
                 ))}
-              </p>
-            </>
-          ) : (
-            ""
-          )}
+                </p>
+              </>
+            ) : (
+              ""
+            )}
           <Button
             className="product-card-delete-btn btn-one "
             onClick={deleteHandler}
-            style={{ backgroundColor: "#e23836 !important" }}
+            style={{backgroundColor:"#e23836 !important"}}
           >
             <i className="fa-solid fa-trash me-4"></i>
             Delete
@@ -186,7 +166,7 @@ const ProductCard = ({ product }) => {
           <Button
             className="product-card-update-btn btn-one"
             onClick={updateHandler}
-            style={{ backgroundColor: "#3eaa24 !important" }}
+            style={{backgroundColor:"#3eaa24 !important"}}
           >
             <i className="fa-solid fa-pen me-4"></i>
             Update
@@ -212,17 +192,12 @@ const ProductCard = ({ product }) => {
 
         <Card.Img
           variant="top"
-          src={LoaderState ? alternate : ImageURL}
           onClick={viewHandler}
-          className={`product-card-img ${
-            LoaderState ? "w-50 my-auto mx-auto" : ""
-          }`}
+          src={LoaderState ? alternate : ImageURL}
+          className={`product-card-img ${LoaderState ? "w-50 my-auto mx-auto" : ""}`}
         />
 
-        <Card.Body
-          className="product-card-body d-flex flex-column justify-content-between"
-          onClick={viewHandler}
-        >
+        <Card.Body className="product-card-body d-flex flex-column justify-content-between" onClick={viewHandler}>
           <div>
             <Card.Title className="product-card-color">
               <h4 className="product-card-heading">
@@ -239,7 +214,9 @@ const ProductCard = ({ product }) => {
             </Card.Text>
           </div>
           <div className="text-center">
-            <Button className="product-card-btn">View</Button>
+            <Button className="product-card-btn" onClick={viewHandler}>
+              View
+            </Button>
           </div>
         </Card.Body>
       </Card>

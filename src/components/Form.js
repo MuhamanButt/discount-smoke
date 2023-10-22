@@ -1,18 +1,22 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Button,
-  DropdownButton,
-  Dropdown,
-  InputGroup,
-  Form,
-} from "react-bootstrap";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import "./styles/Form.css";
+import MyButton from "../reusableComponents/MyButton";
+import { Button } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
 import MyToast from "../reusableComponents/Toast";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
+import Loader from "../reusableComponents/Loader";
+import LoaderDark from "../reusableComponents/LoaderDark";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import "./styles/Form.css";
-
+import { useCloudinary } from "../context/cloudinary";
+import ProgressBar from "../reusableComponents/ProgressBar";
 const MyForm = ({ category }) => {
-  const formControlRef = useRef(null);
   const [Data, setData] = useState({});
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
@@ -24,51 +28,22 @@ const MyForm = ({ category }) => {
   const [Image, setImage] = useState("");
   const [showToast1, setshowToast1] = useState(false);
   const [showToast2, setshowToast2] = useState(false);
+  const [reRender, setreRender] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
   const firebase = useFirebase();
-  useEffect(() => {
-    document.addEventListener("keydown", wrapSelectedTextWithAsterisks);
-    const fetch = async () => {
-      setFlavors(await firebase.getFlavors());
-      setBrands(await firebase.getBrands());
-    };
-    fetch();
-  }, [selectedFlavors, showToast1, showToast2]);
-
-  const wrapSelectedTextWithAsterisks = (e) => {
-    // Check if the event's key is 'b' and Ctrl (or Command) key is pressed
-    if ((e.key === "b" || e.key === "B") && (e.ctrlKey || e.metaKey)) {
-      const formControl = formControlRef.current;
-      if (formControl) {
-        const selectionStart = formControl.selectionStart;
-        const selectionEnd = formControl.selectionEnd;
-        const inputValue = formControl.value;
-        const selectedText = inputValue.slice(selectionStart, selectionEnd);
-        const replacementText = `*${selectedText}*`;
-        const newValue =
-          inputValue.slice(0, selectionStart) +
-          replacementText +
-          inputValue.slice(selectionEnd);
-        setFeatures(newValue);
-        formControl.focus();
-        formControl.selectionStart = selectionStart;
-        formControl.selectionEnd = selectionStart + replacementText.length;
-      }
-    }
-  };
-  // Add event listener to the document
-
-  const SubmitHandler = async () => {
+  
+  const SubmitHandler = async () => { 
     setshowToast2(false);
     setshowToast1(false);
     // Validate the required fields
-    if (!selectedBrand || !ProductName || !Description || !Image) {
+    if (!selectedBrand||!ProductName||!Description||!Image) {
       setshowToast2(false);
       setTimeout(() => {
         setshowToast2(true);
       }, 10);
       return; // Exit the function and prevent form submission
     }
+
 
     // If all required fields are filled in, proceed with adding the product
     setLoaderState(true);
@@ -88,19 +63,19 @@ const MyForm = ({ category }) => {
       setshowToast1(true);
     }
   };
-  const clearAllFields = () => {
-    setProductName();
-    setDescription();
-    setFeatures();
-    setSelectedFlavors([]);
-    setSelectedBrand();
-    setImage("");
-  };
-  const setDataViaCheck = (value, limit, callBack) => {
-    if (value.length <= limit) {
-      callBack(value);
+const clearAllFields=()=>{
+setProductName();
+setDescription();
+setFeatures();
+setSelectedFlavors([])
+setSelectedBrand();
+setImage("")
+}
+  const setDataViaCheck=(value,limit,callBack)=>{
+    if(value.length<=limit){
+      callBack(value)
     }
-  };
+  }
   const flavorHandler = (flavor) => {
     if (!selectedFlavors.includes(flavor)) {
       setSelectedFlavors((prevSelectedFlavors) => [
@@ -116,30 +91,32 @@ const MyForm = ({ category }) => {
       )
     );
   };
+  useEffect(() => {
+    const fetch = async () => {
+      setFlavors(await firebase.getFlavors());
+      setBrands(await firebase.getBrands());
+    };
+    fetch();
+  }, [selectedFlavors,showToast1,showToast2]);
   return (
     <div>
+     
       {LoaderState ? (
         <FormPageSkeleton></FormPageSkeleton>
       ) : (
+        
         <Form>
-          <MyToast
-            text={"Please fill All Required Fields"}
-            showHandler={showToast2}
-          ></MyToast>
-          <MyToast
-            text={"Product Added SuccessFully!!"}
-            showHandler={showToast1}
-          ></MyToast>
-
+          
+          <MyToast text={"Please fill All Required Fields"} showHandler={showToast2}></MyToast>
+          <MyToast text={"Product Added SuccessFully!!"} showHandler={showToast1}></MyToast>
+          
           <Form.Group className="mb-3">
             <Form.Label className="FormLabels">Product Name</Form.Label>
             <Form.Control
               type="text"
               placeholder={"Enter Product Name..."}
               value={ProductName}
-              onChange={(e) =>
-                setDataViaCheck(e.target.value, 30, setProductName)
-              }
+              onChange={(e) => setDataViaCheck(e.target.value,30,setProductName)}
               required
             />
           </Form.Group>
@@ -150,9 +127,7 @@ const MyForm = ({ category }) => {
               placeholder={"Enter Description..."}
               value={Description}
               style={{ height: "100px" }}
-              onChange={(e) =>
-                setDataViaCheck(e.target.value, 300, setDescription)
-              }
+              onChange={(e) => setDataViaCheck(e.target.value,300,setDescription)}
               required
             />
           </Form.Group>
@@ -160,7 +135,6 @@ const MyForm = ({ category }) => {
             <Form.Label className="FormLabels">Features</Form.Label>
             <Form.Control
               as="textarea"
-              ref={formControlRef}
               placeholder={"Enter Features..."}
               value={Features}
               style={{ height: "300px" }}
@@ -171,7 +145,7 @@ const MyForm = ({ category }) => {
             <Form.Label className="FormLabels">Choose Product Image</Form.Label>
             <Form.Control
               type="file"
-              accept=".png, .jpg, .jpeg"
+              accept="image/*"
               onChange={(e) => setImage(e.target.files[0])}
               required
               className="form-image"
@@ -245,6 +219,7 @@ const MyForm = ({ category }) => {
                     onSubmit={SubmitHandler}
                     onClick={SubmitHandler}
                     style={{ backgroundColor: "#00bc00", width: "100%" }}
+                   
                   >
                     Add Product
                   </Button>

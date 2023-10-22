@@ -2,10 +2,10 @@ import React from "react";
 import MyButton from "../reusableComponents/MyButton";
 import { useNavigate } from "react-router-dom";
 const HomePageMain = () => {
-  const navigate = useNavigate();
-  const onclickHandler = () => {
-    navigate("/product/starterDevices");
-  };
+  const navigate=useNavigate();
+  const onclickHandler=()=>{
+    navigate('/product/starterDevices')
+  }
   return (
     <div data-aos="fade-right">
       <div className="row m-0 drop-shadow my-5 homepageMain">
@@ -22,11 +22,7 @@ const HomePageMain = () => {
                 you're an aficionado or a novice, we provide a one-stop shop for
                 all your smoking needs.
               </p>
-              <MyButton
-                outlined={true}
-                text={"View Products"}
-                handler={onclickHandler}
-              />
+              <MyButton outlined={true} text={"View Products"} handler={onclickHandler}/>
             </div>
           </div>
         </div>

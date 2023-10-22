@@ -1,75 +1,73 @@
-.send-msg-btn {
-  background-color: #00bc00 !important;
-  width: 50% !important;
+.contactUs-description{
+    text-align: center;
 }
-.package-image {
-  height: 200px;
+.send-msg-btn{
+    background-color: #00bc00 !important;
+    width: 50% !important;
 }
-.Message-Heading {
-  color: #05225c;
-  font-size: 40px;
-  text-align: start !important;
-  font-weight: 800;
+.Heading{
+    color: #1396D8;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 800;
 }
 
-.contactUs-description {
-  padding: 0px !important;
-}
-@media screen and (max-width: 1200px) {
-  .Message-Heading {
-    font-size: 35px;
-  }
+
+@media screen and (max-width: 1040px) {
+    .Heading{
+        font-size: 35px;
+    }
 }
 @media screen and (max-width: 992px) {
-  .Message-Heading {
-    font-size: 25px;
-  }
+    .Heading{
+        font-size: 25px;
+    }
 }
 
 @media screen and (max-width: 480px) {
-  .Message-Heading {
-    font-size: 20px;
-  }
+    .Heading{
+        font-size: 20px;
+    }
 }
 @media screen and (max-width: 400px) {
-  .Message-Heading {
-    font-size: 15px;
-  }
+    .Heading{
+        font-size: 15px;
+    }
 }
 @media screen and (max-width: 320px) {
-  .Message-Heading {
-    font-size: 10px;
-  }
+    .Heading{
+        font-size: 10px;
+    }
 }
-@media screen and (max-width: 768px) {
-  .contactUs-description {
-    font-size: 8px;
-  }
+@media screen and (max-width:768px)
+{
+    .contactUs-description{
+        font-size: 8px;
+    }
 }
-@media screen and (max-width: 300px) {
-  .contactUs-description {
-    font-size: 6px;
-  }
+@media screen and (max-width:300px)
+{
+    .contactUs-description{
+        font-size: 6px;
+    }
 }
-@media screen and (max-width: 576px) {
-  .send-msg-btn {
-    background-color: #00bc00 !important;
-    font-size: 10px !important;
-  }
-  .c-formLabels {
-    font-size: 15px !important;
-  }
-  .c-formText::placeholder {
-    font-size: 8px !important;
-  }
+@media screen and (max-width:576px)
+{
+    .send-msg-btn{
+        background-color: #00bc00 !important;
+        font-size: 10px !important;
+    }
+    .c-formLabels{
+        font-size: 15px !important;
+    }
+    .c-formText::placeholder{
+        font-size: 8px !important;
+    }
 }
-@media screen and (max-width: 992px) {
-  .package-image {
-    max-height: 150px;
-  }
-}
-@media screen and (max-width: 992px) and (min-width: 768px) {
-  .contactUs-description {
-    font-size: 10px;
-  }
+
+@media screen and (max-width:992px) and (min-width:768px){
+
+    .contactUs-description{
+        font-size:10px;
+    }
 }

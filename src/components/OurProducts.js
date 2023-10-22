@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import Heading from "../reusableComponents/Heading";
 import image from "./assets/7.png";
+import { NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { useFirebase } from "../context/firebase";
+import "./styles/OurProducts.css";
 import { useState } from "react";
 import OurProductSubcomponent from "./OurProductSubcomponent";
 import OurProductSkeleton from "../skeletons/OurProductSkeleton";
-import "./styles/OurProducts.css";
+import { Button } from "react-bootstrap";
 const OurProducts = () => {
   const firebase = useFirebase();
   const [cigaretteProducts, setcigaretteProducts] = useState(null);

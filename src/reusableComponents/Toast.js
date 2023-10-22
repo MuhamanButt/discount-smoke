@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 import { useState } from "react";
@@ -7,7 +8,7 @@ const MyToast = ({ text, showHandler }) => {
   const [Show, setShow] = useState(showHandler);
 
   useEffect(() => {
-    setShow(showHandler);
+    setShow(showHandler)
   }, [showHandler]);
   return (
     <div className="row">

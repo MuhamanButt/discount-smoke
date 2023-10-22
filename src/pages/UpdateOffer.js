@@ -11,13 +11,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../components/styles/Form.css";
+import MyButton from "../reusableComponents/MyButton";
 import { Button } from "react-bootstrap";
 import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 const UpdateOffer = () => {
-  const formControlRef = useRef(null);
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
   const navigate=useNavigate();
@@ -113,25 +112,6 @@ const UpdateOffer = () => {
       ]);
     }
   };
-  const wrapSelectedTextWithAsterisks = (e) => {
-    // Check if the event's key is 'b' and Ctrl (or Command) key is pressed
-    if ((e.key === 'b' || e.key === 'B') && (e.ctrlKey || e.metaKey)) {
-      const formControl = formControlRef.current;
-      if (formControl) {
-        const selectionStart = formControl.selectionStart;
-        const selectionEnd = formControl.selectionEnd;
-        const inputValue = formControl.value;
-        const selectedText = inputValue.slice(selectionStart, selectionEnd);
-        const replacementText = `*${selectedText}*`;
-        const newValue =
-          inputValue.slice(0, selectionStart) + replacementText + inputValue.slice(selectionEnd);
-        setFeatures(newValue);
-        formControl.focus();
-        formControl.selectionStart = selectionStart;
-        formControl.selectionEnd = selectionStart + replacementText.length;
-      }
-    }
-  };
   const removeFlavor = (flavorToRemove) => {
     setSelectedFlavors((prevSelectedFlavors) =>
       prevSelectedFlavors.filter(
@@ -140,7 +120,6 @@ const UpdateOffer = () => {
     );
   };
   useEffect(() => {
-    document.addEventListener("keydown", wrapSelectedTextWithAsterisks);
     const fetch = async () => {
       
     setLoaderState(true);
@@ -268,7 +247,6 @@ const UpdateOffer = () => {
                       <Form.Label className="FormLabels">Features</Form.Label>
                       <Form.Control
                         as="textarea"
-                        ref={formControlRef}
                         placeholder={"Enter Features..."}
                         value={Features}
                         style={{ height: "300px" }}

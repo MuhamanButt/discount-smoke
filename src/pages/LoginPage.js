@@ -9,6 +9,9 @@ import Row from "react-bootstrap/Row";
 import MyButton from "../reusableComponents/MyButton";
 import { useFirebase } from "../context/firebase";
 import { useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 import Loader from "../reusableComponents/Loader";
 import MyToast from "../reusableComponents/Toast";
 const LoginPage = () => {

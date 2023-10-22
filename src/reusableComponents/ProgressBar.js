@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
 const MyProgressBar = ({ width, flag }) => {
-  useEffect(() => {
-    console.log(width, flag);
-  }, [width, flag]);
-
+    useEffect(() => {
+        console.log(width, flag);
+    }, [width, flag]);
+    
   return (
     <>
-      {flag == "true" && (
+      {flag=="true" && (
         <div
           className="progress"
           role="progressbar"

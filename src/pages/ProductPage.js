@@ -6,7 +6,6 @@ import Footer from "../reusableComponents/Footer";
 import SideBarAccordion from "../reusableComponents/SideBarAccordion";
 import ProductCard from "../reusableComponents/ProductCard";
 import { useFirebase } from "../context/firebase";
-import MessageShortcut from "../reusableComponents/MessageShortcut";
 import datacoming from "./assets/underConstruction.svg";
 import ProductPageSkeleton from "../skeletons/ProductPageSkeleton";
 import { useSelector } from "react-redux";
@@ -43,9 +42,7 @@ const ProductPage = ({ category }) => {
     fetch();
   }, [category]);
   return (
-    <div style={{ backgroundColor: "white" }}>
-      
-      <MessageShortcut></MessageShortcut>
+    <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true}></MyNavbar>
       {
         showProgressBar&&<ProgressBar now={ProgressBarLoading} animated  className="progressBar"/>

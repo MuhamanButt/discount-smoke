@@ -1,9 +1,12 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
+import Carousel from "react-bootstrap/Carousel";
 import { useFirebase } from "../context/firebase";
+import { useState } from "react";
 import Heading from "../reusableComponents/Heading";
 import giftImage from "./assets/gift.png";
 import { useSelector } from "react-redux";
-import { Button,Modal,Carousel } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
 import { useDispatch } from "react-redux";

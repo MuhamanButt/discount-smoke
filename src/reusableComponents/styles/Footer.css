@@ -34,12 +34,13 @@
   margin-bottom: 6px;
 }
 
+
 @media screen and (max-width: 768px) {
   .footer-logo {
-    max-width: 30%;
+    max-width: 30% ;
     max-height: 100px;
   }
-  .footer-details {
+  .footer-details{
     padding-top: 30px;
     text-align: center;
   }

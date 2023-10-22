@@ -768,7 +768,6 @@ export const FirebaseProvider = (props) => {
     deleteDoc(documentRef)
       .then(() => {
         console.log("Document successfully deleted!");
-        cloudinary.deleteImage(id);
         return true;
       })
       .catch((error) => {
