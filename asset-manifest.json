@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/discount-smoke/static/css/main.c4546280.css",
-    "main.js": "/discount-smoke/static/js/main.98d5361c.js",
+    "main.css": "/discount-smoke/static/css/main.01b2483c.css",
+    "main.js": "/discount-smoke/static/js/main.74c0a207.js",
     "static/js/787.4e5300e2.chunk.js": "/discount-smoke/static/js/787.4e5300e2.chunk.js",
     "static/media/topbackground3.png": "/discount-smoke/static/media/topbackground3.30d7cdb232901922ec36.png",
     "static/media/topbackground4.png": "/discount-smoke/static/media/topbackground4.56f8ab778748747ee85c.png",
@@ -23,12 +23,12 @@
     "static/media/notloggedin.svg": "/discount-smoke/static/media/notloggedin.ea005d8d17ab00871feb339a217f7f7f.svg",
     "static/media/maleAvatar.svg": "/discount-smoke/static/media/maleAvatar.f6e9fbfb7ee0984f6aa33d165d360fea.svg",
     "index.html": "/discount-smoke/index.html",
-    "main.c4546280.css.map": "/discount-smoke/static/css/main.c4546280.css.map",
-    "main.98d5361c.js.map": "/discount-smoke/static/js/main.98d5361c.js.map",
+    "main.01b2483c.css.map": "/discount-smoke/static/css/main.01b2483c.css.map",
+    "main.74c0a207.js.map": "/discount-smoke/static/js/main.74c0a207.js.map",
     "787.4e5300e2.chunk.js.map": "/discount-smoke/static/js/787.4e5300e2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4546280.css",
-    "static/js/main.98d5361c.js"
+    "static/css/main.01b2483c.css",
+    "static/js/main.74c0a207.js"
   ]
 }
