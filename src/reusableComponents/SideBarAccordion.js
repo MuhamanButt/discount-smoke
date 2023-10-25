@@ -26,7 +26,6 @@ const SideBarAccordion = () => {
   return (
     <div
       className="mb-4"
-      style={{ filter: "drop-shadow(0px 0px 5px #1111114c)" }}
       id="SideBarAccordion"
     >
       <Accordion defaultActiveKey="0" className="dark-accordion">

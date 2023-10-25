@@ -71,7 +71,7 @@ const HomeProductCard = ({ product }) => {
             </Card.Text>
           </div>
           <div className="text-center">
-            <Button className="product-card-btn">View</Button>
+            <Button className="product-card-btn" onClick={viewHandler}>View</Button>
           </div>
         </Card.Body>
       </Card>

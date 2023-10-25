@@ -79,12 +79,12 @@ const OurProducts = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: "#efefef" }}>
+    <div style={{ backgroundColor: "#ffffff" }} className="pb-4">
       <Heading text={"OUR PRODUCTS"}></Heading>
       <div className="row m-0">
         <div className="col p-0">
           <img src={image} alt="" style={{ width: "100%" }} />
-          <div className="row justify-content-center navbar-row m-0 py-2">
+          <div className="row justify-content-center navbar-row m-0 py-2" style={{backgroundColor:"#ffffff"}}>
             <div className="col-12 col-md-10">
               <Nav
                 className="ms-auto our-product-nav"

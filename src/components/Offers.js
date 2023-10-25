@@ -131,13 +131,13 @@ const Offers = () => {
         ""
       ) : (
         <div
-          style={{ backgroundColor: "#efefef" }}
+          style={{ backgroundColor: "#ffffff" }}
           className="overflow-x-hidden"
         >
           <div data-aos="fade-left">
             <Heading
               text={"LIMITED TIME DISCOUNT OFFERS"}
-              backgroundColor={"#efefef"}
+              backgroundColor={"#ffffff"}
             ></Heading>
             <Carousel data-bs-theme="dark">
               {Data.map((data, index) => (

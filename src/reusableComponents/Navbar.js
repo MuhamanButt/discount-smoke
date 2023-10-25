@@ -119,14 +119,14 @@ const MyNavbar = ({ status }) => {
                       onClick={handleDropdownToggle}
                       aria-expanded={showDropdown}
                     >
-                      <i className="fa-solid fa-user adminLoginAlert ms-2"></i>
+                      <i className={`fa-solid fa-user adminLoginAlert ms-2 ${numberOfMessages!=0?'fa-shake':''}`}></i>
                     </Dropdown.Toggle>
                     <Dropdown.Menu show={showDropdown}>
                       <Dropdown.Item onClick={() => navigate("/adminPage")}>
                         <i className="fa-solid fa-user me-3"></i>Profile
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => navigate("/messages/new")}>
-                        <i className="fa-solid fa-message me-3"></i>Inbox
+                        <i className={`fa-solid fa-message me-3 ${numberOfMessages!=0?'fa-shake':''}`}></i>Inbox
                         {numberOfMessages != 0 ? (
                           <span
                             className="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger"

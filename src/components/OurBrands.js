@@ -11,8 +11,8 @@ import './styles/OurBrands.css'
 const OurBrands = () => {
   return (
     <div className='OurBrands overflow-x-hidden'>
-      <Heading text={"OUR BRANDS"} backgroundColor={"#D3D3D3"}></Heading>
-      <div className="row justify-content-center m-0 mt-sm-3" style={{backgroundColor:"#D3D3D3"}}>
+      <Heading text={"OUR BRANDS"} backgroundColor={"#f0f6ff"}></Heading>
+      <div className="row justify-content-center m-0 mt-sm-3" style={{backgroundColor:"#f0f6ff"}}>
         <div className="col-10">
           <div className="row justify-content-center " data-aos="fade-right">
             <div className="col-2 p-0 text-center align-self-center">

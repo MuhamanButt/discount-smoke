@@ -42,7 +42,7 @@ const ProductPage = ({ category }) => {
     fetch();
   }, [category]);
   return (
-    <div style={{ backgroundColor: "#efefef" }}>
+    <div style={{ backgroundColor: "#ffffff" }}>
       <MyNavbar status={true}></MyNavbar>
       {
         showProgressBar&&<ProgressBar now={ProgressBarLoading} animated  className="progressBar"/>
