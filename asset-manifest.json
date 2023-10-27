@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/discount-smoke/static/css/main.15f77a44.css",
-    "main.js": "/discount-smoke/static/js/main.89358c3c.js",
+    "main.css": "/discount-smoke/static/css/main.b3eb0e65.css",
+    "main.js": "/discount-smoke/static/js/main.16ce09a0.js",
     "static/js/787.4e5300e2.chunk.js": "/discount-smoke/static/js/787.4e5300e2.chunk.js",
     "static/media/topbackground3.png": "/discount-smoke/static/media/topbackground3.30d7cdb232901922ec36.png",
     "static/media/topbackground4.png": "/discount-smoke/static/media/topbackground4.56f8ab778748747ee85c.png",
     "static/media/topbackground1.png": "/discount-smoke/static/media/topbackground1.31030b06b0acf6d0dd31.png",
     "static/media/topbackground2.png": "/discount-smoke/static/media/topbackground2.ae7fc918a26387ab3980.png",
+    "static/media/loginpage.png": "/discount-smoke/static/media/loginpage.7cc3e52d5b6b0f9a62bf.png",
     "static/media/7.png": "/discount-smoke/static/media/7.13cf0ba857abe9fbbc17.png",
     "static/media/logoWithoutBackground.png": "/discount-smoke/static/media/logoWithoutBackground.8c7a8e3ec4261845a1b2.png",
     "static/media/pagenotfound.png": "/discount-smoke/static/media/pagenotfound.24a76972912dba9ef1db.png",
@@ -23,12 +24,12 @@
     "static/media/notloggedin.svg": "/discount-smoke/static/media/notloggedin.ea005d8d17ab00871feb339a217f7f7f.svg",
     "static/media/maleAvatar.svg": "/discount-smoke/static/media/maleAvatar.f6e9fbfb7ee0984f6aa33d165d360fea.svg",
     "index.html": "/discount-smoke/index.html",
-    "main.15f77a44.css.map": "/discount-smoke/static/css/main.15f77a44.css.map",
-    "main.89358c3c.js.map": "/discount-smoke/static/js/main.89358c3c.js.map",
+    "main.b3eb0e65.css.map": "/discount-smoke/static/css/main.b3eb0e65.css.map",
+    "main.16ce09a0.js.map": "/discount-smoke/static/js/main.16ce09a0.js.map",
     "787.4e5300e2.chunk.js.map": "/discount-smoke/static/js/787.4e5300e2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15f77a44.css",
-    "static/js/main.89358c3c.js"
+    "static/css/main.b3eb0e65.css",
+    "static/js/main.16ce09a0.js"
   ]
 }
