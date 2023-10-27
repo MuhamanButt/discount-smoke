@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import "./styles/SideBarAccordion.css";
 const productData = [
   { path: "/product/candlesAndIncense", name: "Candles and Incense" },
-  { path: "/product/cigarettes", name: "Cigarettes" },
+  // { path: "/product/cigarettes", name: "Cigarettes" },
   { path: "/product/cigars", name: "Cigars" },
   { path: "/product/chewingTobacco", name: "Chewing Tobacco" },
   { path: "/product/cigaretteMachines", name: "Cigarette Machines" },

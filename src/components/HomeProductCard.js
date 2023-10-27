@@ -3,7 +3,6 @@ import { useFirebase } from "../context/firebase";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import LoaderDark from "../reusableComponents/LoaderDark";
 import "./styles/HomeProductCard.css";
 import "../skeletons/styles/ProductPageSkeleton.css";
 import alternate from "./assets/imageAlternate.svg";

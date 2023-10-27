@@ -1,22 +1,14 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
-import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
-import { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import SearchBar from "../components/SearchBar";
+import {Form,InputGroup,Dropdown,DropdownButton,Button} from "react-bootstrap";
 import "../components/styles/Form.css";
-import { Button } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import LoaderDark from "../reusableComponents/LoaderDark";
 import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import { useNavigate } from "react-router-dom";
 const AddOffer = () => {
-  const navigate=useNavigate();
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
   const [Features, setFeatures] = useState();

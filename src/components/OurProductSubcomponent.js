@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import LoaderDark from "../reusableComponents/LoaderDark";
-import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
 import { useFirebase } from "../context/firebase";
 import HomeProductCard from "./HomeProductCard";

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import Heading from "../reusableComponents/Heading";
+import React from "react";
 import "./styles/ContactUs.css";
 import { useState } from "react";
 import { Form } from "react-bootstrap";

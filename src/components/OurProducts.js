@@ -90,9 +90,9 @@ const OurProducts = () => {
                 className="ms-auto our-product-nav"
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                <button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
+                {/* <button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
                   Cigarettes
-                </button>
+                </button> */}
                 <button className="nav-btn" onClick={() => changeHandler("Cigars")}>
                   Cigars
                 </button>

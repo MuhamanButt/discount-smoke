@@ -1,10 +1,8 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
-import { NavLink } from "react-router-dom";
-import "./styles/SideBarAccordion.css";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button,Accordion } from "react-bootstrap";
 import './styles/AdminAccordion.css'
+import "./styles/SideBarAccordion.css";
 const AdminAccordionAdd = () => {
   const navigate = useNavigate();
 const handler=(str)=>{
@@ -32,7 +30,7 @@ const handler=(str)=>{
               </Button>
             </div>
             <div className="col-12 col-sm-4 col-md-6 col-lg-4 ">
-              <Button onClick={()=>handler("/add/cigarettes")} className="AccordionBtn">Cigarettes</Button>
+              <Button onClick={()=>handler("/add/cigarettes")} className="AccordionBtn" id="cigarette" disabled>Cigarettes</Button>
             </div>
             <div className="col-12 col-sm-4 col-md-6 col-lg-4 ">
               <Button onClick={()=>handler("/add/cigars")} className="AccordionBtn">Cigars</Button>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ExcelJS from "exceljs";
-
+import { setLoginTime } from "../redux/LoginTime/LoginTimeAction";
 import { useSelector } from "react-redux";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
@@ -61,14 +61,16 @@ const flavorsCollectionRef = collection(firestore, "flavors");
 const brandsCollectionRef = collection(firestore, "brands");
 
 export const FirebaseProvider = (props) => {
+  const data = useSelector((state) => state.searchbarData.productInfo);
   const [loaderPercentage, setloaderPercentage] = useState(15);
-  const cloudinary=useCloudinary();
+  const cloudinary = useCloudinary();
   const dispatch = useDispatch();
   //!--------------------------------------------------------AUTHENTICATION
   const loginAdminWithEmailAndPassword = async (email, password) => {
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
       dispatch(loginAdmin());
+      dispatch(setLoginTime(Date.now()))
     } catch (error) {
       console.error("Error logging in:", error);
     }
@@ -210,18 +212,26 @@ export const FirebaseProvider = (props) => {
     }
   };
   const getLatest8ProductsByCategory = async (category) => {
-    const productsCollectionRef = collection(firestore, "products");
-    const newDocRef = doc(productsCollectionRef, category);
-    try {
-      const subCollectionRef = collection(newDocRef, category);
-      const querySnapshot = await getDocs(subCollectionRef);
-      let products = querySnapshot.docs.map((doc) => doc.data());
-      products = products.sort((a, b) => b.listingDate - a.listingDate);
-      products = products.slice(0, 8);
-      return products;
-    } catch (error) {
-      console.error("Error getting products by category: ", error);
-      return [];
+    let dataArray = [];
+    if (Object.keys(data).length != 0) {
+      dataArray = data.filter((product) => product.category == category);
+      dataArray = dataArray.sort((a, b) => b.listingDate - a.listingDate);
+      dataArray = dataArray.slice(0, 8);
+      return dataArray;
+    } else {
+      const productsCollectionRef = collection(firestore, "products");
+      const newDocRef = doc(productsCollectionRef, category);
+      try {
+        const subCollectionRef = collection(newDocRef, category);
+        const querySnapshot = await getDocs(subCollectionRef);
+        let products = querySnapshot.docs.map((doc) => doc.data());
+        products = products.sort((a, b) => b.listingDate - a.listingDate);
+        products = products.slice(0, 8);
+        return products;
+      } catch (error) {
+        console.error("Error getting products by category: ", error);
+        return [];
+      }
     }
   };
   const getProductByIdentity = async (identity, category) => {
@@ -295,7 +305,6 @@ export const FirebaseProvider = (props) => {
     }
   };
 
-  
   //!--------------------------------------------------------BACKUP
   const downloadAllOffersToExcel = async () => {
     const data = await getOffers();
@@ -594,7 +603,7 @@ export const FirebaseProvider = (props) => {
         pictureURL,
         category,
       });
-      await cloudinary.uploadImage(Image,id);
+      await cloudinary.uploadImage(Image, id);
       return true;
     } catch (error) {
       console.log(error);
@@ -631,7 +640,7 @@ export const FirebaseProvider = (props) => {
         ExpirationTime,
         pictureURL,
       });
-      await cloudinary.uploadImage(Image,id);
+      await cloudinary.uploadImage(Image, id);
       return true;
     } catch (error) {
       console.log(error);
@@ -666,7 +675,7 @@ export const FirebaseProvider = (props) => {
         const imageRef = ref(storage, `uploads/images/${id}`);
         const uploadResult = await uploadBytes(imageRef, Image);
         pictureURL = await getDownloadURL(uploadResult.ref);
-        await cloudinary.uploadImage(Image,identity);
+        await cloudinary.uploadImage(Image, identity);
       }
 
       const productData = {
@@ -714,7 +723,7 @@ export const FirebaseProvider = (props) => {
         const imageRef = ref(storage, `uploads/images/${id}`);
         const uploadResult = await uploadBytes(imageRef, Image);
         pictureURL = await getDownloadURL(uploadResult.ref);
-        await cloudinary.uploadImage(Image,identity);
+        await cloudinary.uploadImage(Image, identity);
       }
 
       const offerData = {
@@ -835,7 +844,7 @@ export const FirebaseProvider = (props) => {
     downloadAllDataToExcel,
     downloadAllOffersToExcel,
     downloadAllMessagesToExcel,
-    loaderPercentage
+    loaderPercentage,
   };
 
   return (

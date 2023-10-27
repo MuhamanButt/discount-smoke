@@ -12,7 +12,9 @@ import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
 import { useDispatch } from "react-redux";
 import alternate from "./assets/imageAlternate.svg";
 import "./styles/Offer.css";
+import { setOffers } from "../redux/Offers/OffersAction";
 const Offers = () => {
+  const offers = useSelector((state) => state.offers.offers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const firebase = useFirebase();
@@ -50,13 +52,19 @@ const Offers = () => {
     calculateRemainingTime(timestamp, identity);
     const currentTime = new Date().getTime();
     const timeDifference = timestamp - currentTime;
-    return (Math.floor(timeDifference / 3600000)-(Math.floor(timeDifference / 86400000)*24));
+    return (
+      Math.floor(timeDifference / 3600000) -
+      Math.floor(timeDifference / 86400000) * 24
+    );
   };
   const getMins = (timestamp, identity) => {
     calculateRemainingTime(timestamp, identity);
     const currentTime = new Date().getTime();
     const timeDifference = timestamp - currentTime;
-    return (Math.floor(timeDifference / 60000)-((Math.floor(timeDifference / 3600000)*60)));
+    return (
+      Math.floor(timeDifference / 60000) -
+      Math.floor(timeDifference / 3600000) * 60
+    );
   };
   const calculateRemainingTime = async (timestamp, identity) => {
     const currentTime = new Date().getTime();
@@ -67,18 +75,21 @@ const Offers = () => {
       return;
     }
   };
-  const getImage = async (imageURL) => {
-    const image = await firebase.getImageURL(imageURL);
-    return image;
-  };
   useEffect(() => {
     const fetch = async () => {
       const result = await firebase.getOffers();
+      dispatch(setOffers(result));
       setData(result);
       setRerenderer(true);
     };
-    fetch();
+    if (offers.length > 0) {
+      setData(offers);
+    } else {
+      fetch();
+    }
   }, [Rerenderer]);
+
+  
   useEffect(() => {
     const loadImages = async () => {
       setLoaderState(true);
@@ -101,7 +112,7 @@ const Offers = () => {
             <Modal.Header
               closeButton
               style={{
-                backgroundColor:"#e23737",
+                backgroundColor: "#e23737",
                 color: "white",
               }}
             >
@@ -118,7 +129,7 @@ const Offers = () => {
                 variant="danger"
                 onClick={deleteOffer}
                 style={{
-                  backgroundColor:"#e23737",
+                  backgroundColor: "#e23737",
                 }}
               >
                 Delete

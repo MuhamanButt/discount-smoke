@@ -1,12 +1,10 @@
 
-import React, { useEffect } from "react";
-import Accordion from "react-bootstrap/Accordion";
-import { NavLink } from "react-router-dom";
-import "./styles/SideBarAccordion.css";
+import React from "react";
+import { Button,Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import './styles/AdminAccordion.css'
 import { useFirebase } from "../context/firebase";
+import "./styles/SideBarAccordion.css";
+import './styles/AdminAccordion.css'
 const AdminAccordionDownload = () => {
     const firebase=useFirebase();
   const navigate = useNavigate();

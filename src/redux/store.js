@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from "redux-persist";
 const persistConfig = {
   key: "persist-store1",
   storage,
-  blacklist: ["searchbarData","newMessagesAvailable"] // Exclude the "searchbarData" reducer
+  blacklist: ["searchbarData","newMessagesAvailable","offers"] // Exclude the "searchbarData" reducer
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

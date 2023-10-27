@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
 import MyButton from "../reusableComponents/MyButton";
-import Form from "react-bootstrap/Form";
-import { useState } from "react";
 import { useFirebase } from "../context/firebase";
-import './styles/AddExtras.css'
-
-import Toast from "react-bootstrap/Toast";
-import ToastContainer from "react-bootstrap/ToastContainer";
+import {Toast,ToastContainer,Form} from "react-bootstrap";
 import Loader from "../reusableComponents/Loader";
 import LoaderDark from "../reusableComponents/LoaderDark";
+import './styles/AddExtras.css'
 
 const AddExtras = () => {
   const firebase = useFirebase();

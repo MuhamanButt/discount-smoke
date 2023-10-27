@@ -11,7 +11,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../components/styles/Form.css";
-import MyButton from "../reusableComponents/MyButton";
 import { Button } from "react-bootstrap";
 import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";

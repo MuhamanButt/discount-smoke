@@ -1,23 +1,10 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import "./styles/Form.css";
-import MyButton from "../reusableComponents/MyButton";
-import { Button } from "react-bootstrap";
+import React, { useEffect,useState } from "react";
+import { Button, DropdownButton, Dropdown, InputGroup, Form } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
 import MyToast from "../reusableComponents/Toast";
-import Toast from "react-bootstrap/Toast";
-import ToastContainer from "react-bootstrap/ToastContainer";
-import Loader from "../reusableComponents/Loader";
-import LoaderDark from "../reusableComponents/LoaderDark";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import { useCloudinary } from "../context/cloudinary";
-import ProgressBar from "../reusableComponents/ProgressBar";
+import "./styles/Form.css";
 const MyForm = ({ category }) => {
-  const [Data, setData] = useState({});
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
   const [Features, setFeatures] = useState();
@@ -28,7 +15,6 @@ const MyForm = ({ category }) => {
   const [Image, setImage] = useState("");
   const [showToast1, setshowToast1] = useState(false);
   const [showToast2, setshowToast2] = useState(false);
-  const [reRender, setreRender] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
   const firebase = useFirebase();
   

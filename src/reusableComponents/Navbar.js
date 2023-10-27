@@ -6,12 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./styles/Navbar.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { NavLink } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import navbarlogo from "./assets/logoWithoutBackground.png";
 import { useEffect } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -25,6 +24,7 @@ const MyNavbar = ({ status }) => {
   const firebase = useFirebase();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.admin.adminIsLoggedIn);
+  const loginTime = useSelector((state) => state.loginTime.time);
   const [fixedState, setfixedState] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(false);
   const [show, setShow] = useState(false);
@@ -51,8 +51,19 @@ const MyNavbar = ({ status }) => {
     navigate("/home");
   };
   const navigate = useNavigate();
+  function isTimestampMinutesOld(timestamp, minutes) {
+    const oneMinuteMilliseconds = 60 * 1000;
+    const currentTimestamp = new Date().getTime();
+    const timeDifference = currentTimestamp - timestamp;
+    const allowableTimeDifference = minutes * oneMinuteMilliseconds;
+    return timeDifference <= allowableTimeDifference;
+  }
   useEffect(() => {
     const fetch = async () => {
+      if (!isTimestampMinutesOld(loginTime, 3600) && isLoggedIn) {
+        //! change minutes to logout
+        logoutUser();
+      }
       if (isLoggedIn) {
         const numberOfMessages = (await firebase.getNewMessages()).length;
         dispatch(setNewMessagesAvailable(numberOfMessages));
@@ -119,14 +130,23 @@ const MyNavbar = ({ status }) => {
                       onClick={handleDropdownToggle}
                       aria-expanded={showDropdown}
                     >
-                      <i className={`fa-solid fa-user adminLoginAlert ms-2 ${numberOfMessages!=0?'fa-shake':''}`}></i>
+                      <i
+                        className={`fa-solid fa-user adminLoginAlert ms-2 ${
+                          numberOfMessages != 0 ? "fa-shake" : ""
+                        }`}
+                      ></i>
                     </Dropdown.Toggle>
                     <Dropdown.Menu show={showDropdown}>
                       <Dropdown.Item onClick={() => navigate("/adminPage")}>
                         <i className="fa-solid fa-user me-3"></i>Profile
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => navigate("/messages/new")}>
-                        <i className={`fa-solid fa-message me-3 ${numberOfMessages!=0?'fa-shake':''}`}></i>Inbox
+                        <i
+                          className={`fa-solid fa-message me-3 ${
+                            numberOfMessages != 0 ? "fa-shake" : ""
+                          }`}
+                        ></i>
+                        Inbox
                         {numberOfMessages != 0 ? (
                           <span
                             className="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger"
@@ -166,11 +186,7 @@ const MyNavbar = ({ status }) => {
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header
                     closeButton
-                    style={{
-                      background:
-                        "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(225,42,42,1) 100%)",
-                      color: "white",
-                    }}
+                    style={{ backgroundColor: "#e23737", color: "white" }}
                   >
                     <Modal.Title>Logout</Modal.Title>
                   </Modal.Header>
@@ -184,10 +200,7 @@ const MyNavbar = ({ status }) => {
                     <Button
                       variant="danger"
                       onClick={logoutUser}
-                      style={{
-                        background:
-                          "linear-gradient(151deg, rgba(125,23,23,1) 0%, rgba(255,75,75,1) 100%)",
-                      }}
+                      style={{ backgroundColor: "#e23737" }}
                     >
                       Logout
                     </Button>
@@ -238,13 +251,13 @@ const MyNavbar = ({ status }) => {
                   >
                     Dispossable Vapes
                   </Nav.Link>
-                  <Nav.Link
+                  {/* <Nav.Link
                     className="btn-one"
                     as={NavLink}
                     to={"/product/cigarettes"}
                   >
                     Cigarettes
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link
                     className="btn-one"
                     as={NavLink}
@@ -367,7 +380,6 @@ const MyNavbar = ({ status }) => {
             </Navbar>
           </div>
         </div>
-        
       </div>
     </div>
   );

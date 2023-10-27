@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
 import "./styles/MessageComponent.css";
-import Accordion from "react-bootstrap/Accordion";
 import Modal from "react-bootstrap/Modal";
-import Table from "react-bootstrap/Table";
 
 const MessageComponent = ({ data, index }) => {
   const [showAfterLG, setshowAfterLG] = useState(window.innerWidth >= 992);
