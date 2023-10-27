@@ -16,6 +16,8 @@ const MyForm = ({ category }) => {
   const [showToast1, setshowToast1] = useState(false);
   const [showToast2, setshowToast2] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
+  const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
+
   const firebase = useFirebase();
   
   const SubmitHandler = async () => { 
@@ -62,28 +64,36 @@ setImage("")
       callBack(value)
     }
   }
-  const flavorHandler = (flavor) => {
-    if (!selectedFlavors.includes(flavor)) {
-      setSelectedFlavors((prevSelectedFlavors) => [
-        ...prevSelectedFlavors,
-        flavor,
-      ]);
-    }
-  };
   const removeFlavor = (flavorToRemove) => {
     setSelectedFlavors((prevSelectedFlavors) =>
       prevSelectedFlavors.filter(
         (selectedFlavor) => selectedFlavor !== flavorToRemove
       )
     );
+    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
+   
+  };
+  
+  const flavorHandler = (flavor) => {
+    if (!selectedFlavors.includes(flavor)) {
+      setSelectedFlavors((prevSelectedFlavors) => [
+        ...prevSelectedFlavors,
+        flavor,
+      ]);
+      let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
+      setFlavors(newFlavors);
+    }
   };
   useEffect(() => {
+    console.log("rerendered")
     const fetch = async () => {
-      setFlavors(await firebase.getFlavors());
+      if(!flavorsAddedFirstTime)
+      {setflavorsAddedFirstTime(true)
+      setFlavors(await firebase.getFlavors());}
       setBrands(await firebase.getBrands());
     };
     fetch();
-  }, [selectedFlavors,showToast1,showToast2]);
+  }, [showToast1,showToast2]);
   return (
     <div>
      

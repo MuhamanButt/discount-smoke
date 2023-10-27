@@ -26,7 +26,10 @@ const AddOffer = () => {
   const [reRender, setreRender] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
   const firebase = useFirebase();
+  const [FlavorsChanged, setFlavorsChanged] = useState(false);
+  const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
 
+  
   function calculateExpiration(hours, days) {
     const hoursInMillis = hours * 60 * 60 * 1000;
     const daysInMillis = days * 24 * 60 * 60 * 1000;
@@ -82,14 +85,17 @@ const AddOffer = () => {
     setRemainingDays();
     setRemainingHours();
     }
-  const flavorHandler = (flavor) => {
-    if (!selectedFlavors.includes(flavor)) {
-      setSelectedFlavors((prevSelectedFlavors) => [
-        ...prevSelectedFlavors,
-        flavor,
-      ]);
-    }
-  };
+    const flavorHandler = (flavor) => {
+      if (!selectedFlavors.includes(flavor)) {
+        setSelectedFlavors((prevSelectedFlavors) => [
+          ...prevSelectedFlavors,
+          flavor,
+        ]);
+        let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
+        setFlavors(newFlavors);
+        setFlavorsChanged(true)
+      }
+    };
   const setDataViaCheck=(value,limit,callBack)=>{
     if(value.length<=limit){
       callBack(value)
@@ -101,14 +107,18 @@ const AddOffer = () => {
         (selectedFlavor) => selectedFlavor !== flavorToRemove
       )
     );
+    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
+   
   };
   useEffect(() => {
     const fetch = async () => {
-      setFlavors(await firebase.getFlavors());
+      if(!flavorsAddedFirstTime)
+      {setflavorsAddedFirstTime(true)
+      setFlavors(await firebase.getFlavors());}
       setBrands(await firebase.getBrands());
     };
     fetch();
-  }, [selectedFlavors]);
+  }, []);
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />

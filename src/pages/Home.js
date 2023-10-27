@@ -39,7 +39,7 @@ const Home = () => {
   //!USE EFFECT TO CHECK IF USER IS ON SCREEN FOR MORE THAN 1 HOUR
   useEffect(() => {
     const handleFocus = () => {
-      if (!isTimestampMinutesOld(userEntranceTime,3600)) {
+      if (!isTimestampMinutesOld(userEntranceTime,60)) {
         dispatch(setOffers([]))
         dispatch(setSearchBarData([]))
         dispatch(setUserEntranceTime(Date.now()))

@@ -37,6 +37,9 @@
   font-size: 12px !important;
   border: none !important;
 }
+.product-card-btn:hover {
+  background-color: #0c6592 !important;
+}
 .product-card-delete-btn {
   background-color: #e23836 !important;
   text-align: start !important;

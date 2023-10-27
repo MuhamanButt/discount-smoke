@@ -93,7 +93,7 @@ const ProductCard = ({ product }) => {
               }}
             >
               <Modal.Title>
-                <i class="fa-solid fa-triangle-exclamation me-3"></i>Delete
+                <i className="fa-solid fa-triangle-exclamation me-3"></i>Delete
               </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ fontWeight: "600" }}>

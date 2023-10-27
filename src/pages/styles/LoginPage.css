@@ -3,25 +3,23 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-    border-radius: 10%;
-    padding: 20px;
+  border-radius: 10%;
+  padding: 20px;
 }
 
-.loginImageUnderMD
-{
-    height: 250px !important;
+.loginImageUnderMD {
+  height: 250px !important;
 }
-.loginImageUnderMD img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 40px;
-    border-radius: 0px 0px 0px 80%;
+.loginImageUnderMD img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 40px;
+  border-radius: 0px 0px 0px 80%;
 }
 
-@media screen and (min-width:768px){
-    
-.mainCol{
+@media screen and (min-width: 768px) {
+  .mainCol {
     align-self: center;
-}
+  }
 }

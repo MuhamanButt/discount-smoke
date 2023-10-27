@@ -34,6 +34,7 @@ const UpdateOffer = () => {
   const [RemainingHours, setRemainingHours] = useState(0);
   const [RemainingDays, setRemainingDays] = useState(0);
   const [RemainingMinutes, setRemainingMinutes] = useState(0);
+  const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
   const [OfferDescription, setOfferDescription] = useState(
     "Enter Offer Description..."
   );
@@ -109,6 +110,8 @@ const UpdateOffer = () => {
         ...prevSelectedFlavors,
         flavor,
       ]);
+      let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
+      setFlavors(newFlavors);
     }
   };
   const removeFlavor = (flavorToRemove) => {
@@ -117,6 +120,8 @@ const UpdateOffer = () => {
         (selectedFlavor) => selectedFlavor !== flavorToRemove
       )
     );
+    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
+   
   };
   useEffect(() => {
     const fetch = async () => {
@@ -128,7 +133,6 @@ const UpdateOffer = () => {
       setSelectedBrand(Product.selectedBrand);
       setSelectedFlavors(Product.selectedFlavors);
       setFeatures(Product.Features)
-      setFlavors(await firebase.getFlavors());
       setBrands(await firebase.getBrands());
       setRerenderer(true);
       setRemainingDays(calculateRemainingDays(Product.ExpirationTime));
@@ -138,6 +142,10 @@ const UpdateOffer = () => {
       setIdentity(Product.identity);
       setRerenderer(true);
       setLoaderState(false);
+      
+      if(!flavorsAddedFirstTime)
+      {setflavorsAddedFirstTime(true)
+      setFlavors(await firebase.getFlavors());}
     };
     fetch();
   }, [Rerenderer]);

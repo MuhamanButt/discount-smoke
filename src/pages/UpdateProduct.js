@@ -30,6 +30,7 @@ const UpdateProduct = () => {
   const [Rerenderer, setRerenderer] = useState(false);
   const [showToast1, setShowToast1] = useState(false);
   const [showToast2, setShowToast2] = useState(false);
+  const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
   const SubmitHandler = async () => {
     // Clear any previous error messages
     setShowToast1(false);
@@ -63,14 +64,7 @@ const UpdateProduct = () => {
     }
   };
   
-const clearAllFields=()=>{
-  setProductName();
-  setDescription();
-  setFeatures();
-  setSelectedFlavors([])
-  setSelectedBrand();
-  setImage("")
-  }
+
   const setDataViaCheck = (value, limit, callBack) => {
     if (value.length <= limit) {
       callBack(value);
@@ -82,6 +76,8 @@ const clearAllFields=()=>{
         ...prevSelectedFlavors,
         flavor,
       ]);
+      let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
+      setFlavors(newFlavors);
     }
   };
   const removeFlavor = (flavorToRemove) => {
@@ -90,6 +86,8 @@ const clearAllFields=()=>{
         (selectedFlavor) => selectedFlavor !== flavorToRemove
       )
     );
+    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
+   
   };
   useEffect(() => {
     const fetch = async () => {
@@ -100,11 +98,14 @@ const clearAllFields=()=>{
       setDescription(Product.Description);
       setSelectedBrand(Product.selectedBrand);
       setSelectedFlavors(Product.selectedFlavors);
-      setFlavors(await firebase.getFlavors());
+
       setBrands(await firebase.getBrands());
       setFeatures(Product.Features)
       setRerenderer(true);
       setLoaderState(false);
+      if(!flavorsAddedFirstTime)
+      {setflavorsAddedFirstTime(true)
+      setFlavors(await firebase.getFlavors());}
     };
     fetch();
   }, [Rerenderer]);
