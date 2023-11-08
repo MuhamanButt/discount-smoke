@@ -73,7 +73,6 @@ const RandomProducts = () => {
         
         setProgressBarLoading(30);
         const alldata = await firebase.getAllData();
-        setLoaderState(false);
         shuffleArray(data)
         setProductsData(alldata);
         dispatch(setSearchBarData(alldata));
