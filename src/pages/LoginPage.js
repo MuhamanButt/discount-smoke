@@ -62,7 +62,6 @@ const LoginPage = () => {
                   text={"Ugh!! Wrong Password"}
                   showHandler={showToast}
                 ></MyToast>
-
                 <img src={logo} className="AgeConfirmationPage-img mb-5" />
                 <div className="row justify-content-center text-start ms-3">
                   <div className="col-12 col-sm-10">

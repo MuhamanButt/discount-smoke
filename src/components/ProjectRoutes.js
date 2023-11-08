@@ -16,6 +16,7 @@ import UpdateOffer from '../pages/UpdateOffer';
 import NoMatchPage from '../pages/NoMatchPage';
 import Notloggedin from '../pages/NotLoggedInPage';
 import '../App.css'
+import RandomProducts from '../pages/RandomProducts';
 
 const ProjectRoutes = () => {
     const isLoggedIn = useSelector((state) => state.admin.adminIsLoggedIn);
@@ -27,6 +28,7 @@ const ProjectRoutes = () => {
         <Routes>
           <Route path="/" element={<AgeConfirmation/>} />
           <Route path="/home" element={<Home/>} />
+          <Route path="/product/all" element={<RandomProducts/>} />
           <Route path="/product/pods" element={<ProductPage category={"Pods"}/>} />
           <Route path="/product/coils" element={<ProductPage category={"Coils"}/>} />
           <Route path="/product/cigars" element={<ProductPage category={"Cigars"}/>} />

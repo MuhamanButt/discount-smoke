@@ -6,6 +6,7 @@ import newMessagesAvailableReducer from "./Messages/MessagesReducer";
 import loginTimeReducer from "./LoginTime/LoginTimeReducer";
 import offersReducer from "./Offers/OffersReducer";
 import userEntranceTimeReducer from "./UserEntranceTime/UserEntranceTimeReducer";
+import selectedCategoryReducer from "./SelectedCategory/SelectedCategoryReducer";
 const rootReducer = combineReducers({
   admin: adminReducer,
   productInfo: productInfoReducer,
@@ -13,8 +14,8 @@ const rootReducer = combineReducers({
   newMessagesAvailable: newMessagesAvailableReducer,
   loginTime: loginTimeReducer,
   offers:offersReducer,
-  userEntranceTime:userEntranceTimeReducer
-
+  userEntranceTime:userEntranceTimeReducer,
+  selectedCategory:selectedCategoryReducer
 });
 
 export default rootReducer;

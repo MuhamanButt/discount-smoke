@@ -92,7 +92,9 @@ const MyNavbar = ({ status }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
+useEffect(()=>{
+  console.log("rerendered")
+},[showDropdown])
   return (
     <div
       className={`row m-0 ${fixedState ? "navbar-fade-show" : "navbar-fade"}`}

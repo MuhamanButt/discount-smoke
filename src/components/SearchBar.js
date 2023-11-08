@@ -6,7 +6,7 @@ import { useFirebase } from "../context/firebase";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import SearchBarProductList from "./SearchBarProductList";
 import SideBarAccordion from "../reusableComponents/SideBarAccordion";
-const SearchBar = ({ inNavbar }) => {
+const SearchBar = ({ inNavbar,category }) => {
   const dispatch = useDispatch();
   const firebase = useFirebase();
   const data = useSelector((state) => state.searchbarData.productInfo);
@@ -84,7 +84,7 @@ const SearchBar = ({ inNavbar }) => {
         ) : (
           <div className="row m-0">
             <div className="col p-0">
-              <SideBarAccordion></SideBarAccordion>
+              <SideBarAccordion category={category}></SideBarAccordion>
             </div>
           </div>
         )}

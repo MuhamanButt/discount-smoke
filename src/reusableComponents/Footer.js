@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./styles/Footer.css";
 import logo from "./assets/logoVerticalWithoutBackground.png";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 const Footer = () => {
   return (
     <div className="row footer-main m-0 ">

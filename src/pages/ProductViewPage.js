@@ -53,7 +53,6 @@ const ProductViewPage = () => {
             setImageURL(image);
           })();
         }
-
         setTimeout(() => setLoaderState(false), 200);
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -61,6 +60,7 @@ const ProductViewPage = () => {
     };
     fetch();
   }, [Product, productInfo]);
+
   return (
     <>
       <div style={{ backgroundColor: "#efefef" }}>
@@ -68,7 +68,7 @@ const ProductViewPage = () => {
         <Title name={Product.ProductName}></Title>
         <div className="row m-0">
           <div className="col-4 col-lg-3 d-md-block d-none">
-            <SearchBar></SearchBar>
+            <SearchBar category={Product.category}></SearchBar>
           </div>
           <div className="col-12 col-md-8 col-lg-9 p-0 overflow-x-hidden align-content-center">
             <div

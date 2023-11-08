@@ -29,6 +29,7 @@ const AddExtras = () => {
       await firebase.addNewBrand(brand);
       setreRender(!reRender)
       setLoaderState(false)
+      setFlavor("Enter Brand Name...");
     }
   };
   const FlavorSubmitHandler = async () => {
@@ -43,6 +44,7 @@ const AddExtras = () => {
       await firebase.addNewFlavor(flavor);
       setreRender(!reRender)
       setLoaderState(false)
+      setFlavor("Enter Flavor Name...");
     }
   };
 

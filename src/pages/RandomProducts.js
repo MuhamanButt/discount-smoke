@@ -13,10 +13,8 @@ import { useDispatch } from "react-redux";
 import { setOffers } from "../redux/Offers/OffersAction";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
-import { setSelectedCategory } from "../redux/SelectedCategory/SelectedCategoryActions";
 
-const ProductPage = ({ category }) => {
-
+const RandomProducts = () => {
   const dispatch=useDispatch();
   const userEntranceTime=useSelector((state)=>state.userEntranceTime.time)
   const [ProgressBarLoading, setProgressBarLoading] = useState(0);
@@ -37,15 +35,25 @@ const ProductPage = ({ category }) => {
     const allowableTimeDifference = minutes * oneMinuteMilliseconds;
     return timeDifference <= allowableTimeDifference;
   }
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
   //!USE EFFECT TO CHECK IF USER IS ON SCREEN FOR MORE THAN 1 HOUR
   useEffect(() => {
-    dispatch(setSelectedCategory(category))
     const handleFocus = () => {
       if (!isTimestampMinutesOld(userEntranceTime, 60)) {
         dispatch(setOffers([]))
         dispatch(setSearchBarData([]))
         dispatch(setUserEntranceTime(Date.now()))
         setRerenderer(!Rerenderer)
+        console.log("old")
+      }
+      else
+      {
+        console.log("new")
       }
     };
     window.addEventListener("focus", handleFocus);
@@ -61,19 +69,28 @@ const ProductPage = ({ category }) => {
       setshowProgressBar(true);
       setProgressBarLoading(20);
       setProductsData(null);
-      if (data.length > 0) {
-        setProductsData(filterArrayByCategory(data, category));
-        setProgressBarLoading(40);
-      } else {
+      if (Object.keys(data).length === 0) {
+        
         setProgressBarLoading(30);
-        const result = await firebase.getProductsByCategory(category);
-        setProductsData(result);
+        const alldata = await firebase.getAllData();
+        setLoaderState(false);
+        shuffleArray(data)
+        setProductsData(alldata);
+        dispatch(setSearchBarData(alldata));
+        setProgressBarLoading(80);
+      } else {
+        
+        setProgressBarLoading(50);
+        shuffleArray(data)
+        setProductsData(data);
       }
+      
       setProgressBarLoading(100);
       setshowProgressBar(false);
+
     };
     fetch();
-  }, [category]);
+  }, []);
   return (
     <div style={{ backgroundColor: "#ffffff" }}>
       <MyNavbar status={true}></MyNavbar>
@@ -84,15 +101,14 @@ const ProductPage = ({ category }) => {
           className="progressBar"
         />
       )}
-      <Title name={category}></Title>
       <div className="row m-0">
         <div className="col-3 d-md-block d-none">
-          <SearchBar category={category}/>
+          <SearchBar></SearchBar>
         </div>
         <div className="col-12 col-md-9 p-0" style={{ minHeight: "500px" }}>
           <div className="row m-0 overflow-x-hidden px-3 px-md-0">
             {!ProductsData ? (
-              <ProductPageSkeleton/>
+              <ProductPageSkeleton></ProductPageSkeleton>
             ) : (
               <>
                 {ProductsData.length == 0 ? (
@@ -120,4 +136,4 @@ const ProductPage = ({ category }) => {
   );
 };
 
-export default ProductPage;
+export default RandomProducts;

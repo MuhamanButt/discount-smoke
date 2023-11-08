@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const HomePageMain = () => {
   const navigate=useNavigate();
   const onclickHandler=()=>{
-    navigate('/product/starterDevices')
+    navigate('/product/all')
   }
   return (
     <div data-aos="fade-right">
