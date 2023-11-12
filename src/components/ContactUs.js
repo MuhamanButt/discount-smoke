@@ -14,6 +14,7 @@ const ContactUs = () => {
   const [showToast1, setshowToast1] = useState(false);
   const [showToast2, setshowToast2] = useState(false);
   const [showToast3, setshowToast3] = useState(false);
+  const [showToast4, setshowToast4] = useState(false);
   const nameHandler = (value) => {
     if (value.length < 30) {
       setName(value);
@@ -39,6 +40,9 @@ const ContactUs = () => {
       if (Email && ContactNo && Description && Name) {
         if(await firebase.addMessage(Name, Email, ContactNo, Description))
         setshowToast2(true);
+      else{
+        showToast4(true);
+      }
       } else {
         setshowToast3(true);
       }
@@ -86,6 +90,10 @@ const ContactUs = () => {
               <MyToast
                 text={"Please fill All Fields"}
                 showHandler={showToast3}
+              ></MyToast>
+              <MyToast
+                text={"There is an error sending message"}
+                showHandler={showToast4}
               ></MyToast>
               <div className="row">
                 <div className="col-5" data-aos="fade-right">
