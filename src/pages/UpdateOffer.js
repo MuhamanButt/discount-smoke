@@ -12,6 +12,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../components/styles/Form.css";
 import { Button } from "react-bootstrap";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useNavigate } from "react-router-dom";
@@ -252,13 +254,7 @@ const UpdateOffer = () => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label className="FormLabels">Features</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        placeholder={"Enter Features..."}
-                        value={Features}
-                        style={{ height: "300px" }}
-                        onChange={(e) => setFeatures(e.target.value)}
-                      />
+                      <ReactQuill theme="snow" value={Features} onChange={setFeatures} style={{height:"300px"}}/>
                     </Form.Group>
                     <Form.Group controlId="formFile" className="mb-3">
                       <Form.Label className="FormLabels">

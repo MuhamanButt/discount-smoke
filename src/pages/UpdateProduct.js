@@ -10,8 +10,11 @@ import MyButton from "../reusableComponents/MyButton";
 import { Button,Dropdown,DropdownButton,InputGroup,Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import MyToast from "../reusableComponents/Toast";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
+import ReactHtmlParser from "react-html-parser";
 const UpdateProduct = () => {
   const navigate=useNavigate()
   const { productID, category } = useParams();
@@ -159,14 +162,7 @@ const UpdateProduct = () => {
                   </Form.Group>
                   <Form.Group className="mb-3">
                     <Form.Label className="FormLabels">Features</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      placeholder={"Enter Features..."}
-                      value={Features}
-                      style={{ height: "300px" }}
-                      
-                      onChange={(e) => setFeatures(e.target.value)}
-                    />
+                    <ReactQuill theme="snow" value={Features} onChange={setFeatures} style={{height:"300px"}}/>
                   </Form.Group>
                   <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label className="FormLabels">

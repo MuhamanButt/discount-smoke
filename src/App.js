@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css'
 import ProjectRoutes from './components/ProjectRoutes';
 import { useDispatch } from 'react-redux';
+import ReactHtmlParser from "react-html-parser";
 import { setUserEntranceTime } from './redux/UserEntranceTime/UserEntranceTimeActions';
 const App = () => {
   const dispatch=useDispatch();

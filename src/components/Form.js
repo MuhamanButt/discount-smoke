@@ -1,8 +1,16 @@
-import React, { useEffect,useState } from "react";
-import { Button, DropdownButton, Dropdown, InputGroup, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  DropdownButton,
+  Dropdown,
+  InputGroup,
+  Form,
+} from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
 import MyToast from "../reusableComponents/Toast";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import "./styles/Form.css";
 const MyForm = ({ category }) => {
   const [ProductName, setProductName] = useState();
@@ -17,21 +25,19 @@ const MyForm = ({ category }) => {
   const [showToast2, setshowToast2] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
   const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
-
   const firebase = useFirebase();
-  
-  const SubmitHandler = async () => { 
+
+  const SubmitHandler = async () => {
     setshowToast2(false);
     setshowToast1(false);
     // Validate the required fields
-    if (!selectedBrand||!ProductName||!Description||!Image) {
+    if (!selectedBrand || !ProductName || !Description || !Image) {
       setshowToast2(false);
       setTimeout(() => {
         setshowToast2(true);
       }, 10);
       return; // Exit the function and prevent form submission
     }
-
 
     // If all required fields are filled in, proceed with adding the product
     setLoaderState(true);
@@ -51,68 +57,76 @@ const MyForm = ({ category }) => {
       setshowToast1(true);
     }
   };
-const clearAllFields=()=>{
-setProductName();
-setDescription();
-setFeatures();
-setSelectedFlavors([])
-setSelectedBrand();
-setImage("")
-}
-  const setDataViaCheck=(value,limit,callBack)=>{
-    if(value.length<=limit){
-      callBack(value)
+  const clearAllFields = () => {
+    setProductName();
+    setDescription();
+    setFeatures();
+    setSelectedFlavors([]);
+    setSelectedBrand();
+    setImage("");
+  };
+  const setDataViaCheck = (value, limit, callBack) => {
+    if (value.length <= limit) {
+      callBack(value);
     }
-  }
+  };
   const removeFlavor = (flavorToRemove) => {
     setSelectedFlavors((prevSelectedFlavors) =>
       prevSelectedFlavors.filter(
         (selectedFlavor) => selectedFlavor !== flavorToRemove
       )
     );
-    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
-   
+    setFlavors((prevFlavors) => [
+      ...prevFlavors,
+      { flavorName: flavorToRemove },
+    ]);
   };
-  
+
   const flavorHandler = (flavor) => {
     if (!selectedFlavors.includes(flavor)) {
       setSelectedFlavors((prevSelectedFlavors) => [
         ...prevSelectedFlavors,
         flavor,
       ]);
-      let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
+      let newFlavors = Flavors.filter((f) => f.flavorName != flavor);
       setFlavors(newFlavors);
     }
   };
   useEffect(() => {
-    console.log("rerendered")
+    console.log("rerendered");
     const fetch = async () => {
-      if(!flavorsAddedFirstTime)
-      {setflavorsAddedFirstTime(true)
-      setFlavors(await firebase.getFlavors());}
+      if (!flavorsAddedFirstTime) {
+        setflavorsAddedFirstTime(true);
+        setFlavors(await firebase.getFlavors());
+      }
       setBrands(await firebase.getBrands());
     };
     fetch();
-  }, [showToast1,showToast2]);
+  }, [showToast1, showToast2]);
   return (
     <div>
-     
       {LoaderState ? (
         <FormPageSkeleton></FormPageSkeleton>
       ) : (
-        
         <Form>
-          
-          <MyToast text={"Please fill All Required Fields"} showHandler={showToast2}></MyToast>
-          <MyToast text={"Product Added SuccessFully!!"} showHandler={showToast1}></MyToast>
-          
+          <MyToast
+            text={"Please fill All Required Fields"}
+            showHandler={showToast2}
+          ></MyToast>
+          <MyToast
+            text={"Product Added SuccessFully!!"}
+            showHandler={showToast1}
+          ></MyToast>
+
           <Form.Group className="mb-3">
             <Form.Label className="FormLabels">Product Name</Form.Label>
             <Form.Control
               type="text"
               placeholder={"Enter Product Name..."}
               value={ProductName}
-              onChange={(e) => setDataViaCheck(e.target.value,30,setProductName)}
+              onChange={(e) =>
+                setDataViaCheck(e.target.value, 30, setProductName)
+              }
               required
             />
           </Form.Group>
@@ -123,19 +137,15 @@ setImage("")
               placeholder={"Enter Description..."}
               value={Description}
               style={{ height: "100px" }}
-              onChange={(e) => setDataViaCheck(e.target.value,300,setDescription)}
+              onChange={(e) =>
+                setDataViaCheck(e.target.value, 300, setDescription)
+              }
               required
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label className="FormLabels">Features</Form.Label>
-            <Form.Control
-              as="textarea"
-              placeholder={"Enter Features..."}
-              value={Features}
-              style={{ height: "300px" }}
-              onChange={(e) => setFeatures(e.target.value)}
-            />
+            <ReactQuill theme="snow" value={Features} onChange={setFeatures} style={{height:"300px"}}/>
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label className="FormLabels">Choose Product Image</Form.Label>
@@ -147,6 +157,7 @@ setImage("")
               className="form-image"
             />
           </Form.Group>
+          
           <InputGroup className="mb-3">
             <Form.Control
               aria-label="Text input with dropdown button"
@@ -215,7 +226,6 @@ setImage("")
                     onSubmit={SubmitHandler}
                     onClick={SubmitHandler}
                     style={{ backgroundColor: "#00bc00", width: "100%" }}
-                   
                   >
                     Add Product
                   </Button>

@@ -10,6 +10,7 @@ import { useFirebase } from "../context/firebase";
 import "./styles/ProductViewPage.css";
 import FlavorButton from "../reusableComponents/FlavorButton";
 import HrTag from "../reusableComponents/HrTag";
+import ReactHtmlParser from "react-html-parser";
 const ProductViewPage = () => {
   const firebase = useFirebase();
   const [Product, setProduct] = useState({});
@@ -17,31 +18,6 @@ const ProductViewPage = () => {
   const [LoaderState, setLoaderState] = useState(true);
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const [FlavorIsAvailable, setFlavorIsAvailable] = useState(false);
-
-  const getFeatures = () => {
-    if (Product.Features) {
-      const formattedFeatures = Product.Features.split("\n").map(
-        (line, index) => {
-          const parts = line.split(/\*([^*]+)\*/g);
-
-          return (
-            <div key={index}>
-              {parts.map((part, partIndex) => {
-                if (partIndex % 2 === 1) {
-                  return <strong key={partIndex}>{part}</strong>;
-                } else {
-                  return part;
-                }
-              })}
-            </div>
-          );
-        }
-      );
-
-      return formattedFeatures;
-    }
-    return "";
-  };
 
   useEffect(() => {
     setProduct(productInfo.product);
@@ -80,7 +56,7 @@ const ProductViewPage = () => {
                 <div className="row justify-content-center mb-4">
                   <div
                     className="col-5 col-sm-4 d-flex align-items-center justify-content-center text-center"
-                    style={{ height: "250px"}}
+                    style={{ height: "250px" }}
                   >
                     <img src={ImageURL} alt="" className="pc-img" />
                   </div>
@@ -119,11 +95,13 @@ const ProductViewPage = () => {
 
                 <div className="row justify-content-center mb-4">
                   <div className="col-10">
-                    <h3 className="pc-brandName"><strong>Description :</strong></h3>
+                    <h3 className="pc-brandName">
+                      <strong>Description :</strong>
+                    </h3>
                     <div className="pc-text">
                       <div className="row m-0">
                         <div className="col p-0 pc-features">
-                          {getFeatures()}
+                          {ReactHtmlParser(Product.Features)}
                         </div>
                       </div>
                     </div>
