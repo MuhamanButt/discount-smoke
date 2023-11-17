@@ -13,4 +13,4 @@ jobs:
       with:
         server: ftp.discountsmoke.us
         username: admin@discountsmoke.us
-        password: ${{ secrets.ftp_password }}
+        password: ${{ secrets.DISCOUNT_SMOKE_FTP }}
