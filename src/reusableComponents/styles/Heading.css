@@ -16,19 +16,3 @@
         font-size: 25px;
     }
 }
-
-@media screen and (max-width: 480px) {
-    .Heading{
-        font-size: 20px;
-    }
-}
-@media screen and (max-width: 400px) {
-    .Heading{
-        font-size: 15px;
-    }
-}
-@media screen and (max-width: 320px) {
-    .Heading{
-        font-size: 10px;
-    }
-}

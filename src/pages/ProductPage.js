@@ -7,6 +7,7 @@ import ProductCard from "../reusableComponents/ProductCard";
 import { useFirebase } from "../context/firebase";
 import datacoming from "./assets/underConstruction.svg";
 import ProductPageSkeleton from "../skeletons/ProductPageSkeleton";
+import { toAbsoluteURL } from "../helper/Helper";
 import { useSelector } from "react-redux";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useDispatch } from "react-redux";
@@ -99,7 +100,7 @@ const ProductPage = ({ category }) => {
                   <div className="row m-0" style={{ height: "70vh" }}>
                     <div className="col text-center align-self-center">
                       <img
-                        src={datacoming}
+                        src={toAbsoluteURL(datacoming)}
                         alt=""
                         style={{ height: "100%", maxWidth: "70%" }}
                       />

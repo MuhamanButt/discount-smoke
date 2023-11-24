@@ -9,7 +9,8 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { NavLink } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import navbarlogo from "./assets/logoWithoutBackground.png";
+import navbarlogo from "../logoWithoutBackground.png";
+import { toAbsoluteURL } from "../helper/Helper";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -218,8 +219,7 @@ useEffect(()=>{
             >
               <Navbar.Brand as={NavLink} to="/home">
                 <img
-                  src={navbarlogo}
-                  alt="Navbar Logo"
+                  src={toAbsoluteURL(navbarlogo)}
                   className="navbar-logo"
                 />
               </Navbar.Brand>
@@ -387,4 +387,4 @@ useEffect(()=>{
   );
 };
 
-export default React.memo(MyNavbar);
+export default MyNavbar;

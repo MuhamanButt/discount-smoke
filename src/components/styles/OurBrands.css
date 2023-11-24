@@ -42,3 +42,9 @@
         width: 100px;
     }
 }
+@media screen and (max-width:500px){
+    .ourbrands-image{
+        height: 28vw;
+        width: 28vw;
+    }
+}

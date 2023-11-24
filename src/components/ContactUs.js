@@ -38,11 +38,11 @@ const ContactUs = () => {
   const SubmitHandler = async () => {
     if (validateEmail(Email)) {
       if (Email && ContactNo && Description && Name) {
-        if(await firebase.addMessage(Name, Email, ContactNo, Description))
-        setshowToast2(true);
-      else{
-        showToast4(true);
-      }
+        if (await firebase.addMessage(Name, Email, ContactNo, Description))
+          setshowToast2(true);
+        else {
+          setshowToast4(true);
+        }
       } else {
         setshowToast3(true);
       }

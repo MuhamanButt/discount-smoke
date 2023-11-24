@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Heading from "../reusableComponents/Heading";
-import image from "./assets/7.png";
+import image from "./assets/7.webp";
+import imageUnderSM from "./assets/productsbannerUnderSM.webp";
 import { NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { useFirebase } from "../context/firebase";
@@ -13,6 +14,7 @@ const OurProducts = () => {
   const firebase = useFirebase();
   const [cigaretteProducts, setcigaretteProducts] = useState(null);
   const [dataToShow, setdataToShow] = useState([]);
+  const [showImageUnderSM, setshowImageUnderSM] = useState(false);
   const [cigarProducts, setcigarProducts] = useState(null);
   const [disposableVapeProducts, setdisposableVapeProducts] = useState(null);
   const [starterDevicesProducts, setstarterDevicesProducts] = useState(null);
@@ -66,12 +68,30 @@ const OurProducts = () => {
   }
   
   
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 600) {
+        setshowImageUnderSM(true);
+      } else {
+        setshowImageUnderSM(false);
+      }
+    }
+  
+    // Initial check on component mount
+    handleResize();
+  
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   
   
   const determineItemsToMap = () => {
     const viewportWidth = window.innerWidth;
     if (viewportWidth < 576) {
-      return 2;
+      return 1;
     } else if (viewportWidth < 768) {
       return 3;
     } else {
@@ -83,32 +103,41 @@ const OurProducts = () => {
       <Heading text={"OUR PRODUCTS"}></Heading>
       <div className="row m-0">
         <div className="col p-0">
-          <img src={image} alt="" style={{ width: "100%" }} />
+          <img src={`${showImageUnderSM?(imageUnderSM):(image)}`} alt="" className="our-products-image"/>
           <div className="row justify-content-center navbar-row m-0 py-2" style={{backgroundColor:"#ffffff"}}>
             <div className="col-12 col-md-10">
-              <Nav
-                className="ms-auto our-product-nav"
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                {/* <button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
-                  Cigarettes
-                </button> */}
-                <button className="nav-btn" onClick={() => changeHandler("Cigars")}>
-                  Cigars
-                </button>
-                <button className="nav-btn" onClick={() => changeHandler("Disposable Vapes")}>
+              <div className="wrapper">
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Cigars")}>
+                     Cigars
+                  </button>
+                </div>
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Disposable Vapes")}>
                   Disposable Vapes
-                </button>
-                <button className="nav-btn" onClick={() => changeHandler("Starter Devices")}>
+                  </button>
+                </div>
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Starter Devices")}>
                   Starter Devices
-                </button>
-                <button className="nav-btn" onClick={() => changeHandler("Vape Juice")}>
+                  </button>
+                </div>
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Vape Juice")}>
                   Vape Juice
-                </button>
-                <button className="nav-btn" onClick={() => changeHandler("Hookah")}>
+                  </button>
+                </div>
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Hookah")}>
                   Hookah
-                </button>
-              </Nav>
+                  </button>
+                </div>
+                <div className="wrapper-item">
+                  <button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
+                  Cigarettes
+                  </button>
+                </div>
+              </div>
               {LoaderState ? (
                 <OurProductSkeleton number={determineItemsToMap()}></OurProductSkeleton>
               ) : ( (dataToShow && dataToShow.length > 0)?(<OurProductSubcomponent

@@ -1,90 +1,119 @@
-.nav-btn{
-    color: black !important;
-    background-color: transparent !important;
-    border: none !important;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 10px;
+.nav-btn {
+  color: black !important;
+  background-color: transparent !important;
+  border: none !important;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px;
+  width: 100px;
+  /* Remove the width property */
+}
+.our-products-image {
+  width: 100%;
+  height: auto;
+}
+/* @media screen and (max-width:600px)
+{
+  .our-products-image
+  {
     width: auto;
-    flex:auto;
+    height: 200px;
+  }
+} */
+
+.navbar-row {
+  background-color: #d3d3d3;
 }
-.navbar-row{
-    background-color: #D3D3D3 ;
-}
-.carousel-control-next-icon,.carousel-control-prev-icon{
-    display: none !important;
-}
-@media screen and (max-width:920px)
-{
-    .nav-btn{
-        font-size: 10px !important;
-    }
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  display: none !important;
 }
 
-@media screen and (max-width:480px)
-{
-    .nav-btn{
-        font-size: 6px !important;
-    }
+@media screen and (max-width: 500px) {
+  .nav-btn {
+   font-size: 12px !important;
+  }
+}@media screen and (min-width: 500px) {
+  .nav-btn {
+    width: 120px !important;
+  }
 }
 
-.nav-btn-active{
-    background-color: #05225C !important;
-    border-radius: 10px;
-    font-weight: 400;
-    color: white !important;
+@media screen and (min-width: 920px) {
+  .nav-btn {
+    width: 150px !important;
+  }
 }
 
-
+.nav-btn-active {
+  background-color: #05225c !important;
+  border-radius: 10px;
+  font-weight: 400;
+  color: white !important;
+}
+/* 
+========================
+      slider
+========================
+*/
+.wrapper {
+  display: flex;
+  overflow-x: auto;
+}
+.wrapper-item {
+  width: 200px !important;
+  text-align: center;
+}
+.wrapper::-webkit-scrollbar {
+  height: 0px;
+}
 /* 
 ========================
       BUTTON ONE
 ========================
 */
 .nav-btn {
-    color: #fff;
-    transition: all 0.3s;
-    position: relative;
-  }
-  .nav-btn span {
-    transition: all 0.3s;
-  }
-  .nav-btn::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-top-color: #05225C;
-    border-bottom-color: #05225C;
-    transform: scale(0.1, 1);
-  }
-  .nav-btn:hover span {
-    letter-spacing: 2px;
-  }
-  .nav-btn:hover::before {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-  .nav-btn::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    transition: all 0.3s;
-  }
-  .nav-btn:hover::after {
-    opacity: 0;
-    transform: scale(0.1, 1);
-  }
+  color: #fff;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-btn span {
+  transition: all 0.3s;
+}
+.nav-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: #05225c;
+  border-bottom-color: #05225c;
+  transform: scale(0.1, 1);
+}
+.nav-btn:hover span {
+  letter-spacing: 2px;
+}
+.nav-btn:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.nav-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.nav-btn:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}

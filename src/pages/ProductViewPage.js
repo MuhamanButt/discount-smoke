@@ -11,6 +11,7 @@ import "./styles/ProductViewPage.css";
 import FlavorButton from "../reusableComponents/FlavorButton";
 import HrTag from "../reusableComponents/HrTag";
 import ReactHtmlParser from "react-html-parser";
+import { toAbsoluteURL } from "../helper/Helper";
 const ProductViewPage = () => {
   const firebase = useFirebase();
   const [Product, setProduct] = useState({});

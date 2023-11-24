@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import "./styles/Footer.css";
 import logo from "./assets/logoVerticalWithoutBackground.png";
 import { NavLink } from "react-router-dom";
+import { toAbsoluteURL } from "../helper/Helper";
 const Footer = () => {
   return (
     <div className="row footer-main m-0 ">
       <div className="col p-0 py-3 py-lg-2">
         <div className="row justify-content-center m-0">
           <div className="col-12 col-sm-2 align-self-center text-center">
-            <img src={logo} alt="" className="footer-logo" />
+            <img src={toAbsoluteURL(logo)} alt="" className="footer-logo" />
           </div>
           <div className="col-12 col-sm-3 col-md-3 footer-details align-self-center">
             <p>436 Rubber Ave Naugatuck, CT 06770</p>
