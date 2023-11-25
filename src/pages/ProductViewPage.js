@@ -56,13 +56,13 @@ const ProductViewPage = () => {
               <div className="col">
                 <div className="row justify-content-center mb-4">
                   <div
-                    className="col-5 col-sm-4 d-flex align-items-center justify-content-center text-center"
+                    className="col-10 col-sm-4 d-flex align-items-center justify-content-center text-center mb-sm-0"
                     style={{ height: "250px" }}
                   >
                     <img src={ImageURL} alt="" className="pc-img" />
                   </div>
-                  <div className="col-6 col-sm-6 align-self-center me-3 ms-0 ms-sm-5">
-                    <h3 className="pc-productName">{Product.ProductName}</h3>
+                  <div className="col-10 col-sm-6 align-self-center px-3 mb-3">
+                    <h3 className="pc-productName mt-5 mt-sm-0">{Product.ProductName}</h3>
                     <p className="pc-brandName">
                       <strong>Brand : </strong>
                       {Product.selectedBrand}

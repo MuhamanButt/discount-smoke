@@ -1,6 +1,7 @@
 .toast-header{
     background-color:#05225C !important;
     color: white !important;
+    padding: 5px !important;
 }
 .toast-body{
     color: black !important;

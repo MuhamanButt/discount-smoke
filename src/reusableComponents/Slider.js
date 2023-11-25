@@ -4,7 +4,7 @@ const Slider = ({ Components }) => {
   return (
     <div className="wrapper my-2">
       {Components.map((component, key) => (
-        <div className="wrapper-item" id={key}>
+        <div className="wrapper-item ms-4" id={key}>
           {component}
         </div>
       ))}
