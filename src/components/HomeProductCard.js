@@ -33,37 +33,36 @@ const HomeProductCard = ({ product }) => {
     fetch();
   }, [imageURL, product]);
   return (
-    <div className="col-6 col-sm-4 col-md-3">
-      <Card className="product-card">
+      <Card className="home-product-card">
         {LoaderState ? (
           <Card.Img
             variant="top"
-            className="product-card-img w-50 mx-auto my-auto"
+            className="home-product-card-img w-50 mx-auto my-auto"
             src={alternate} // Use the stored imageURL
           />
         ) : (
           <Card.Img
             variant="top"
             onClick={viewHandler}
-            className="product-card-img"
+            className="home-product-card-img"
             src={imageURL} // Use the stored imageURL
           />
         )}
 
         <Card.Body
-          className="product-card-body d-flex flex-column justify-content-between"
+          className="home-product-card-body d-flex flex-column justify-content-between"
           onClick={viewHandler}
         >
           <div>
-            <Card.Title className="product-card-color">
-              <h4 className="product-card-heading">
+            <Card.Title className="home-product-card-color">
+              <h4 className="home-product-card-heading">
                 <strong>{product.ProductName}</strong>
               </h4>
             </Card.Title>
-            <Card.Text className="product-card-brandName">
+            <Card.Text className="home-product-card-brandName mb-2">
               <strong>Brand : </strong> {product.selectedBrand}
             </Card.Text>
-            <Card.Text className="product-card-description">
+            <Card.Text className="home-product-card-description">
               {product.Description.length > 100
                 ? `${product.Description.slice(0, 100)}. . .`
                 : product.Description}
@@ -74,7 +73,6 @@ const HomeProductCard = ({ product }) => {
           </div>
         </Card.Body>
       </Card>
-    </div>
   );
 };
 

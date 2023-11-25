@@ -94,10 +94,10 @@ const ProductViewPage = () => {
                   </div>
                 </div>
 
-                <div className="row justify-content-center mb-4">
+                <div className="row justify-content-center mb-4 mt-4">
                   <div className="col-10">
-                    <h3 className="pc-brandName">
-                      <strong>Description :</strong>
+                    <h3 className="pc-subHeading">
+                     Description :
                     </h3>
                     <div className="pc-text">
                       <div className="row m-0">

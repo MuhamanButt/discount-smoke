@@ -43,12 +43,7 @@ const Home = () => {
         dispatch(setOffers([]))
         dispatch(setSearchBarData([]))
         dispatch(setUserEntranceTime(Date.now()))
-        console.log("old")
         setRerenderer(!Rerenderer)
-      }
-      else
-      {
-        console.log("new")
       }
     };
     window.addEventListener("focus", handleFocus);

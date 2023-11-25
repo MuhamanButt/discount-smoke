@@ -10,6 +10,7 @@ import { useState } from "react";
 import OurProductSubcomponent from "./OurProductSubcomponent";
 import OurProductSkeleton from "../skeletons/OurProductSkeleton";
 import { Button } from "react-bootstrap";
+import Slider from "../reusableComponents/Slider";
 const OurProducts = () => {
   const firebase = useFirebase();
   const [cigaretteProducts, setcigaretteProducts] = useState(null);
@@ -47,6 +48,8 @@ const OurProducts = () => {
   }, [selectedProduct, starterDevicesProducts]);
   useEffect(()=>{
     changeHandler(selectedProduct);
+    if (window.innerWidth <= 600)
+      setshowImageUnderSM(true);
   },[])
   function changeHandler(selectedOption) {
     // Get all buttons with the "nav-btn" class
@@ -68,26 +71,6 @@ const OurProducts = () => {
   }
   
   
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth <= 600) {
-        setshowImageUnderSM(true);
-      } else {
-        setshowImageUnderSM(false);
-      }
-    }
-  
-    // Initial check on component mount
-    handleResize();
-  
-    window.addEventListener("resize", handleResize);
-  
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  
-  
   const determineItemsToMap = () => {
     const viewportWidth = window.innerWidth;
     if (viewportWidth < 576) {
@@ -99,45 +82,32 @@ const OurProducts = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: "#ffffff" }} className="pb-4">
+    <div style={{ backgroundColor: "#ffffff" }} className="pb-1">
       <Heading text={"OUR PRODUCTS"}></Heading>
       <div className="row m-0">
         <div className="col p-0">
           <img src={`${showImageUnderSM?(imageUnderSM):(image)}`} alt="" className="our-products-image"/>
           <div className="row justify-content-center navbar-row m-0 py-2" style={{backgroundColor:"#ffffff"}}>
             <div className="col-12 col-md-10">
-              <div className="wrapper">
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Cigars")}>
-                     Cigars
+              <Slider Components={[
+                  <button className="nav-btn align-self-center" onClick={() => changeHandler("Cigars")}>
+                    Cigars
+                  </button>,
+                  <button className="nav-btn align-self-center" onClick={() => changeHandler("Disposable Vapes")}>
+                    Disposable Vapes
+                  </button>,
+                  <button className="nav-btn align-self-center" onClick={() => changeHandler("Starter Devices")}>
+                    Starter Devices
+                  </button>,
+                  <button className="nav-btn align-self-center" onClick={() => changeHandler("Vape Juice")}>
+                    Vape Juice
+                  </button>,<button className="nav-btn align-self-center" onClick={() => changeHandler("Hookah")}>
+                    Hookah
                   </button>
-                </div>
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Disposable Vapes")}>
-                  Disposable Vapes
-                  </button>
-                </div>
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Starter Devices")}>
-                  Starter Devices
-                  </button>
-                </div>
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Vape Juice")}>
-                  Vape Juice
-                  </button>
-                </div>
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Hookah")}>
-                  Hookah
-                  </button>
-                </div>
-                <div className="wrapper-item">
-                  <button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
-                  Cigarettes
-                  </button>
-                </div>
-              </div>
+                  // ,<button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
+                  // Cigarettes
+                  // </button>
+              ]}></Slider>
               {LoaderState ? (
                 <OurProductSkeleton number={determineItemsToMap()}></OurProductSkeleton>
               ) : ( (dataToShow && dataToShow.length > 0)?(<OurProductSubcomponent

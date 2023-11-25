@@ -94,7 +94,6 @@ const MyNavbar = ({ status }) => {
     };
   }, []);
 useEffect(()=>{
-  console.log("rerendered")
 },[showDropdown])
   return (
     <div

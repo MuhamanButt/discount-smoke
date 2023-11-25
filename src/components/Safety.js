@@ -11,7 +11,7 @@ import './styles/Safety.css'
 const Safety = () => {
   return (
     <div className="overflow-x-hidden" style={{backgroundColor:"#f0f6ff"}}>
-      <div data-aos="fade-right">
+      <div >
         <Heading
           text={"HEALTH & SAFETY TIPS"}
           backgroundColor={"#f0f6ff"}
@@ -21,22 +21,22 @@ const Safety = () => {
           style={{ backgroundColor: "#f0f6ff" }}
 
         >
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image1} alt="" />
           </div>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image2} alt="" />
           </div>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image3} alt="" />
           </div>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image4} alt="" />
           </div>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image5} alt="" />
           </div>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">
               <img src={image6} alt="" />
           </div>
         </div>
