@@ -9,7 +9,7 @@ import "../components/styles/Form.css";
 import MyButton from "../reusableComponents/MyButton";
 import { Button,Dropdown,DropdownButton,InputGroup,Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import MyToast from "../reusableComponents/Toast";
+import CustomModal from "../utils/Modal";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";
@@ -127,14 +127,14 @@ const UpdateProduct = () => {
                 <FormPageSkeleton></FormPageSkeleton>
               ) : (
                 <Form>
-                  <MyToast
+                  <CustomModal
                     text={"Product Updated Successfully!!"}
                     showHandler={showToast1}
-                  ></MyToast>
-                  <MyToast
+                  ></CustomModal>
+                  <CustomModal
                     text={"Please fill Required Fields"}
                     showHandler={showToast2}
-                  ></MyToast>
+                  ></CustomModal>
                   <Form.Group className="mb-3">
                     <Form.Label className="FormLabels">Product Name</Form.Label>
                     <Form.Control

@@ -1,0 +1,12 @@
+.inputFormComponentMain{
+    font-size: 6px;
+}
+.inputFormComponentField{
+    font-size: .6em
+}
+.inputFormComponentLabel{
+    font-size: .6em
+}
+@media screen and (max-width: 768px) {
+
+}

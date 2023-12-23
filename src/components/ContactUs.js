@@ -1,60 +1,57 @@
 import React from "react";
 import "./styles/ContactUs.css";
+import * as Yup from "yup";
 import { useState } from "react";
-import { Form } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import MyToast from "../reusableComponents/Toast";
+import { Formik, Form } from "formik";
+import FormikControl from '../formik/FormikControl'
 import { useFirebase } from "../context/firebase";
-const ContactUs = () => {
+import Loader from "../reusableComponents/Loader";
+const ContactUs = ({modalInvoker}) => {
   const firebase = useFirebase();
-  const [Email, setEmail] = useState("");
-  const [Name, setName] = useState("");
-  const [ContactNo, setContactNo] = useState("");
-  const [Description, setDescription] = useState("");
-  const [showToast1, setshowToast1] = useState(false);
-  const [showToast2, setshowToast2] = useState(false);
-  const [showToast3, setshowToast3] = useState(false);
-  const [showToast4, setshowToast4] = useState(false);
-  const nameHandler = (value) => {
-    if (value.length < 30) {
-      setName(value);
+  const [messageBeingSent, setmessageBeingSent] = useState(false);
+  const initialValues = {
+    name: "",
+    email: "",
+    contactNo: "",
+    description:"",
+  };
+  const validationSchema = Yup.object({
+    email: Yup.string().required("Enter valid email..."),
+    contactNo: Yup.string().required("Enter valid Contact No..."),
+    description:Yup.string().required("Enter valid description..."),
+    name:Yup.string().required("Enter valid name...")
+  });
+  const onSubmit=async(values)=>{
+    setmessageBeingSent(true)
+    if (await firebase.addMessage(values.name,values.email,values.contactNo, values.description))
+    modalInvoker("Message sent successfully!!",2000)
+    
+    else {
+      modalInvoker("There is an error sending message",2000)
+  }
+  setmessageBeingSent(false)
+  }
+  const interfaceDetails={
+    inputDesign:{
+      backgroundColor:"transparent",
+      border:"none",
+      padding :"0px"
+    },
+    fieldDesign:{
+    },
+    labelDesign:{
+      color:"#1396D8",
+      fontWeight:"700",
+      fontSize:"20px",
+      border:"none"
     }
-  };
-  const emailHandler = (value) => {
-    setEmail(value);
-  };
-  const contactNoHandler = (value) => {
-    setContactNo(value);
-  };
-  const descriptionHandler = (value) => {
-    if (value.length < 1000) {
-      setDescription(value);
-    }
-  };
-  const validateEmail = (email) => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(email);
-  };
-  const SubmitHandler = async () => {
-    if (validateEmail(Email)) {
-      if (Email && ContactNo && Description && Name) {
-        if (await firebase.addMessage(Name, Email, ContactNo, Description))
-          setshowToast2(true);
-        else {
-          setshowToast4(true);
-        }
-      } else {
-        setshowToast3(true);
-      }
-    } else {
-      setshowToast1(true);
-    }
-  };
+  }
   return (
     <div
-      className="OurBrands overflow-x-hidden"
+      className={`OurBrands overflow-x-hidden`}
       style={{ backgroundColor: "white" }}
     >
+    
       <div>
         <div className="row justify-content-center">
           <div className="col text-center">
@@ -72,101 +69,38 @@ const ContactUs = () => {
             We will contact you once shipment is arrived at the store.
           </div>
         </div>
-
+       
         <div
           className="row justify-content-center m-0 mt-sm-3"
           style={{ backgroundColor: "white" }}
         >
           <div className="col-12">
-            <Form>
-              <MyToast
-                text={"Please enter Valid Email!!"}
-                showHandler={showToast1}
-              ></MyToast>
-              <MyToast
-                text={"Message sent successfully!!"}
-                showHandler={showToast2}
-              ></MyToast>
-              <MyToast
-                text={"Please fill All Fields"}
-                showHandler={showToast3}
-              ></MyToast>
-              <MyToast
-                text={"There is an error sending message"}
-                showHandler={showToast4}
-              ></MyToast>
-              <div className="row">
-                <div className="col-5" data-aos="fade-right">
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels c-formLabels">
-                      Name
-                    </Form.Label>
-                    <Form.Control
-                      className="c-formText"
-                      type="text"
-                      placeholder={"Enter Your Name..."}
-                      value={Name}
-                      onChange={(e) => nameHandler(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels c-formLabels">
-                      Email
-                    </Form.Label>
-                    <Form.Control
-                      className="c-formText"
-                      type="text"
-                      placeholder={"Enter Your Email..."}
-                      value={Email}
-                      onChange={(e) => emailHandler(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels c-formLabels">
-                      Contact No
-                    </Form.Label>
-                    <Form.Control
-                      className="c-formText"
-                      type="text"
-                      placeholder={"Enter Your Contact No..."}
-                      value={ContactNo}
-                      onChange={(e) => contactNoHandler(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
+          {messageBeingSent?<Loader height="150px"/>:
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              validateOnBlur={false}
+              onSubmit={onSubmit}
+            >
+               {(formik) => (
+              <Form className="row">
+                <div className="col-5 p-1" data-aos="fade-right">
+                  <FormikControl control="input" type="name" name="name" label="Name" interfaceDetails={interfaceDetails}/>
+                  <FormikControl control="input" type="email" name="email" label="Email" interfaceDetails={interfaceDetails}/>
+                  <FormikControl control="input" type="contactNo" name="contactNo" label="Contact No" interfaceDetails={interfaceDetails}/>
                 </div>
                 <div className="col-7" data-aos="fade-left">
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels c-formLabels">
-                      Description
-                    </Form.Label>
-                    <Form.Control
-                      className="c-formText"
-                      as="textarea"
-                      placeholder={"Enter Product Description..."}
-                      value={Description}
-                      style={{ height: "210px" }}
-                      onChange={(e) => descriptionHandler(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
+                  <FormikControl control="input" type="description" name="description" label="Description" interfaceDetails={interfaceDetails}/>
                 </div>
-              </div>
 
               <div className="row justify-content-center" data-aos="fade-left">
-                <div className="col-12 text-center">
-                  <Button
-                    onSubmit={SubmitHandler}
-                    onClick={SubmitHandler}
-                    className="send-msg-btn"
-                  >
-                    Send Message
-                  </Button>
+                <div className="col-12 col-md-6 mt-4 text-center">
+                  <button type="submit" className="send-msg-btn" disabled={formik.isSubmitting}>Send Message</button>
                 </div>
               </div>
-            </Form>
+              </Form>
+               )}
+            </Formik>}
           </div>
         </div>
       </div>

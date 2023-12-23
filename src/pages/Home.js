@@ -18,12 +18,16 @@ import { useSelector } from "react-redux";
 import { setOffers } from "../redux/Offers/OffersAction";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
+import CustomModal from "../utils/Modal";
 const Home = () => {
   const dispatch=useDispatch();
   const userEntranceTime=useSelector((state)=>state.userEntranceTime.time)
   const [backgroundImage, setBackgroundImage] = useState("");
   const [MessageModal, setMessageModal] = useState(false);
   const [Rerenderer, setRerenderer] = useState(false);
+  const [showSuccessfulModal, setshowSuccessfulModal] = useState(false);
+  const [ModalText, setModalText] = useState('');
+  const [ModalTimer, setModalTimer] = useState(2000);
   function getRandomNumber() {
     const random = Math.random();
     const randomNumber = Math.floor(random * 4);
@@ -52,6 +56,9 @@ const Home = () => {
     };
   }, []);
 
+  const closeModal=()=>{
+    setMessageModal(false)
+  }
   useEffect(()=>{
 
   },[Rerenderer])
@@ -70,7 +77,18 @@ const Home = () => {
     const intervalId = setInterval(changeBackgroundImage, 3500);
     return () => clearInterval(intervalId);
   }, []);
-
+const invokeModal=(text,timer)=>{
+  if("Message sent successfully!!"==text)
+    {
+      setMessageModal(false)
+    }
+    setshowSuccessfulModal(true)
+    setTimeout(() => {
+      setshowSuccessfulModal(false)
+    }, timer);
+  setModalText(text);
+  setModalTimer(timer)
+}
   return (
     <>
       <div className="row m-0 ">
@@ -78,12 +96,12 @@ const Home = () => {
           className="col p-0 homepage-background"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
+         {showSuccessfulModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"MSGST"}/>}
           <MyNavbar status={false}></MyNavbar>
           <HomePageMain />
           <Offers></Offers>
           <OurBrands></OurBrands>
           <OurProducts></OurProducts>
-
           <Safety></Safety>
           <Footer />
         </div>
@@ -97,7 +115,7 @@ const Home = () => {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <ContactUs></ContactUs>
+          <ContactUs closeHandler={closeModal} modalInvoker={invokeModal}/>
         </Modal.Body>
       </Modal>
       <div className="position-relative">

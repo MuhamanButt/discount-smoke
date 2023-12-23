@@ -7,7 +7,7 @@ import {
   Form,
 } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import MyToast from "../reusableComponents/Toast";
+import Toast from "../utils/Modal";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -109,14 +109,14 @@ const MyForm = ({ category }) => {
         <FormPageSkeleton></FormPageSkeleton>
       ) : (
         <Form>
-          <MyToast
+          <CustomModal
             text={"Please fill All Required Fields"}
             showHandler={showToast2}
-          ></MyToast>
-          <MyToast
+          ></CustomModal>
+          <CustomModal
             text={"Product Added SuccessFully!!"}
             showHandler={showToast1}
-          ></MyToast>
+          ></CustomModal>
 
           <Form.Group className="mb-3">
             <Form.Label className="FormLabels">Product Name</Form.Label>

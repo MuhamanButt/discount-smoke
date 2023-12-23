@@ -45,7 +45,11 @@
   margin-left: auto;
 }
 
-
+.quill
+{
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
 
 /**
  * ----------------------------------------

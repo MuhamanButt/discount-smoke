@@ -71,8 +71,10 @@ export const FirebaseProvider = (props) => {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
       dispatch(loginAdmin());
       dispatch(setLoginTime(Date.now()))
+      return true
     } catch (error) {
       console.error("Error logging in:", error);
+      return false
     }
   };
   const signoutAdmin = async () => {
@@ -89,6 +91,7 @@ export const FirebaseProvider = (props) => {
   //!--------------------------------------------------------SEND MESSAGE
 
   const addMessage = async (Name, Email, ContactNo, Description) => {
+    console.log(Name, Email, ContactNo, Description)
     const nowDate = Date.now();
     const id = `${nowDate}-${Email}`;
     const messageCollectionRef = collection(firestore, "Messages");

@@ -14,7 +14,7 @@ import "../components/styles/Form.css";
 import { Button } from "react-bootstrap";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import MyToast from "../reusableComponents/Toast";
+import CustomModal from "../utils/Modal";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useNavigate } from "react-router-dom";
 const UpdateOffer = () => {
@@ -163,15 +163,15 @@ const UpdateOffer = () => {
           <div className="row m-0 justify-content-center">
             <div className="col-11">
               <Form>
-                <MyToast
+                <CustomModal
                   text={"Offer Updated Successfully!!"}
                   showHandler={showToast1}
-                ></MyToast>
+                ></CustomModal>
 
-                <MyToast
+                <CustomModal
                   text={"Please fill the required fields!!"}
                   showHandler={showToast2}
-                ></MyToast>
+                ></CustomModal>
                 {LoaderState ? (
                   <FormPageSkeleton></FormPageSkeleton>
                 ) : (

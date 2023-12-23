@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar";
 import {Form,InputGroup,Dropdown,DropdownButton,Button} from "react-bootstrap";
 import "../components/styles/Form.css";
 import { useFirebase } from "../context/firebase";
-import MyToast from "../reusableComponents/Toast";
+import Toast from "../utils/Modal";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
@@ -136,11 +136,11 @@ const AddOffer = () => {
                 <FormPageSkeleton></FormPageSkeleton>
               ) : (
                 <Form>
-                  <MyToast
+                  <Toast
                     text={"Offer Added Successfully!!"}
                     showHandler={showToast1}
-                  ></MyToast>
-                  <MyToast text={"Please fill All Required Fields"} showHandler={showToast2}></MyToast>
+                  ></Toast>
+                  <Toast text={"Please fill All Required Fields"} showHandler={showToast2}></Toast>
                   <Form.Group className="mb-3">
                     <Form.Label className="FormLabels">
                       Offer Description
