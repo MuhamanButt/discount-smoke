@@ -1,0 +1,17 @@
+.textAreaComponentMain{
+    font-size: 6px;
+}
+.textAreaComponentField{
+    font-size: .6em
+}
+.textAreaComponentLabel{
+    font-size: .6em
+}
+.numberOfCharacters{
+    font-size: 10px;
+}
+@media screen and (min-width: 992px) {
+    .numberOfCharacters {
+      font-size: 12px;
+    }
+  }

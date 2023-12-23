@@ -1,12 +1,17 @@
-.inputFormComponentMain{
-    font-size: 6px;
+.inputFormComponentMain {
+  font-size: 6px;
 }
-.inputFormComponentField{
-    font-size: .6em
+.inputFormComponentField {
+  font-size: 0.6em;
 }
-.inputFormComponentLabel{
-    font-size: .6em
+.inputFormComponentLabel {
+  font-size: 0.6em;
 }
-@media screen and (max-width: 768px) {
-
+.numberOfCharacters {
+  font-size: 10px;
+}
+@media screen and (min-width: 992px) {
+  .numberOfCharacters {
+    font-size: 12px;
+  }
 }

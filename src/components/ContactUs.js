@@ -17,18 +17,17 @@ const ContactUs = ({modalInvoker}) => {
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Enter valid email..."),
-    contactNo: Yup.string().required("Enter valid Contact No..."),
-    description:Yup.string().required("Enter valid description..."),
-    name:Yup.string().required("Enter valid name...")
+    contactNo: Yup.number().required("Enter valid Contact No...").typeError("Enter valid Contact No..."),
+    description:Yup.string().required("Enter valid description...").max(600,"Description must be less than 600 characters"),
+    name:Yup.string().required("Enter valid name...").max(20,"Name must be less than 20 characters"),
   });
   const onSubmit=async(values)=>{
     setmessageBeingSent(true)
     if (await firebase.addMessage(values.name,values.email,values.contactNo, values.description))
     modalInvoker("Message sent successfully!!",2000)
-    
-    else {
+    else 
       modalInvoker("There is an error sending message",2000)
-  }
+  
   setmessageBeingSent(false)
   }
   const interfaceDetails={
@@ -47,12 +46,7 @@ const ContactUs = ({modalInvoker}) => {
     }
   }
   return (
-    <div
-      className={`OurBrands overflow-x-hidden`}
-      style={{ backgroundColor: "white" }}
-    >
-    
-      <div>
+    <div className={`OurBrands overflow-x-hidden`} style={{ backgroundColor: "white" }}>
         <div className="row justify-content-center">
           <div className="col text-center">
             <h1 className="Heading">WANT A SPECIFIC PRODUCT?</h1>
@@ -87,10 +81,10 @@ const ContactUs = ({modalInvoker}) => {
                 <div className="col-5 p-1" data-aos="fade-right">
                   <FormikControl control="input" type="name" name="name" label="Name" interfaceDetails={interfaceDetails}/>
                   <FormikControl control="input" type="email" name="email" label="Email" interfaceDetails={interfaceDetails}/>
-                  <FormikControl control="input" type="contactNo" name="contactNo" label="Contact No" interfaceDetails={interfaceDetails}/>
+                  <FormikControl control="input" type="contactNo" name="contactNo" label="Contact No" interfaceDetails={interfaceDetails} />
                 </div>
                 <div className="col-7" data-aos="fade-left">
-                  <FormikControl control="input" type="description" name="description" label="Description" interfaceDetails={interfaceDetails}/>
+                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={600}/>
                 </div>
 
               <div className="row justify-content-center" data-aos="fade-left">
@@ -103,7 +97,6 @@ const ContactUs = ({modalInvoker}) => {
             </Formik>}
           </div>
         </div>
-      </div>
     </div>
   );
 };

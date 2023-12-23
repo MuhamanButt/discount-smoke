@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import Loader from "../reusableComponents/Loader";
 import CustomModal from "../utils/Modal";
 import loginImage from "./assets/loginpage.webp";
-import CustomAlert from "../utils/Alert"
 import "./styles/LoginPage.css";
 import "./styles/AgeConfirmation.css";
 
