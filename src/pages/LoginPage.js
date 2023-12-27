@@ -1,5 +1,4 @@
 import React, { useEffect,useState } from "react";
-import * as Yup from "yup";
 import logo from "./assets/logoVerticalWithoutBackground.png";
 import { useNavigate } from "react-router-dom";
 import { useFirebase } from "../context/firebase";
@@ -11,6 +10,10 @@ import CustomModal from "../utils/Modal";
 import loginImage from "./assets/loginpage.webp";
 import "./styles/LoginPage.css";
 import "./styles/AgeConfirmation.css";
+import { LOGIN_PAGE_SCHEMA } from "../values/ValidationSchemas";
+import { LIGHT_BLUE } from "../values/Colors";
+import { LOGIN_PAGE_INITIAL_VALUES } from "../values/InitialValues";
+import { LOGIN_PAGE_INTERFACE } from "../values/InterfaceDetails";
 
 const LoginPage = () => {
   const firebase = useFirebase();
@@ -25,44 +28,17 @@ const LoginPage = () => {
     }
   }, [isLoggedIn]);
 
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string().required("Enter valid email..."),
-    password: Yup.string().required("Enter valid password..."),
-  });
 
   const onSubmit = async(values) => {
     setLoaderState(true);
     await firebase.loginAdminWithEmailAndPassword(values.email, values.password);
-    if (!isLoggedIn) {
-      setShowToast(true);
-    }
-    setLoaderState(false);
+    !isLoggedIn ? setShowToast(true) : setLoaderState(false);
   };
   
-  const interfaceDetails={
-    inputDesign:{
-      backgroundColor:"transparent",
-      border:"none",
-    },
-    fieldDesign:{
-      border:"none"
-    },
-    labelDesign:{
-      backgroundColor:"transparent",
-      border:"none",
-      color:"#1396D8",
-      fontWeight:"700",
-      fontSize:"20px",
-    }
-  }
-
+  const interfaceDetails=LOGIN_PAGE_INTERFACE
+  const initialValues = LOGIN_PAGE_INITIAL_VALUES
+  const validationSchema = () => LOGIN_PAGE_SCHEMA
   return (
-  
       <div className="row m-0">
         <div className="col-6 p-0 d-none d-md-block">
           <img src={loginImage} alt="" className="loginImage" />
@@ -78,13 +54,7 @@ const LoginPage = () => {
                     <img src={loginImage} alt="" />
                   </div>
                 </div>
-                {showToast && (
-                  <CustomModal
-                    text={"Oops! Incorrect password. Please try again."}
-                    timer={3000}
-                    imageID={"ERR"}
-                  />
-                )}
+                {showToast && (<CustomModal text={"Oops! Incorrect password. Please try again."} timer={3000} imageID={"ERR"}/>)}
                 <img src={logo} className="AgeConfirmationPage-img mb-5" />
                 <div className="row justify-content-center text-start ms-3">
                   <div className="col-12 col-sm-10 align-self-center">

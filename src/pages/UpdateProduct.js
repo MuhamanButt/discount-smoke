@@ -15,6 +15,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import ReactHtmlParser from "react-html-parser";
+import { SUCCESS } from "../values/Colors";
 const UpdateProduct = () => {
   const navigate=useNavigate()
   const { productID, category } = useParams();
@@ -246,7 +247,7 @@ const UpdateProduct = () => {
                           <MyButton
                             text={"Update Product"}
                             handler={SubmitHandler}
-                            color={"#00bc00"}
+                            color={SUCCESS}
                             width={100}
                           ></MyButton>
                         </div>

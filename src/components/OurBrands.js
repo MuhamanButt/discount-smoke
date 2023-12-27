@@ -1,5 +1,4 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
 import Heading from "../reusableComponents/Heading";
 import brandlogo1 from "./assets/brandLogo1.webp";
 import brandlogo2 from "./assets/brandLogo2.webp";
@@ -10,6 +9,7 @@ import brandlogo6 from "./assets/brandLogo6.webp";
 import { useState, useEffect } from "react";
 import "./styles/OurBrands.css";
 import Slider from "../reusableComponents/Slider";
+import { SUBTLE_BLUE } from "../values/Colors";
 const OurBrands = () => {
   const [ShowSlider, setShowSlider] = useState(false);
   useEffect(() => {
@@ -27,10 +27,10 @@ const OurBrands = () => {
   }, []);
   return (
     <div className="OurBrands overflow-x-hidden">
-      <Heading text={"OUR BRANDS"} backgroundColor={"#f0f6ff"}></Heading>
+      <Heading text={"OUR BRANDS"} backgroundColor={SUBTLE_BLUE}></Heading>
       <div
         className="row justify-content-between m-0 mt-sm-3"
-        style={{ backgroundColor: "#f0f6ff" }}
+        style={{ backgroundColor: SUBTLE_BLUE }}
       >
         <div className="col-12 p-0">
           <Slider

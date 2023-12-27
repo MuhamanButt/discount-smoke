@@ -7,11 +7,12 @@ import {
   Form,
 } from "react-bootstrap";
 import { useFirebase } from "../context/firebase";
-import Toast from "../utils/Modal";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import ReactQuill from 'react-quill';
+import CustomModal from "../utils/Modal";
 import 'react-quill/dist/quill.snow.css';
 import "./styles/Form.css";
+import { SUCCESS } from "../values/Colors";
 const MyForm = ({ category }) => {
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
@@ -225,7 +226,7 @@ const MyForm = ({ category }) => {
                   <Button
                     onSubmit={SubmitHandler}
                     onClick={SubmitHandler}
-                    style={{ backgroundColor: "#00bc00", width: "100%" }}
+                    style={{ backgroundColor: SUCCESS, width: "100%" }}
                   >
                     Add Product
                   </Button>

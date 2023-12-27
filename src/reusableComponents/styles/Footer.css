@@ -1,5 +1,5 @@
 .footer-main {
-  background-color: #030f2b;
+  background-color: var(--darkBlue);
 }
 .footer-logo {
   width: 80%;

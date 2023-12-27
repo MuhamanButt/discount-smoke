@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./styles/MyButton.css";
 import Button from "react-bootstrap/Button";
+import { BLUE } from "../values/Colors";
 const MyButton = ({ outlined, text, handler, color,width }) => {
   return (
     <div>
@@ -15,7 +16,7 @@ const MyButton = ({ outlined, text, handler, color,width }) => {
         </Button>
       ) : (
         <Button
-          style={{ backgroundColor: color ? color : "#05225C" }}
+          style={{ backgroundColor: color ? color : BLUE }}
           className={`MyButton ${width?(`w-${width}`):(``)}`}
           onClick={handler}
         >

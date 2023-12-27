@@ -1,19 +1,19 @@
 .accordion-button{
     font-size: 16px !important;
-    background-color: #05225C;
+    background-color: var(--blue);
     color: white;
     padding: 10px 20px !important;
 }
 .sidebar-accordion-heading button{
     font-size: 16px !important;
-    background-color: #05225C;
+    background-color: var(--blue);
     color: white;
     padding: 10px 20px !important;
 }
 .accordion-button:not(.collapsed) {
 
     font-size: 16px !important;
-    background-color: #05225C !important;
+    background-color: var(--blue) !important;
     color: white !important;
     padding: 10px 20px !important;
 

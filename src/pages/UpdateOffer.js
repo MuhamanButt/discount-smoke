@@ -17,6 +17,7 @@ import 'react-quill/dist/quill.snow.css';
 import CustomModal from "../utils/Modal";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useNavigate } from "react-router-dom";
+import { SUCCESS } from "../values/Colors";
 const UpdateOffer = () => {
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
@@ -341,7 +342,7 @@ const UpdateOffer = () => {
                               onSubmit={SubmitHandler}
                               onClick={SubmitHandler}
                               style={{
-                                backgroundColor: "#00bc00",
+                                backgroundColor: SUCCESS,
                                 width: "100%",
                               }}
                               type="submit"

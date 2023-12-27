@@ -1,9 +1,9 @@
 .message-status-btn{
-    background-color: #05225C !important;
+    background-color: var(--blue) !important;
 }
 .message-row{
     background-color: white;
-    border: 1px solid #D3D3D3;
+    border: 1px solid var(--grey);
     border-radius: 10px;
 }
 .message-status-btn{
@@ -16,7 +16,7 @@ font-size: 12px !important;
     align-self: center;
 }
 .card-title{
-    color: #05225C !important;
+    color: var(--blue) !important;
 }
 .card-body{
     background-color:white !important ;

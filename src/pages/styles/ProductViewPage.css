@@ -6,20 +6,20 @@
 }
 .pc-productName {
   font-weight: 800;
-  color: #05225c;
+  color: var(--blue);
   font-size: 32px;
 }
 .pc-brandName {
-  color: #05225c;
+  color: var(--blue);
   font-size: 20px;
 }
 .pc-text {
   font-size: 14px;
-  color: #05225c;
+  color: var(--blue);
 }
 .pc-subHeading {
   font-weight: 700;
-  color: #05225c;
+  color: var(--blue);
   font-size: 26px;
 }
 .flavorButtons {

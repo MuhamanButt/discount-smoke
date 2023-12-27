@@ -4,16 +4,16 @@
   object-fit: contain;
 }
 .home-product-card-color {
-  color: #030f2b !important;
+  color: var(--darkBlue) !important;
 }
 
 .home-product-card-brandName {
-  color: #030f2b;
+  color: var(--darkBlue);
   font-size: 13px;
   margin-bottom: 2px;
 }
 .home-product-card-description {
-  color: #030f2b;
+  color: var(--darkBlue);
   font-size: 10px;
 }
 .home-product-card-body {
@@ -33,16 +33,16 @@
   margin-bottom: 15px;
 }
 .home-product-card-btn {
-  background-color: #1396d8 !important;
+  background-color: var(--lightBlue) !important;
   width: 50% !important;
   font-size: 15px !important;
   border: none !important;
 }
 .home-product-card-btn:hover {
-  background-color: #0c6592 !important;
+  filter: brightness(1);
 }
 .home-product-card-delete-btn {
-  background-color: #e23836 !important;
+  background-color: var(--danger) !important;
   text-align: start !important;
   color: white !important;
   width: 45%;
@@ -52,7 +52,7 @@
   margin-top: 5px;
 }
 .home-product-card-update-btn {
-  background-color: rgb(0, 158, 16) !important;
+  background-color: var(--success) !important;
   text-align: start !important;
   color: white !important;
   width: 45%;
@@ -70,7 +70,7 @@
   margin-top: 0px !important;
 }
 .home-product-card-delete-btn:hover {
-  background-color: #8d1715 !important;
+  filter: brightness(0.8) !important;
   color: white !important;
   border: 1px solid white !important;
 }

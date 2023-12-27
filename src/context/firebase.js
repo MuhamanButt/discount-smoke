@@ -91,7 +91,6 @@ export const FirebaseProvider = (props) => {
   //!--------------------------------------------------------SEND MESSAGE
 
   const addMessage = async (Name, Email, ContactNo, Description) => {
-    console.log(Name, Email, ContactNo, Description)
     const nowDate = Date.now();
     const id = `${nowDate}-${Email}`;
     const messageCollectionRef = collection(firestore, "Messages");
@@ -176,7 +175,7 @@ export const FirebaseProvider = (props) => {
     try {
       const results = await getDocs(brandsCollectionRef);
       results.forEach((doc) => {
-        dataArray.push(doc.data());
+        dataArray.push(doc.data().brandName);
       });
     } catch (error) {
       console.error("Error fetching brands: ", error);
@@ -190,7 +189,7 @@ export const FirebaseProvider = (props) => {
 
       results.forEach((doc) => {
         // Access the data of each document using doc.data()
-        dataArray.push(doc.data());
+        dataArray.push(doc.data().flavorName);
       });
     } catch (error) {
       console.error("Error fetching flavors: ", error);

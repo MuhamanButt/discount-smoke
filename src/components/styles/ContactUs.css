@@ -3,18 +3,19 @@
 }
 .send-msg-btn{
     width: 100%;
-    background-color: #00bc00;
+    background-color: var(--success);
     border: 1px solid #008e11;
     color: white;
     border-radius: 5px;
     font-weight: 300;
     font-size: 14px;
+    align-self: center;
     padding: 5px 10px;
   }
 @media screen and (max-width:576px)
 {
     .send-msg-btn{
-        background-color: #00bc00 !important;
+        background-color: var(--success) !important;
         font-size: 10px !important;
     }
     .c-formLabels{

@@ -17,8 +17,8 @@ const Input = (props) => {
       </div>
       <Field id={name} name={name} {...rest} style={fieldDesign} placeholder={`Enter ${label}`}className={`form-control row col-10 ${styles.inputFormComponentField}`}/>
       <ErrorMessage name={name} component={TextError} />
-      <div className={`col-12 text-end p-2 ${totalCharacters?"d-block":"d-none"}`}>
-      <p style={textColorRed ? { color: "red" } : {}} className={styles.numberOfCharacters}>
+      <div className={`col-12 text-end ${totalCharacters?"d-block":"d-none"}`}>
+      <p style={textColorRed ? { color: "red" } : {}} className={`${styles.numberOfCharacters} m-0`}>
        {
          <Field name={name}>
            {({ field }) => {

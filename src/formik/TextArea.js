@@ -4,7 +4,7 @@ import TextError from "./TextError";
 import styles from './styles/Textarea.module.css';
 
 const TextArea = (props) => {
-  const { label, name, interfaceDetails,totalCharacters, ...rest } = props;
+  const { label, name, interfaceDetails,totalCharacters,height, ...rest } = props;
   const { labelDesign, fieldDesign, inputDesign } = interfaceDetails;
 
   const [textColorRed, settextColorRed] = useState(false);
@@ -15,10 +15,10 @@ const TextArea = (props) => {
       <div className="col-12 p-0">
         <label htmlFor={name} style={labelDesign} className={`form-control row col-10 ${styles.textAreaComponentLabel}`}>{label}</label>
       </div>
-      <Field as="textarea" id={name} name={name} {...rest} style={fieldDesign} placeholder={`Enter ${label}`} className={`form-control row col-10 ${styles.textAreaComponentField}`}/>
+      <Field as="textarea" id={name} name={name} {...rest} style={{...fieldDesign,height}} placeholder={`Enter ${label}`} className={`form-control row col-10 ${styles.textAreaComponentField}`}/>
       <ErrorMessage name={name} component={TextError} />
-      <div className={`col-12 text-end p-2 ${totalCharacters?"d-block":"d-none"}`}>
-      <p style={textColorRed ? { color: "red" } : {}} className={styles.numberOfCharacters}>
+      <div className={`col-12 text-end ${totalCharacters?"d-block":"d-none"}`}>
+      <p style={textColorRed ? { color: "red" } : {}} className={`${styles.numberOfCharacters} m-0`}>
        {
          <Field name={name}>
            {({ field }) => {

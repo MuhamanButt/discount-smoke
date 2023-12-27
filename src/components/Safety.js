@@ -8,17 +8,18 @@ import image4 from './assets/safetytip4.webp'
 import image5 from './assets/safetytip5.webp'
 import image6 from './assets/safetytip6.webp'
 import './styles/Safety.css'
+import { SUBTLE_BLUE } from "../values/Colors";
 const Safety = () => {
   return (
-    <div className="overflow-x-hidden" style={{backgroundColor:"#f0f6ff"}}>
+    <div className="overflow-x-hidden" style={{backgroundColor:SUBTLE_BLUE}}>
       <div >
         <Heading
           text={"HEALTH & SAFETY TIPS"}
-          backgroundColor={"#f0f6ff"}
+          backgroundColor={SUBTLE_BLUE}
         ></Heading>
         <div
           className="row justify-content-center mx-5 my-3 safety-images"
-          style={{ backgroundColor: "#f0f6ff" }}
+          style={{ backgroundColor: SUBTLE_BLUE }}
 
         >
           <div className="col-12 col-sm-6 col-lg-4" data-aos="fade-right">

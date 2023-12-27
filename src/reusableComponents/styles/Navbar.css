@@ -37,11 +37,11 @@
   width: auto !important;
 }
 .navbar-fade.show {
-  background-color: #030F2B !important;
+  background-color: var(--darkBlue) !important;
   transition: background-color 0.3s ease-in-out;
 }
 .dropdown-menu{
-  background-color: #030F2B !important;
+  background-color: var(--darkBlue) !important;
   border: 0.5px solid white !important;
 }
 @media screen and (max-width: 1200px) {

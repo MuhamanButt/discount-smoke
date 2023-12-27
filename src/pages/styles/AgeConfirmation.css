@@ -1,5 +1,5 @@
 .AgeConfirmationPage{
-    background-color: #030F2B;
+    background-color: var(--darkBlue);
     height: 100vh;
     background-position: center;
     background-attachment: fixed;

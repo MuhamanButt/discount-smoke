@@ -7,7 +7,7 @@
     transition: background-image 0.5s ease-in-out;
 }
 .messaging-icon{
-    background-color: #1396D8;
+    background-color: var(--lightBlue);
     width: 45px;
     height: 45px;
     border-radius: 100%;
@@ -23,7 +23,7 @@
     cursor: pointer;
 }
 .homepage-background-heading{
-    color: #1396D8;
+    color: var(--lightBlue);
     font-weight: 700;
     font-size: 56px;
 }

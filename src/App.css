@@ -1,31 +1,17 @@
+:root {
+  --black: #111111; /* Default color */
+  --darkBlue: #030F2B; /* Default color */
+  --blue: #05225C; /* Default color */
+  --lightBlue: #1396D8; /* Default color */
+  --darkGrey: #9B9B9B; /* Default color */
+  --semiDarkGrey:#dedede
+  --grey: #D3D3D3; /* Default color */
+  --white: #efefef; /* Default color */
+  --superWhite: #ffffff; /* Default color */
+  --danger: #880000; /* Default color */
+  --success: #00bc00; /* Default color */
+}
 
-.color-black{
-  color: #111111 !important;
-}
-.color-darkBlue{
-  color: #030F2B !important;
-}
-.color-blue{
-  color: #05225C !important;
-}
-.color-lightBlue{
-  color: #1396D8 !important;
-}
-.color-darkGrey{
-  color: #9B9B9B !important;
-}
-.color-grey{
-  color: #D3D3D3 !important;
-}
-.color-white{
-  color: #efefef !important;
-}
-.color-super-white{
-  color: #ffffff !important;
-}
-.color-red{
-  color: #880000 !important;
-}
 
 .progressBar{
   height: 5px !important;

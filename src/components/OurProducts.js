@@ -2,14 +2,11 @@ import React, { useEffect } from "react";
 import Heading from "../reusableComponents/Heading";
 import image from "./assets/7.webp";
 import imageUnderSM from "./assets/productsbannerUnderSM.webp";
-import { NavLink } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 import { useFirebase } from "../context/firebase";
 import "./styles/OurProducts.css";
 import { useState } from "react";
 import OurProductSubcomponent from "./OurProductSubcomponent";
 import OurProductSkeleton from "../skeletons/OurProductSkeleton";
-import { Button } from "react-bootstrap";
 import Slider from "../reusableComponents/Slider";
 const OurProducts = () => {
   const firebase = useFirebase();
@@ -25,8 +22,6 @@ const OurProducts = () => {
   const [LoaderState, setLoaderState] = useState(true);
  
   useEffect(() => {
-    
-
     const fetch=async()=>{
       setLoaderState(true);
       if (selectedProduct === "Starter Devices") {
@@ -52,15 +47,11 @@ const OurProducts = () => {
       setshowImageUnderSM(true);
   },[])
   function changeHandler(selectedOption) {
-    // Get all buttons with the "nav-btn" class
     const buttons = document.querySelectorAll('.nav-btn');
-  
-    // Loop through all buttons and remove the "nav-btn-active" class
     buttons.forEach((button) => {
       button.classList.remove('nav-btn-active');
     });
   
-    // Find the button that was clicked and add the "nav-btn-active" class to it
     buttons.forEach((button) => {
       if (button.textContent.trim() === selectedOption) {
         button.classList.add('nav-btn-active');
@@ -107,7 +98,7 @@ const OurProducts = () => {
                   // ,<button className="nav-btn" onClick={() => changeHandler("Cigarettes")}>
                   // Cigarettes
                   // </button>
-              ]}></Slider>
+              ]}/>
               {LoaderState ? (
                 <OurProductSkeleton number={determineItemsToMap()}></OurProductSkeleton>
               ) : ( (dataToShow && dataToShow.length > 0)?(<OurProductSubcomponent

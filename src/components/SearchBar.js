@@ -76,7 +76,7 @@ const SearchBar = ({ inNavbar,category }) => {
             style={{ minHeight: "650px" }}
           >
             <div className="col p-0">
-              <SearchBarProductList data={dataToShow} inNavbar={inNavbar}></SearchBarProductList>
+              <SearchBarProductList data={dataToShow} inNavbar={inNavbar}/>
             </div>
           </div>
         ) : inNavbar ? (
@@ -84,7 +84,7 @@ const SearchBar = ({ inNavbar,category }) => {
         ) : (
           <div className="row m-0">
             <div className="col p-0">
-              <SideBarAccordion category={category}></SideBarAccordion>
+              <SideBarAccordion category={category}/>
             </div>
           </div>
         )}

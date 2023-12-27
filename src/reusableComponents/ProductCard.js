@@ -13,6 +13,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import maleAvatar from "./assets/maleAvatar.svg";
 import Modal from "react-bootstrap/Modal";
 import alternate from "./assets/imageAlternate.svg";
+import { DANGER, SUCCESS } from "../values/Colors";
 
 const ProductCard = ({ product }) => {
   const [ImageURL, setImageURL] = useState(null);
@@ -88,7 +89,7 @@ const ProductCard = ({ product }) => {
             <Modal.Header
               closeButton
               style={{
-                backgroundColor:"#e23737",
+                backgroundColor:DANGER,
                 color: "white",
               }}
             >
@@ -107,7 +108,7 @@ const ProductCard = ({ product }) => {
                 variant="danger"
                 onClick={deleteProduct}
                 style={{
-                  backgroundColor:"#e23737",
+                  backgroundColor:DANGER,
                 }}
               >
                 Delete
@@ -158,7 +159,7 @@ const ProductCard = ({ product }) => {
           <Button
             className="product-card-delete-btn btn-one "
             onClick={deleteHandler}
-            style={{backgroundColor:"#e23836 !important"}}
+            style={{backgroundColor:`${DANGER} !important`}}
           >
             <i className="fa-solid fa-trash me-4"></i>
             Delete
@@ -166,7 +167,7 @@ const ProductCard = ({ product }) => {
           <Button
             className="product-card-update-btn btn-one"
             onClick={updateHandler}
-            style={{backgroundColor:"#3eaa24 !important"}}
+            style={{backgroundColor:`${SUCCESS} !important`}}
           >
             <i className="fa-solid fa-pen me-4"></i>
             Update

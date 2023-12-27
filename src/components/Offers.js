@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import alternate from "./assets/imageAlternate.svg";
 import "./styles/Offer.css";
 import { setOffers } from "../redux/Offers/OffersAction";
+import { DANGER, SUCCESS } from "../values/Colors";
 const Offers = () => {
   const offers = useSelector((state) => state.offers.offers);
   const dispatch = useDispatch();
@@ -43,28 +44,31 @@ const Offers = () => {
     navigate(`/offer/update/${data.identity}`);
   };
   const getDays = (timestamp, identity) => {
-    calculateRemainingTime(timestamp, identity);
-    const currentTime = new Date().getTime();
-    const timeDifference = timestamp - currentTime;
-    return Math.floor(timeDifference / 86400000);
+    if (calculateRemainingTime(timestamp, identity)) {
+      const currentTime = new Date().getTime();
+      const timeDifference = timestamp - currentTime;
+      return Math.floor(timeDifference / 86400000);
+    }
   };
   const getHours = (timestamp, identity) => {
-    calculateRemainingTime(timestamp, identity);
-    const currentTime = new Date().getTime();
-    const timeDifference = timestamp - currentTime;
-    return (
-      Math.floor(timeDifference / 3600000) -
-      Math.floor(timeDifference / 86400000) * 24
-    );
+    if (calculateRemainingTime(timestamp, identity)) {
+      const currentTime = new Date().getTime();
+      const timeDifference = timestamp - currentTime;
+      return (
+        Math.floor(timeDifference / 3600000) -
+        Math.floor(timeDifference / 86400000) * 24
+      );
+    }
   };
   const getMins = (timestamp, identity) => {
-    calculateRemainingTime(timestamp, identity);
-    const currentTime = new Date().getTime();
-    const timeDifference = timestamp - currentTime;
-    return (
-      Math.floor(timeDifference / 60000) -
-      Math.floor(timeDifference / 3600000) * 60
-    );
+    if (calculateRemainingTime(timestamp, identity)) {
+      const currentTime = new Date().getTime();
+      const timeDifference = timestamp - currentTime;
+      return (
+        Math.floor(timeDifference / 60000) -
+        Math.floor(timeDifference / 3600000) * 60
+      );
+    }
   };
   const calculateRemainingTime = async (timestamp, identity) => {
     const currentTime = new Date().getTime();
@@ -72,8 +76,9 @@ const Offers = () => {
 
     if (timeDifference <= 0) {
       firebase.deleteOffer(identity);
-      return;
+      return false;
     }
+    return true;
   };
   useEffect(() => {
     const fetch = async () => {
@@ -89,7 +94,6 @@ const Offers = () => {
     }
   }, [Rerenderer]);
 
-  
   useEffect(() => {
     const loadImages = async () => {
       setLoaderState(true);
@@ -112,7 +116,7 @@ const Offers = () => {
             <Modal.Header
               closeButton
               style={{
-                backgroundColor: "#e23737",
+                backgroundColor: DANGER,
                 color: "white",
               }}
             >
@@ -129,7 +133,7 @@ const Offers = () => {
                 variant="danger"
                 onClick={deleteOffer}
                 style={{
-                  backgroundColor: "#e23737",
+                  backgroundColor: DANGER,
                 }}
               >
                 Delete
@@ -225,7 +229,7 @@ const Offers = () => {
                                 <div className="col-5 col-sm-4 col-md-3">
                                   <Button
                                     style={{
-                                      backgroundColor: "#e23737",
+                                      backgroundColor: DANGER,
                                       width: "100%",
                                       marginRight: "5px",
                                     }}
@@ -238,7 +242,7 @@ const Offers = () => {
                                 <div className="col-6 col-sm-5 col-md-3">
                                   <Button
                                     style={{
-                                      backgroundColor: "#3eaa24",
+                                      backgroundColor: SUCCESS,
                                       width: "100%",
                                       marginLeft: "5px",
                                     }}

@@ -20,13 +20,14 @@ import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
 import CustomModal from "../utils/Modal";
 const Home = () => {
-  const dispatch=useDispatch();
-  const userEntranceTime=useSelector((state)=>state.userEntranceTime.time)
+  const dispatch = useDispatch();
+  const userEntranceTime = useSelector((state) => state.userEntranceTime.time);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [MessageModal, setMessageModal] = useState(false);
   const [Rerenderer, setRerenderer] = useState(false);
   const [showSuccessfulModal, setshowSuccessfulModal] = useState(false);
-  const [ModalText, setModalText] = useState('');
+  const [showErrorModal, setshowErrorModal] = useState(false);
+  const [ModalText, setModalText] = useState("");
   const [ModalTimer, setModalTimer] = useState(2000);
   function getRandomNumber() {
     const random = Math.random();
@@ -43,11 +44,11 @@ const Home = () => {
   //!USE EFFECT TO CHECK IF USER IS ON SCREEN FOR MORE THAN 1 HOUR
   useEffect(() => {
     const handleFocus = () => {
-      if (!isTimestampMinutesOld(userEntranceTime,60)) {
-        dispatch(setOffers([]))
-        dispatch(setSearchBarData([]))
-        dispatch(setUserEntranceTime(Date.now()))
-        setRerenderer(!Rerenderer)
+      if (!isTimestampMinutesOld(userEntranceTime, 60)) {
+        dispatch(setOffers([]));
+        dispatch(setSearchBarData([]));
+        dispatch(setUserEntranceTime(Date.now()));
+        setRerenderer(!Rerenderer);
       }
     };
     window.addEventListener("focus", handleFocus);
@@ -56,12 +57,10 @@ const Home = () => {
     };
   }, []);
 
-  const closeModal=()=>{
-    setMessageModal(false)
-  }
-  useEffect(()=>{
-
-  },[Rerenderer])
+  const closeModal = () => {
+    setMessageModal(false);
+  };
+  useEffect(() => {}, [Rerenderer]);
   const showMessageModal = () => {
     setMessageModal(true);
   };
@@ -77,18 +76,24 @@ const Home = () => {
     const intervalId = setInterval(changeBackgroundImage, 3500);
     return () => clearInterval(intervalId);
   }, []);
-const invokeModal=(text,timer)=>{
-  if("Message sent successfully!!"==text)
-    {
-      setMessageModal(false)
+  const invokeModal = (text, timer, id) => {
+    if ("Message sent successfully!!" == text) {
+      setMessageModal(false);
     }
-    setshowSuccessfulModal(true)
-    setTimeout(() => {
-      setshowSuccessfulModal(false)
-    }, timer);
-  setModalText(text);
-  setModalTimer(timer)
-}
+    if (text == "There is an error sending the message") {
+      setshowErrorModal(true);
+      setTimeout(() => {
+        setshowErrorModal(false);
+      }, timer);
+    } else {
+      setshowSuccessfulModal(true);
+      setTimeout(() => {
+        setshowSuccessfulModal(false);
+      }, timer);
+    }
+    setModalText(text);
+    setModalTimer(timer);
+  };
   return (
     <>
       <div className="row m-0 ">
@@ -96,13 +101,14 @@ const invokeModal=(text,timer)=>{
           className="col p-0 homepage-background"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-         {showSuccessfulModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"MSGST"}/>}
-          <MyNavbar status={false}></MyNavbar>
+           {showSuccessfulModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"MSGST"}/>}
+         {showErrorModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"ERR"}/>}
+          <MyNavbar status={false}/>
           <HomePageMain />
-          <Offers></Offers>
-          <OurBrands></OurBrands>
-          <OurProducts></OurProducts>
-          <Safety></Safety>
+          <Offers/>
+          <OurBrands/>
+          <OurProducts/>
+          <Safety/>
           <Footer />
         </div>
       </div>
@@ -115,15 +121,12 @@ const invokeModal=(text,timer)=>{
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <ContactUs closeHandler={closeModal} modalInvoker={invokeModal}/>
+          <ContactUs closeHandler={closeModal} modalInvoker={invokeModal} />
         </Modal.Body>
       </Modal>
       <div className="position-relative">
-        <div
-          className="position-fixed bottom-0 end-0 text-center me-3 mb-3"
-          onClick={showMessageModal}
-        >
-          <i className="fa-solid fa-message messaging-icon"></i>
+        <div className="position-fixed bottom-0 end-0 text-center me-3 mb-3" onClick={showMessageModal} >
+          <i className="fa-solid fa-message messaging-icon"/>
         </div>
       </div>
     </>

@@ -9,24 +9,24 @@
 }
 .offer-productName {
   font-weight: 800;
-  color: #05225c;
+  color: var(--blue);
   font-size: 32px;
 }
 .offer-brandName {
-  color: #05225c;
+  color: var(--blue);
   font-size: 18px;
 }
 .offer-text {
   font-size: 14px;
-  color: #05225c;
+  color: var(--blue);
 }
 .offer-subHeading {
   font-weight: 700;
-  color: #05225c;
+  color: var(--blue);
   font-size: 26px;
 }
 .flavorButtons {
-  border: 1px solid #9b9b9b;
+  border: 1px solid var(--darkGrey);
   padding: 5px 10px;
   border-radius: 10px;
   margin-right: 10px;

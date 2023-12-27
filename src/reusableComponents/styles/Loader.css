@@ -18,7 +18,7 @@
     height: 56px;
     border-radius: 50%;
     border: 3px solid;
-    border-color: #1396D8 transparent;
+    border-color: var(--lightBlue)transparent;
   }
   
   @keyframes rotation {

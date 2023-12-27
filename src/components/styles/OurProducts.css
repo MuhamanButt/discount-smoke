@@ -6,23 +6,14 @@
   font-weight: 600;
   padding: 5px;
   width: 100px;
-  /* Remove the width property */
 }
 .our-products-image {
   width: 100%;
   height: auto;
 }
-/* @media screen and (max-width:600px)
-{
-  .our-products-image
-  {
-    width: auto;
-    height: 200px;
-  }
-} */
 
 .navbar-row {
-  background-color: #d3d3d3;
+  background-color: var(--grey);
 }
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
@@ -46,7 +37,7 @@
 }
 
 .nav-btn-active {
-  background-color: #05225c !important;
+  background-color: var(--blue) !important;
   border-radius: 10px;
   font-weight: 400;
   color: white !important;
@@ -93,8 +84,8 @@
   border-bottom-width: 1px;
   border-top-style: solid;
   border-bottom-style: solid;
-  border-top-color: #05225c;
-  border-bottom-color: #05225c;
+  border-top-color: var(--blue);
+  border-bottom-color: var(--blue);
   transform: scale(0.1, 1);
 }
 .nav-btn:hover span {

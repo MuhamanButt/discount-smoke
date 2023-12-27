@@ -3,58 +3,79 @@ import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
-import MyButton from "../reusableComponents/MyButton";
 import { useFirebase } from "../context/firebase";
-import {Toast,ToastContainer,Form} from "react-bootstrap";
-import Loader from "../reusableComponents/Loader";
+import { Formik, Form } from "formik";
+import FormikControl from '../formik/FormikControl'
 import LoaderDark from "../reusableComponents/LoaderDark";
 import './styles/AddExtras.css'
+import { BTN_SUCCESS } from "../values/designs";
+import CustomModal from "../utils/Modal";
+import { BRAND_NAME_SCHEMA, FLAVOR_NAME_SCHEMA } from "../values/ValidationSchemas";
+import { CONVERT_TO_PASCAL_CASING } from "../utils/genericFunctions";
+import { LIGHT_BLUE, WHITE } from "../values/Colors";
 
 const AddExtras = () => {
   const firebase = useFirebase();
-  const [show, setShow] = useState(false);
-  const [Flavor, setFlavor] = useState("Enter Flavor Name...");
   const [PreviousFlavors, setPreviousFlavors] = useState([]);
-  const [Brand, setBrand] = useState("Enter Brand Name...");
+  const [showFlavorALreadyAdded, setshowFlavorALreadyAdded] = useState(false);
+  const [showBrandALreadyAdded, setshowBrandALreadyAdded] = useState(false);
   const [PreviousBrands, setPreviousBrands] = useState([]);
+  const [updateFlag, setUpdateFlag] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
-  const [reRender, setreRender] = useState(false);
-  const BrandSubmitHandler = async () => {
-    setLoaderState(true)
-    let brand=capitalizeWords(Brand);
-    if (PreviousBrands.some((prevBrand) => prevBrand.brandName === brand)) {
-      setShow(true);
-      setLoaderState(false)
-    } else {
-      await firebase.addNewBrand(brand);
-      setreRender(!reRender)
-      setLoaderState(false)
-      setFlavor("Enter Brand Name...");
-    }
-  };
-  const FlavorSubmitHandler = async () => {
-    setLoaderState(true)
-    let flavor=capitalizeWords(Flavor);
-    if (
-      PreviousFlavors.some((prevFlavor) => prevFlavor.flavorName === flavor)
-    ) {
-      setShow(true);
-      setLoaderState(false)
-    } else {
-      await firebase.addNewFlavor(flavor);
-      setreRender(!reRender)
-      setLoaderState(false)
-      setFlavor("Enter Flavor Name...");
-    }
-  };
 
-  const capitalizeWords=(inputString)=> {
-    const words = inputString.split(" ");
-    const capitalizedWords = words.map((word) => {if (word.length > 0) {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-  }});
-    return capitalizedWords.join(" ");
+  const flavorValidationSchema=()=>FLAVOR_NAME_SCHEMA
+  const brandValidationSchema=()=>BRAND_NAME_SCHEMA
+
+  const FlavorInitialValues = {
+    flavorName: "",
+  };
+  const BrandInitialValues = {
+    brandName: "",
+  };
+const flavorOnSubmit = async (values) => {
+  setLoaderState(true);
+  let flavor = CONVERT_TO_PASCAL_CASING(values.flavorName);
+  if (PreviousFlavors.some((prevFlavor) => prevFlavor.flavorName === flavor)) {
+    setshowFlavorALreadyAdded(true);
+  } else {
+    setshowFlavorALreadyAdded(false);
+    await firebase.addNewFlavor(flavor);
+    setUpdateFlag((prevFlag) => !prevFlag);
   }
+  setLoaderState(false);
+};
+
+const brandOnSubmit = async (values) => {
+  setLoaderState(true);
+  let brand = CONVERT_TO_PASCAL_CASING(values.brandName);
+  if (PreviousBrands.some((prevBrand) => prevBrand.brandName === brand)) {
+    setshowBrandALreadyAdded(true);
+  } else {
+    setshowBrandALreadyAdded(false);
+    await firebase.addNewBrand(brand);
+    // Update the flag to trigger a re-render
+    setUpdateFlag((prevFlag) => !prevFlag);
+  }
+  setLoaderState(false);
+};
+  
+
+  const interfaceDetails = {
+    inputDesign: {
+      backgroundColor: "transparent",
+      border: "none",
+      padding: "0px"
+    },
+    fieldDesign: {
+    },
+    labelDesign: {
+      color: LIGHT_BLUE,
+      backgroundColor:"transparent",
+      fontWeight: "700",
+      fontSize: "20px",
+      border: "none"
+    }
+  };
   
   useEffect(() => {
     const fetch = async () => {
@@ -62,40 +83,21 @@ const AddExtras = () => {
       setPreviousBrands(await firebase.getBrands());
     };
     fetch();
-  },[reRender]);
+  },[updateFlag]);
+
   return (
-    <div style={{ backgroundColor: "#efefef" }}>
+    <div style={{ backgroundColor: WHITE }}>
       <MyNavbar status={true} />
       <Title name={`Add Extras`} />
-      <div className="row m-0">
-          <div className="mb-2 col-md-6">
-            <ToastContainer
-              position="top-end"
-              className="p-3"
-              style={{ zIndex: 1 }}
-            >
-               <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                <Toast.Header>
-                  <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2"
-                    alt=""
-                  />
-                  <strong className="me-auto">Discount Smoke</strong>
-                  <small>Just now</small>
-                </Toast.Header>
-                <Toast.Body>Already Added!!</Toast.Body>
-              </Toast>
-            </ToastContainer>
-          </div>
-        </div>
+      {showFlavorALreadyAdded && <CustomModal text={"Flavor already added"} timer={3000} imageID={"MSGST"}/>}
+      {showBrandALreadyAdded && <CustomModal text={"Brand already added"} timer={3000} imageID={"MSGST"}/>}
       <div className="row m-0">
         <div className="col-4 col-lg-3 d-md-block d-none p-0">
           <SearchBar />
         </div>
        <div className="col-lg-9 col-12 col-md-8 p-0">
           <div className="row m-0 justify-content-center">
-            {LoaderState?(<LoaderDark></LoaderDark>):(<div className="col-11">
+            {LoaderState?(<LoaderDark/>):(<div className="col-11">
               <p className="FormLabels">Previously Added Flavors :</p> 
               {PreviousFlavors.map((flavor,index) => (
                 <div className="flavorButtons col" key={index}>
@@ -103,50 +105,33 @@ const AddExtras = () => {
                 </div>
               ))}
               <br />
-              <Form>
-                <Form.Group className="my-3">
-                  <Form.Label className="FormLabels">Flavor Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder={Flavor}
-                    onChange={(e) => setFlavor(e.target.value)}
-                  />
-                </Form.Group>
-                <div className="row justify-content-center">
-                  <div className="col text-center mb-5">
-                    <MyButton
-                      text={"Add Flavor"}
-                      handler={FlavorSubmitHandler}
-                      color={"#00bc00"}
-                    ></MyButton>
+              <Formik initialValues={FlavorInitialValues} validateOnBlur={false} onSubmit={flavorOnSubmit} validationSchema={flavorValidationSchema}>
+               {(formik) => {
+                return <Form>
+                  <FormikControl control="input" type="flavorName" name="flavorName" label="Flavor Name"interfaceDetails={interfaceDetails} />
+                  <div style={{textAlign:'center'}}>
+                    <button type="submit" style={BTN_SUCCESS}>Add Flavor</button>
                   </div>
-                </div>
-
-                <p className="FormLabels">Previously Added Brands :</p> 
+                </Form>
+               }}
+              </Formik>
+              <p className="FormLabels">Previously Added Brands :</p> 
               {PreviousBrands.map((brand,index) => (
                 <div className="flavorButtons col" key={index}>
                   {brand.brandName}
                 </div>
               ))}
               <br />
-                <Form.Group className="my-3">
-                  <Form.Label className="FormLabels">Brand Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder={Brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                  />
-                </Form.Group>
-                <div className="row justify-content-center">
-                  <div className="col text-center mb-5">
-                    <MyButton
-                      text={"Add Brand"}
-                      handler={BrandSubmitHandler}
-                      color={"#00bc00"}
-                    ></MyButton>
+              <Formik initialValues={BrandInitialValues} validateOnBlur={false} onSubmit={brandOnSubmit} validationSchema={brandValidationSchema}>
+               {(formik) => {
+                return <Form>
+                  <FormikControl control="input" type="brandName" name="brandName" label="Brand Name"interfaceDetails={interfaceDetails} />
+                  <div style={{textAlign:'center'}}>
+                    <button type="submit" style={BTN_SUCCESS}>Add Brand</button>
                   </div>
-                </div>
-              </Form>
+                </Form>
+               }}
+              </Formik>
             </div>)}
           </div>
         </div>

@@ -5,6 +5,9 @@ import Select from "./Select";
 import RadioButton from "./RadioButton";
 import Checkbox from "./Checkbox";
 import DatePicker from "./DatePicker";
+import Quill from "./Quill";
+import ImageInput from "./Image";
+import DropdownInput from "./Dropdown";
 
 const FormikControl = (props) => {
   const { control,...rest } = props;
@@ -15,6 +18,9 @@ const FormikControl = (props) => {
     case "radio":return <RadioButton {...rest}/>
     case "checkbox":return<Checkbox {...rest}/>
     case "date":return<DatePicker {...rest}/>
+    case "quill":return<Quill {...rest}/>
+    case "image":return<ImageInput {...rest}/>
+    case "dropdown":return<DropdownInput {...rest}/>
     default:
       return null;
   }

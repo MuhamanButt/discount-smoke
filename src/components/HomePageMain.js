@@ -1,6 +1,7 @@
 import React from "react";
 import MyButton from "../reusableComponents/MyButton";
 import { useNavigate } from "react-router-dom";
+import { HOMEPAGE_TAGLINE } from "../values/Strings";
 const HomePageMain = () => {
   const navigate=useNavigate();
   const onclickHandler=()=>{
@@ -16,11 +17,7 @@ const HomePageMain = () => {
           <div className="row homepage-background-text-row">
             <div className="col-12 col-md-8">
               <p className="homepage-background-description ">
-                Your premier destination for a wide range of smoking essentials
-                and accessories. Explore our curated collection of premium
-                cigars, cigarettes, vaping supplies, hookahs, and more. Whether
-                you're an aficionado or a novice, we provide a one-stop shop for
-                all your smoking needs.
+                {HOMEPAGE_TAGLINE}
               </p>
               <MyButton outlined={true} text={"View Products"} handler={onclickHandler}/>
             </div>

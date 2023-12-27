@@ -5,7 +5,7 @@
 }
 .navbtn {
   text-decoration: none;
-  color: #030f2b;
+  color: var(--darkBlue);
   font-weight: 600;
   padding-bottom: 3px;
   transition: border-bottom 0.5s ease; /* Add other styles you want to transition here */
@@ -19,7 +19,7 @@
   }
   
 .message-table-header th {
-  color: #05225C !important;
+  color: var(--blue) !important;
 }
 
 .navbtn:hover{

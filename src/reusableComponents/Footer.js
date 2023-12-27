@@ -15,13 +15,13 @@ const Footer = () => {
             <p>436 Rubber Ave Naugatuck, CT 06770</p>
             <br />
             <p>
-              <i className="fa-solid fa-phone"></i>203-723-5000
+              <i className="fa-solid fa-phone"/>203-723-5000
             </p>
             <p>
-              <i className="fa-solid fa-envelope"></i>dsmoke436@gmail.com
+              <i className="fa-solid fa-envelope"/>dsmoke436@gmail.com
             </p>
             <p>
-              <i className="fa-regular fa-clock"></i>Mon - Sun (9AM to 9PM)
+              <i className="fa-regular fa-clock"/>Mon - Sun (9AM to 9PM)
             </p>
           </div>
           <div className="col-4 col-md-3 footer-links align-self-center mt-md-0 mt-4">

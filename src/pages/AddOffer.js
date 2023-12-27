@@ -10,6 +10,7 @@ import Toast from "../utils/Modal";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
+import { SUCCESS } from "../values/Colors";
 const AddOffer = () => {
   const [ProductName, setProductName] = useState();
   const [Description, setDescription] = useState();
@@ -41,6 +42,7 @@ const AddOffer = () => {
     return expirationTime;
   }
   const SubmitHandler = async () => {
+    console.log(Image)
     setShowToast2(false);
     setShowToast1(false);
     if (
@@ -280,7 +282,7 @@ const AddOffer = () => {
                             onSubmit={SubmitHandler}
                             onClick={SubmitHandler}
                             style={{
-                              backgroundColor: "#00bc00",
+                              backgroundColor: SUCCESS,
                               width: "100%",
                             }}
                             type="submit"

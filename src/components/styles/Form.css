@@ -1,14 +1,14 @@
 .FormLabels{
     font-weight: 700;
     font-size: 22px;
-    color: #05225C;
+    color: var(--blue);
 }
 .form-control,.dropdown-item{
   font-size: 12px !important;
 }
 #input-group-dropdown
 {
-    background-color: #05225C !important;
+    background-color: var(--darkBlue) !important;
     color: rgb(255, 255, 255) !important;
     font-size: 10px !important;
 }
@@ -16,7 +16,7 @@
     color: white !important;
 }
 .dropdown-item:hover{
-  background-color: #05225C !important;
+  background-color: var(--blue) !important;
 }
 .drop-shadow{
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
@@ -24,7 +24,7 @@
 
 .ButtonHover:hover {
     color: white;
-    background-color: #062368 !important;
+    filter: brightness(1);
     transition: all 0.3s;
     position: relative;
   }
