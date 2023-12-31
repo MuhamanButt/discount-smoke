@@ -6,361 +6,140 @@ import Footer from "../reusableComponents/Footer";
 import { useSelector } from "react-redux";
 import { useFirebase } from "../context/firebase";
 import { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import "../components/styles/Form.css";
-import { Button } from "react-bootstrap";
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import CustomModal from "../utils/Modal";
-import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { useNavigate } from "react-router-dom";
-import { SUCCESS } from "../values/Colors";
+import { Formik, Form } from "formik";
+import styles from './styles/AddProduct.module.css'
+import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
+import FormikControl from '../formik/FormikControl'
+import Loader from "../reusableComponents/Loader";
+import { UPDATE_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 const UpdateOffer = () => {
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
   const navigate=useNavigate();
-  const [Product, setProduct] = useState({});
   const [LoaderState, setLoaderState] = useState(false);
-  const [Image, setImage] = useState("");
-  const [showToast1, setShowToast1] = useState(false);
-  const [showToast2, setShowToast2] = useState(false);
-  const [ProductName, setProductName] = useState();
-  const [Description, setDescription] = useState();
-  const [Features, setFeatures] = useState();
-  const [selectedFlavors, setSelectedFlavors] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [Brands, setBrands] = useState([]);
-  const [Flavors, setFlavors] = useState([]);
-  const [RemainingHours, setRemainingHours] = useState(0);
-  const [RemainingDays, setRemainingDays] = useState(0);
-  const [RemainingMinutes, setRemainingMinutes] = useState(0);
+  const [Flavors, setFlavors] = useState(null);
+  const [Brands, setBrands] = useState(null);
+  const [showErrorModal, setshowErrorModal] = useState(false);
+  const [showSuccessModal, setshowSuccessModal] = useState(false);
   const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
-  const [OfferDescription, setOfferDescription] = useState(
-    "Enter Offer Description..."
-  );
-  const [Rerenderer, setRerenderer] = useState(false);
-  const [Identity, setIdentity] = useState(0);
   function calculateExpiration(hours, days) {
     const hoursInMillis = hours * 60 * 60 * 1000;
     const daysInMillis = days * 24 * 60 * 60 * 1000;
-    const expirationTime = Date.now() + hoursInMillis + daysInMillis;
-    const expirationDate = new Date(expirationTime);
-    return expirationTime;
+    return Date.now() + hoursInMillis + daysInMillis;
   }
-  
-  function calculateRemainingHours(timestamp) {
+  const calculateRemainingHours = (timestamp) => {
     const timeDifference = timestamp - Date.now();
-    return (Math.floor(timeDifference / 3600000)-(Math.floor(timeDifference / 86400000)*24));
-  }
-  function calculateRemainingDays(timestamp) {
+    return Math.floor(timeDifference / 3600000) - (Math.floor(timeDifference / 86400000) * 24);
+  };
+  
+  const calculateRemainingDays = (timestamp) => {
     const timeDifference = timestamp - Date.now();
     return Math.floor(timeDifference / 86400000);
-  }
-  function calculateRemainingMinutes(timestamp) {
-    const timeDifference = timestamp - Date.now();
-    return (Math.floor(timeDifference / 60000)-((Math.floor(timeDifference / 3600000)*60)));
-  }
-  const setDataViaCheck = (value, limit, callBack) => {
-    if (value.length <= limit) {
-      callBack(value);
-    }
-  };
-  const SubmitHandler = async () => {
-    setShowToast1(false);
-    setShowToast2(false);
-    if (
-      !selectedBrand ||
-      !ProductName ||
-      !Description ||
-      !RemainingDays ||
-      !RemainingHours ||
-      !OfferDescription
-    ) {
-      
-      setShowToast2(false);
-      setTimeout(() => {
-        setShowToast2(true);
-      }, 10);
-      return; // Exit the function and prevent form submission
-    }
-    setLoaderState(true);
-    const ExpirationTime = calculateExpiration(RemainingHours, RemainingDays);
-    if (
-      await firebase.updateOffer(
-        ProductName,
-        Description,
-        Features,
-        selectedBrand,
-        selectedFlavors,
-        OfferDescription,
-        ExpirationTime,
-        Identity,
-        Image
-      )
-    ) {
-      setLoaderState(false);
-      setShowToast1(true);
-      navigate('/home')
-    }
   };
   
-  const flavorHandler = (flavor) => {
-    if (!selectedFlavors.includes(flavor)) {
-      setSelectedFlavors((prevSelectedFlavors) => [
-        ...prevSelectedFlavors,
-        flavor,
-      ]);
-      let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
-      setFlavors(newFlavors);
-    }
+  const calculateRemainingMinutes = (timestamp) => {
+    const timeDifference = timestamp - Date.now();
+    return Math.floor(timeDifference / 60000) - ((Math.floor(timeDifference / 3600000) * 60));
   };
-  const removeFlavor = (flavorToRemove) => {
-    setSelectedFlavors((prevSelectedFlavors) =>
-      prevSelectedFlavors.filter(
-        (selectedFlavor) => selectedFlavor !== flavorToRemove
-      )
-    );
-    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
-   
-  };
+  
+  const [initialValues, setInitialValues] = useState(UPDATE_OFFER_INITIAL_VALUES);
   useEffect(() => {
     const fetch = async () => {
-      
-    setLoaderState(true);
-      setProduct(productInfo);
-      setProductName(Product.ProductName);
-      setDescription(Product.Description);
-      setSelectedBrand(Product.selectedBrand);
-      setSelectedFlavors(Product.selectedFlavors);
-      setFeatures(Product.Features)
-      setBrands(await firebase.getBrands());
-      setRerenderer(true);
-      setRemainingDays(calculateRemainingDays(Product.ExpirationTime));
-      setRemainingHours(calculateRemainingHours(Product.ExpirationTime));
-      setRemainingMinutes(calculateRemainingMinutes(Product.ExpirationTime));
-      setOfferDescription(Product.OfferDescription);
-      setIdentity(Product.identity);
-      setRerenderer(true);
+      setInitialValues({
+        productName: productInfo.ProductName,
+        description: productInfo.Description,
+        features: productInfo.Features,
+        selectedBrand: productInfo.selectedBrand,
+        selectedFlavors: Array.isArray(productInfo.selectedFlavors) ? productInfo.selectedFlavors : [],
+        offerDescription: productInfo.OfferDescription,
+        RemainingMinutes: calculateRemainingMinutes(productInfo.ExpirationTime),
+        RemainingHours: calculateRemainingHours(productInfo.ExpirationTime),
+        RemainingDays: calculateRemainingDays(productInfo.ExpirationTime),
+        offerId: productInfo.identity,
+        image: '',
+      });
+
+      setLoaderState(true);
+
+      if (!Brands) {
+        const brands = await firebase.getBrands();
+        setBrands(brands);
+      }
+
+      if (!flavorsAddedFirstTime) {
+        const flavors = await firebase.getFlavors();
+        setflavorsAddedFirstTime(true);
+        setFlavors(flavors);
+      }
       setLoaderState(false);
-      
-      if(!flavorsAddedFirstTime)
-      {setflavorsAddedFirstTime(true)
-      setFlavors(await firebase.getFlavors());}
     };
+
     fetch();
-  }, [Rerenderer]);
+  }, [Brands,Flavors]);
+  const onSubmit=async({offerDescription,RemainingHours,RemainingDays,productName,description,features,selectedFlavors,selectedBrand,image,offerId})=>{
+    setLoaderState(true);
+    const ExpirationTime = calculateExpiration(RemainingHours, RemainingDays);
+    if(await firebase.updateOffer(productName,description,features,selectedBrand,selectedFlavors,offerDescription,ExpirationTime,offerId,image))
+    {
+      setshowSuccessModal(false)
+      setshowSuccessModal(true)
+      setTimeout(() => {
+        navigate(`/home`)
+      }, 2000);
+      setLoaderState(false);
+    }
+    else{
+      showErrorModal(false)
+      showErrorModal(true)
+    }
+    setLoaderState(false);
+  }
+  const interfaceDetails=ADD_UPDATE_PRODUCT_INTERFACE
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />
+      {showErrorModal&&<CustomModal text="There is an error updating product Please try again" timer={2000} imageID={"ERR"}/>}
+      {showSuccessModal&&<CustomModal text="Product updated successfully" timer={2000} imageID={"MSGST"}/>}
       <Title name={`Update Offer`} />
       <div className="row m-0">
-        <div className="col-4 col-lg-3 d-md-block d-none">
-          <SearchBar />
-        </div>
+        <div className="col-4 col-lg-3 d-md-block d-none"><SearchBar /></div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">
             <div className="col-11">
-              <Form>
-                <CustomModal
-                  text={"Offer Updated Successfully!!"}
-                  showHandler={showToast1}
-                ></CustomModal>
-
-                <CustomModal
-                  text={"Please fill the required fields!!"}
-                  showHandler={showToast2}
-                ></CustomModal>
-                {LoaderState ? (
-                  <FormPageSkeleton></FormPageSkeleton>
-                ) : (
-                  <>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Offer Description
-                      </Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        placeholder={"Enter Offer Description..."}
-                        value={OfferDescription}
-                        style={{ height: "100px" }}
-                        onChange={(e) =>
-                          setDataViaCheck(
-                            e.target.value,
-                            300,
-                            setOfferDescription
-                          )
-                        }
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Remaining Days
-                      </Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder={"Enter Remaining Days..."}
-                        value={RemainingDays}
-                        onChange={(e) =>
-                          setDataViaCheck(e.target.value, 2, setRemainingDays)
-                        }
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Remaining Hours
-                      </Form.Label>
-                      <Form.Control
-                        type="number"
-                        value={RemainingHours}
-                        placeholder={"Enter Remaining Hours..."}
-                        onChange={(e) =>
-                          setDataViaCheck(e.target.value, 2, setRemainingHours)
-                        }
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Product Name
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder={"Enter Product Name..."}
-                        value={ProductName}
-                        onChange={(e) =>
-                          setDataViaCheck(e.target.value, 30, setProductName)
-                        }
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Description
-                      </Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        placeholder={"Enter Description..."}
-                        value={Description}
-                        style={{ height: "100px" }}
-                        onChange={(e) =>
-                          setDataViaCheck(e.target.value, 300, setDescription)
-                        }
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="FormLabels">Features</Form.Label>
-                      <ReactQuill theme="snow" value={Features} onChange={setFeatures} style={{height:"300px"}}/>
-                    </Form.Group>
-                    <Form.Group controlId="formFile" className="mb-3">
-                      <Form.Label className="FormLabels">
-                        Choose Product Image
-                      </Form.Label>
-                      <Form.Control
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setImage(e.target.files[0])}
-                        className="form-image"
-                      />
-                    </Form.Group>
-                    <InputGroup className="mb-3">
-                      <Form.Control
-                        aria-label="Text input with dropdown button"
-                        value={selectedBrand}
-                        readOnly
-                      />
-
-                      <DropdownButton
-                        variant="outline-secondary"
-                        title="Brand"
-                        id="input-group-dropdown"
-                        align="end"
-                        className="drop-shadow"
-                      >
-                        {Brands &&
-                          Brands.map((brand, index) => (
-                            <Dropdown.Item
-                              key={index}
-                              onClick={() => setSelectedBrand(brand.brandName)}
-                              className="ButtonHover"
-                            >
-                              {brand.brandName}
-                            </Dropdown.Item>
-                          ))}
-                      </DropdownButton>
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                      <DropdownButton
-                        variant="outline-secondary"
-                        title="Flavors"
-                        id="input-group-dropdown"
-                        align="end"
-                        className="form-dropdown-btn drop-shadow"
-                      >
-                        {Flavors &&
-                          Flavors.map((flavor, index) => (
-                            <Dropdown.Item
-                              key={index}
-                              onClick={() => flavorHandler(flavor.flavorName)}
-                              className="dropdown-item-btn ButtonHover"
-                            >
-                              {flavor.flavorName}
-                            </Dropdown.Item>
-                          ))}
-                      </DropdownButton>
-                    </InputGroup>
-                    <div className="mb-3">
-                      {selectedFlavors &&
-                        selectedFlavors.map((flavor, index) => (
-                          <Button
-                            key={index}
-                            onClick={() => removeFlavor(flavor)}
-                            className="btn btn-danger btn-sm m-1 "
-                            style={{ borderRadius: "10px" }}
-                          >
-                            {flavor}{" "}
-                            <span
-                              aria-hidden="true"
-                              className="float-end fs-16"
-                            >
-                              &times;
-                            </span>
-                          </Button>
-                        ))}
+            {LoaderState?<Loader/>:
+            <Formik
+            initialValues={initialValues}
+            validateOnBlur={false}
+            onSubmit={onSubmit}
+            enableReinitialize
+          >
+            {(formik)=>{
+              return <Form>
+                 <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>
+                 <FormikControl control="input" type="RemainingDays" name="RemainingDays" label="Remaining Days" interfaceDetails={interfaceDetails}/>
+                 <FormikControl control="input" type="RemainingHours" name="RemainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
+                 <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/> 
+                 <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/> 
+                 <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"200px"}/> 
+                 <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors}/>
+                 <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands} allowSingleOption={true}/>
+                 <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik}/>
+                 <div className="row justify-content-center">
+                    <div className="col-12 col-md-6 mb-4 text-center">
+                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Add Offer</button>
                     </div>
-
-                    <div className="row justify-content-center">
-                      <div className="col text-center mb-5">
-                        <div className="row justify-content-center">
-                          <div className="col-sm-6 text-end col-12">
-                            <Button
-                              onSubmit={SubmitHandler}
-                              onClick={SubmitHandler}
-                              style={{
-                                backgroundColor: SUCCESS,
-                                width: "100%",
-                              }}
-                              type="submit"
-                            >
-                              Update Offer
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
+                  </div>
               </Form>
+            }}
+          </Formik>}
             </div>
           </div>
         </div>
       </div>
-
       <Footer></Footer>
     </div>
   );

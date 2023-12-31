@@ -4,7 +4,7 @@ import styles from './styles/Input.module.css';
 import TextError from "./TextError";
 
 const ImageInput = (props) => {
-  const { formik, label, name, interfaceDetails, ...rest } = props;
+  const { formik, label, name, interfaceDetails,notRequired, ...rest } = props;
   const { labelDesign, fieldDesign, inputDesign } = interfaceDetails;
 
   return (
@@ -14,7 +14,7 @@ const ImageInput = (props) => {
           {label}
         </label>
       </div>
-      <input type="file" accept="image/*" required onChange={(e)=>{
+      <input type="file" accept="image/*" required={!notRequired} onChange={(e)=>{
         formik.setFieldValue(name,e.target.files[0])
       }}></input>
       <ErrorMessage name={name} component={TextError} />

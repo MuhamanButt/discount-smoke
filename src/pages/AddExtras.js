@@ -13,6 +13,8 @@ import CustomModal from "../utils/Modal";
 import { BRAND_NAME_SCHEMA, FLAVOR_NAME_SCHEMA } from "../values/ValidationSchemas";
 import { CONVERT_TO_PASCAL_CASING } from "../utils/genericFunctions";
 import { LIGHT_BLUE, WHITE } from "../values/Colors";
+import { ADD_EXTRAS_INTERFACE } from "../values/InterfaceDetails";
+import { ADD_EXTRA_BRAND_INITIAL_VALUES, ADD_EXTRA_FLAVOR_INITIAL_VALUES } from "../values/InitialValues";
 
 const AddExtras = () => {
   const firebase = useFirebase();
@@ -23,15 +25,6 @@ const AddExtras = () => {
   const [updateFlag, setUpdateFlag] = useState(false);
   const [LoaderState, setLoaderState] = useState(false);
 
-  const flavorValidationSchema=()=>FLAVOR_NAME_SCHEMA
-  const brandValidationSchema=()=>BRAND_NAME_SCHEMA
-
-  const FlavorInitialValues = {
-    flavorName: "",
-  };
-  const BrandInitialValues = {
-    brandName: "",
-  };
 const flavorOnSubmit = async (values) => {
   setLoaderState(true);
   let flavor = CONVERT_TO_PASCAL_CASING(values.flavorName);
@@ -58,24 +51,13 @@ const brandOnSubmit = async (values) => {
   }
   setLoaderState(false);
 };
-  
 
-  const interfaceDetails = {
-    inputDesign: {
-      backgroundColor: "transparent",
-      border: "none",
-      padding: "0px"
-    },
-    fieldDesign: {
-    },
-    labelDesign: {
-      color: LIGHT_BLUE,
-      backgroundColor:"transparent",
-      fontWeight: "700",
-      fontSize: "20px",
-      border: "none"
-    }
-  };
+  const flavorValidationSchema=()=>FLAVOR_NAME_SCHEMA
+  const brandValidationSchema=()=>BRAND_NAME_SCHEMA
+
+  const FlavorInitialValues = ADD_EXTRA_FLAVOR_INITIAL_VALUES
+  const BrandInitialValues = ADD_EXTRA_BRAND_INITIAL_VALUES
+  const interfaceDetails =ADD_EXTRAS_INTERFACE
   
   useEffect(() => {
     const fetch = async () => {

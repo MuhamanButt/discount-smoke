@@ -42,7 +42,7 @@
   filter: brightness(.8);
 }
 .product-card-delete-btn {
-  background-color: #e23836 !important;
+  background-color: var(--danger) !important;
   text-align: start !important;
   color: white !important;
   width: 45%;
@@ -96,17 +96,7 @@
   }
   
 }.product-card {
-  height: 350px !important;
-}
-@media screen and (max-width: 992px) {
-  .product-card {
-    height: 310px !important;
-  }
-}
-@media screen and (max-width: 992px) {
-  .product-card {
-    height: 310px !important;
-  }
+  height: auto !important;
 }
 @media screen and (min-width: 1000px) {
   .product-card-description {
@@ -123,9 +113,6 @@
   .product-card-img {
     height: 110px !important;
   }
-  .product-card {
-    height: 280px !important;
-  }
 }
 @media screen and (max-width: 380px) {
   .product-card-brandName {
@@ -136,9 +123,6 @@
   }
   .product-card-heading {
     font-size: 10px;
-  }
-  .product-card {
-    height: 230px !important;
   }
   .product-card-img {
     height: 80px !important;

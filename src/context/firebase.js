@@ -180,6 +180,7 @@ export const FirebaseProvider = (props) => {
     } catch (error) {
       console.error("Error fetching brands: ", error);
     }
+    console.log('dataArray',dataArray)
     return dataArray;
   };
   const getFlavors = async () => {

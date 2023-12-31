@@ -80,10 +80,7 @@ const AdminAccordionViewInbox = () => {
         <Accordion.Body>
           <div className="row">
             <div className="col-12 d-flex flex-row-reverse">
-              <a
-                onClick={() => handler("/messages/new")}
-                className="viewAllButton"
-              >
+              <a onClick={() => handler("/messages/new")} className="viewAllButton">
                 View All
               </a>
             </div>
@@ -91,7 +88,7 @@ const AdminAccordionViewInbox = () => {
           <div className="row m-0 justify-content-center">
             <div className="col-12">
               {LoaderState ? (
-                <LoaderDark></LoaderDark>
+                <LoaderDark/>
               ) : (
                 <Table responsive="lg" hover>
                   <thead>
@@ -104,11 +101,7 @@ const AdminAccordionViewInbox = () => {
                   </thead>
                   <tbody className="contactUs-body">
                     {Messages.slice(0, 10).map((message, index) => (
-                      <AdminAccordionMessageComponent
-                        data={message}
-                        key={index}
-                        index={index}
-                      ></AdminAccordionMessageComponent>
+                      <AdminAccordionMessageComponent data={message} key={index} index={index}/>
                     ))}
                   </tbody>
                 </Table>

@@ -3,129 +3,58 @@ import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
 import Footer from "../reusableComponents/Footer";
 import SearchBar from "../components/SearchBar";
-import {Form,InputGroup,Dropdown,DropdownButton,Button} from "react-bootstrap";
 import "../components/styles/Form.css";
 import { useFirebase } from "../context/firebase";
-import Toast from "../utils/Modal";
-import ReactQuill from 'react-quill';
+import { Formik, Form } from "formik";
+import styles from './styles/AddProduct.module.css'
+import CustomModal from "../utils/Modal";
+import FormikControl from '../formik/FormikControl'
+import Loader from "../reusableComponents/Loader";
 import 'react-quill/dist/quill.snow.css';
-import FormPageSkeleton from "../skeletons/FormPageSkeleton";
-import { SUCCESS } from "../values/Colors";
+import { CONVERT_HOURS_DAYS_TO_TIMESTAMP } from "../utils/genericFunctions";
+import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
+import { ADD_OFFER_INITIAL_VALUES } from "../values/InitialValues";
+import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
 const AddOffer = () => {
-  const [ProductName, setProductName] = useState();
-  const [Description, setDescription] = useState();
-  const [Features, setFeatures] = useState();
-  const [selectedFlavors, setSelectedFlavors] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [Brands, setBrands] = useState([]);
-  const [Flavors, setFlavors] = useState([]);
-  const [Image, setImage] = useState("");
-  const [OfferDescription, setOfferDescription] = useState();
-  const [RemainingDays, setRemainingDays] = useState();
-  const [RemainingHours, setRemainingHours] = useState();
 
-  const [showToast1, setShowToast1] = useState(false);
-  const [showToast2, setShowToast2] = useState(false);
-  const [reRender, setreRender] = useState(false);
-  const [LoaderState, setLoaderState] = useState(false);
   const firebase = useFirebase();
-  const [FlavorsChanged, setFlavorsChanged] = useState(false);
-  const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
-
+  const [Loading, setLoading] = useState(true);
+  const [Flavors, setFlavors] = useState(null);
+  const [Brands, setBrands] = useState(null);
+  const [showErrorModal, setshowErrorModal] = useState(false);
+  const [showSuccessModal, setshowSuccessModal] = useState(false);
+  const onSubmit=async({offerDescription,remainingDays,remainingHours,productName,description,features,selectedFlavors,selectedBrand,image})=>{
+    setLoading(true);
+    const ExpirationTime = CONVERT_HOURS_DAYS_TO_TIMESTAMP(remainingHours, remainingDays)
+    if(await firebase.addNewOffer( productName, description, features, selectedBrand, selectedFlavors,offerDescription,ExpirationTime, image)){
+      setshowSuccessModal(false)
+      setshowSuccessModal(true)
+    }
+    else{
+      showErrorModal(false)
+      showErrorModal(true)
+    }
+    setLoading(false);
+  }
   
-  function calculateExpiration(hours, days) {
-    const hoursInMillis = hours * 60 * 60 * 1000;
-    const daysInMillis = days * 24 * 60 * 60 * 1000;
-    const expirationTime = Date.now() + hoursInMillis + daysInMillis;
-    const expirationDate = new Date(expirationTime);
-    console.log(expirationDate);
-    return expirationTime;
-  }
-  const SubmitHandler = async () => {
-    console.log(Image)
-    setShowToast2(false);
-    setShowToast1(false);
-    if (
-      !selectedBrand ||
-      !ProductName ||
-      !Description ||
-      !Image ||
-      !RemainingDays ||
-      !RemainingHours ||
-      !OfferDescription
-    ) {
-      setShowToast2(false);
-      setTimeout(() => {
-        setShowToast2(true);
-      }, 10);
-      return; // Exit the function and prevent form submission
-    }
-    setLoaderState(true);
-    const ExpirationTime = calculateExpiration(RemainingHours, RemainingDays);
-    if (
-      await firebase.addNewOffer(
-        ProductName,
-        Description,
-        Features,
-        selectedBrand,
-        selectedFlavors,
-        OfferDescription,
-        ExpirationTime,
-        Image
-      )
-    ) {
-      clearAllFields();
-      setLoaderState(false);
-      setShowToast1(true);
-    }
-  };
-  const clearAllFields=()=>{
-    setProductName();
-    setDescription();
-    setFeatures();
-    setSelectedFlavors([])
-    setSelectedBrand();
-    setImage("")
-    setRemainingDays();
-    setRemainingHours();
-    }
-    const flavorHandler = (flavor) => {
-      if (!selectedFlavors.includes(flavor)) {
-        setSelectedFlavors((prevSelectedFlavors) => [
-          ...prevSelectedFlavors,
-          flavor,
-        ]);
-        let newFlavors=Flavors.filter((f) => f.flavorName != flavor);
-        setFlavors(newFlavors);
-        setFlavorsChanged(true)
-      }
-    };
-  const setDataViaCheck=(value,limit,callBack)=>{
-    if(value.length<=limit){
-      callBack(value)
-    }
-  }
-  const removeFlavor = (flavorToRemove) => {
-    setSelectedFlavors((prevSelectedFlavors) =>
-      prevSelectedFlavors.filter(
-        (selectedFlavor) => selectedFlavor !== flavorToRemove
-      )
-    );
-    setFlavors((prevFlavors) => [...prevFlavors, {flavorName:flavorToRemove}]);
-   
-  };
   useEffect(() => {
     const fetch = async () => {
-      if(!flavorsAddedFirstTime)
-      {setflavorsAddedFirstTime(true)
-      setFlavors(await firebase.getFlavors());}
+      if(!(Flavors&&Brands)) {
+        setFlavors(await firebase.getFlavors());
       setBrands(await firebase.getBrands());
+      }
+      setLoading(false)
     };
     fetch();
-  }, []);
+  }, [Flavors,Brands]);
+  const interfaceDetails=ADD_UPDATE_PRODUCT_INTERFACE
+  const initialValues=ADD_OFFER_INITIAL_VALUES
+  const validationSchema=()=>ADD_OFFER_SCHEMA
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />
+      {showErrorModal&&<CustomModal text="There is an error adding offer Please try again" timer={2000} imageID={"ERR"}/>}
+      {showSuccessModal&&<CustomModal text="Offer added successfully" timer={2000} imageID={"MSGST"}/>}
       <Title name={`Add New Offer`} />
       <div className="row m-0">
         <div className="col-4 col-lg-3 d-md-block d-none">
@@ -133,174 +62,36 @@ const AddOffer = () => {
         </div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">
-            <div className="col-11">
-              {LoaderState ? (
-                <FormPageSkeleton></FormPageSkeleton>
-              ) : (
-                <Form>
-                  <Toast
-                    text={"Offer Added Successfully!!"}
-                    showHandler={showToast1}
-                  ></Toast>
-                  <Toast text={"Please fill All Required Fields"} showHandler={showToast2}></Toast>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">
-                      Offer Description
-                    </Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      placeholder={"Enter Offer Description..."}
-                      value={OfferDescription}
-                      style={{ height: "100px" }}
-                      onChange={(e) => setDataViaCheck(e.target.value,300,setOfferDescription)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">
-                      Remaining Days
-                    </Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder={"Enter Remaining Days..."}
-                      value={RemainingDays}
-                      onChange={(e) => setDataViaCheck(e.target.value,2,setRemainingDays)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">
-                      Remaining Hours
-                    </Form.Label>
-                    <Form.Control
-                      type="number"
-                      value={RemainingHours}
-                      placeholder={"Enter Remaining Hours..."}
-                      onChange={(e) => setDataViaCheck(e.target.value,2,setRemainingHours)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">Product Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder={"Enter Product Name..."}
-                      value={ProductName}
-                      onChange={(e) => setDataViaCheck(e.target.value,30,setProductName)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">Description</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      placeholder={"Enter Description..."}
-                      value={Description}
-                      style={{ height: "100px" }}
-                      onChange={(e) => setDataViaCheck(e.target.value,300,setDescription)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label className="FormLabels">Features</Form.Label>
-                    <ReactQuill theme="snow" value={Features} onChange={setFeatures} style={{height:"300px"}}/>
-                  </Form.Group>
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label className="FormLabels">
-                      Choose Product Image
-                    </Form.Label>
-                    <Form.Control
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setImage(e.target.files[0])}
-                      required
-                      className="form-image"
-                    />
-                  </Form.Group>
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      aria-label="Text input with dropdown button"
-                      value={selectedBrand}
-                      readOnly
-                    />
-
-                    <DropdownButton
-                      variant="outline-secondary"
-                      title="Brand"
-                      id="input-group-dropdown"
-                      align="end"
-                    >
-                      {Brands.map((brand, index) => (
-                        <Dropdown.Item
-                          key={index}
-                          onClick={() => setSelectedBrand(brand.brandName)}
-                        >
-                          {brand.brandName}
-                        </Dropdown.Item>
-                      ))}
-                    </DropdownButton>
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <DropdownButton
-                      variant="outline-secondary"
-                      title="Flavors"
-                      id="input-group-dropdown"
-                      align="end"
-                      className="form-dropdown-btn"
-                    >
-                      {Flavors.map((flavor, index) => (
-                        <Dropdown.Item
-                          key={index}
-                          onClick={() => flavorHandler(flavor.flavorName)}
-                        >
-                          {flavor.flavorName}
-                        </Dropdown.Item>
-                      ))}
-                    </DropdownButton>
-                  </InputGroup>
-                  <div className="mb-3">
-                    {selectedFlavors.map((flavor, index) => (
-                      <Button
-                        key={index}
-                        onClick={() => removeFlavor(flavor)}
-                        className="btn btn-danger btn-sm m-1"
-                        style={{ borderRadius: "10px" }}
-                      >
-                        {flavor}{" "}
-                        <span aria-hidden="true" className="float-end fs-16">
-                          &times;
-                        </span>
-                      </Button>
-                    ))}
-                  </div>
-
-                  <div className="row justify-content-center">
-                    <div className="col text-center mb-5">
-                      <div className="row justify-content-center">
-                        <div className="col-sm-6 text-end col-12">
-                          <Button
-                            onSubmit={SubmitHandler}
-                            onClick={SubmitHandler}
-                            style={{
-                              backgroundColor: SUCCESS,
-                              width: "100%",
-                            }}
-                            type="submit"
-                          >
-                            Add Offer
-                          </Button>
-                        </div>
-                      </div>
+          {Loading?<Loader/>:
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            validateOnBlur={false}
+            onSubmit={onSubmit}
+          >
+            {(formik)=>{
+              return <Form>
+                 <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>
+                 <FormikControl control="input" type="remainingDays" name="remainingDays" label="Remaining Days" interfaceDetails={interfaceDetails}/>
+                 <FormikControl control="input" type="remainingHours" name="remainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
+                 <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/>
+                 <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/>
+                 <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"200px"}/>
+                 <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors}/>
+                 <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands} allowSingleOption={true}/>
+                 <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik}/>
+                 <div className="row justify-content-center">
+                    <div className="col-12 col-md-6 mb-4 text-center">
+                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Add Offer</button>
                     </div>
                   </div>
-                </Form>
-              )}
-            </div>
+              </Form>
+            }}
+          </Formik>}
           </div>
         </div>
       </div>
-
-      <Footer></Footer>
+      <Footer/>
     </div>
   );
 };

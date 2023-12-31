@@ -15,7 +15,6 @@ import ProductViewPage from '../pages/ProductViewPage';
 import UpdateOffer from '../pages/UpdateOffer';
 import NoMatchPage from '../pages/NoMatchPage';
 import Notloggedin from '../pages/NotLoggedInPage';
-import MyNavbar from '../reusableComponents/Navbar'
 import '../App.css'
 import RandomProducts from '../pages/RandomProducts';
 

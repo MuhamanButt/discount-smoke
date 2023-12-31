@@ -1,0 +1,12 @@
+.toggle_icon{
+    color: rgb(208, 208, 208);
+}
+.offcanvas_main{
+    background-color: var(--darkBlue) !important;
+}
+.offcanvas_body{
+    color: rgb(207, 207, 207) !important;
+}
+.navbar_btn{
+    font-size: 18px !important;
+}

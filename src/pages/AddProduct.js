@@ -15,7 +15,7 @@ import Loader from "../reusableComponents/Loader";
 import { useFirebase } from "../context/firebase";
 import CustomModal from "../utils/Modal";
 import { ADD_PRODUCT_INITIAL_VALUES } from "../values/InitialValues";
-import { ADD_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
+import { ADD_PRODUCT_INTERFACE, ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 
 const AddProduct = ({category}) => {
   const firebase=useFirebase();
@@ -43,13 +43,13 @@ const AddProduct = ({category}) => {
       if(!(Flavors&&Brands))
       {
         setFlavors(await firebase.getFlavors());
-      setBrands(await firebase.getBrands());
+        setBrands(await firebase.getBrands());
       }
       setLoading(false)
     };
     fetch();
   }, [Flavors,Brands]);
-  const interfaceDetails = ADD_PRODUCT_INTERFACE
+  const interfaceDetails = ADD_UPDATE_PRODUCT_INTERFACE
   const initialValues = ADD_PRODUCT_INITIAL_VALUES
   const validationSchema = () => ADD_PRODUCT_SCHEMA
   return (

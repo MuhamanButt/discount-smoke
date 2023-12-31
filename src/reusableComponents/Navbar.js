@@ -17,6 +17,8 @@ import { DARK_BLUE, GREY } from "../values/Colors";
 import ConfirmationModal from "../utils/ConfirmationModal";
 import { NEED_ASSISTANCE } from "../values/Strings";
 import { IS_TIMESTAMP_GIVEN_MINUTES_OLD } from "../utils/genericFunctions";
+import NavbarMd from "../components/NavbarMd";
+import NavbarLessThanMd from "../components/NavbarLessThanMd";
 const MyNavbar = ({ status }) => {
   const firebase = useFirebase();
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const MyNavbar = ({ status }) => {
   const [show, setShow] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const numberOfMessages = useSelector((state) => state.newMessagesAvailable.numOfMessages);
-  const [BackgroundColor, setBackgroundColor] = useState(window.innerWidth <= 768);
+  const [ScreenIsUnder768, setScreenIsUnder768] = useState(window.innerWidth <= 768);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -63,9 +65,9 @@ const MyNavbar = ({ status }) => {
     }
     function handleResize() {
       if (window.innerWidth <= 768) {
-        setBackgroundColor(true);
+        setScreenIsUnder768(true);
       } else {
-        setBackgroundColor(false);
+        setScreenIsUnder768(false);
       }
     }
 
@@ -131,57 +133,8 @@ useEffect(()=>{
            {show && <ConfirmationModal query={"Are you sure you want to logout?"} confirmationOption={"Logout"} onConfirmHandler={logoutUser}/>}   
              
             <hr className="m-0 color-white hr" />
-            <Navbar expand="md" data-bs-theme="dark" className="navbar-dark pe-md-5">
-              <Navbar.Brand as={NavLink} to="/home">
-                <img src={toAbsoluteURL(navbarlogo)} className="navbar-logo" />
-              </Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse
-                id="basic-navbar-nav"
-                style={BackgroundColor ? {
-                  backgroundColor: DARK_BLUE,
-                  borderRadius: "5px"
-              } : null}
-              >
-                <Nav className="ms-auto">
-                  <Nav.Link className="btn-one" as={NavLink} to={"/home"}>Home</Nav.Link>
-                  <Nav.Link className="btn-one" as={NavLink} to={"/product/cigars"}>Cigars</Nav.Link>
-                  <Nav.Link className="btn-one" as={NavLink} to={"/product/disposableVapes"}>Dispossable Vapes</Nav.Link>
-                  {/* <Nav.Link className="btn-one"as={NavLink} to={"/product/cigarettes"}> Cigarettes </Nav.Link> */}
-                  <Nav.Link className="btn-one" as={NavLink} to={"/product/starterDevices"} >Starter devices</Nav.Link>
-                  <Nav.Link className="btn-one" as={NavLink} to={"/product/vapeJuice"}>Vape Juice</Nav.Link>
-                  <NavDropdown title="Accessories" id="basic-nav-dropdown" className="drop-shadow z-1">
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/pods"}>Pods</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/coils"}> Coils</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/candlesAndIncense"}>Candles and Incense</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/hookah"} >Hookah </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/hookahFlavors"} >Hookah Flavors </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/cigaretteMachines"} > Cigarette Machines </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/glassCleaners"} > Glass Cleaners </NavDropdown.Item>
-                  </NavDropdown>
-                  <NavDropdown title="More" id="basic-nav-dropdown" className="drop-shadow z-1 mb-2">
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/kratom"} > Kratom </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/chewingTobacco"} > Chewing Tobacco </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/rollYourOwn"} > Roll your Own </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item className="btn-one" as={NavLink} to={"/product/cbdGummies"} > CBD Gummies </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-                <div className="row m-0 d-md-none">
-                  <div className="col p-0">
-                    <SearchBar inNavbar={true}/>
-                  </div>
-                </div>
-              </Navbar.Collapse>
-            </Navbar>
+            {ScreenIsUnder768?<NavbarLessThanMd/>:<NavbarMd/>}
+
           </div>
         </div>
       </div>

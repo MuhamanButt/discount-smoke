@@ -28,7 +28,7 @@ const ContactUs = ({ modalInvoker }) => {
   const interfaceDetails = CONTACT_US_INTERFACE
   const initialValues = CONTACT_US_INITIAL_VALUES
   const validationSchema = () => CONTACT_US_SEND_MESSAGE_SCHEMA
-  
+
   return (
     <div className={`OurBrands overflow-x-hidden`} style={{ backgroundColor: "white" }}>
       <div className="row justify-content-center">
@@ -61,7 +61,7 @@ const ContactUs = ({ modalInvoker }) => {
                     <FormikControl control="input" type="contactNo" name="contactNo" label="Contact No" interfaceDetails={interfaceDetails} />
                   </div>
                   <div className="col-7" data-aos="fade-left">
-                    <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={600} />
+                    <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={600} height={"200px"} />
                   </div>
                   <div className="row justify-content-center" data-aos="fade-left">
                     <div className="col-12 col-md-6 mt-4 text-center">

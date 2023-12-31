@@ -22,11 +22,11 @@ const Input = (props) => {
        {
          <Field name={name}>
            {({ field }) => {
-             if (field.value.length > totalCharacters) settextColorRed(true);
+             if (field.value && field.value.length > totalCharacters) settextColorRed(true);
              else {
                settextColorRed(false);
              }
-             return `${field.value.length}/${totalCharacters}`;
+             return `${field?.value?.length}/${totalCharacters}`;
            }}
          </Field>
        } characters</p>
