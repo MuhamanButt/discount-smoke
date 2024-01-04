@@ -3,13 +3,13 @@ import Carousel from "react-bootstrap/Carousel";
 import { useFirebase } from "../context/firebase";
 import { useState } from "react";
 import Heading from "../reusableComponents/Heading";
-import giftImage from "./assets/gift.png";
+import giftImage from "../assets/gift.webp"
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
 import { useDispatch } from "react-redux";
-import alternate from "./assets/imageAlternate.svg";
+import alternate from "../assets/imageAlternate.svg";
 import "./styles/Offer.css";
 import { setOffers } from "../redux/Offers/OffersAction";
 import { DANGER, SUCCESS } from "../values/Colors";

@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from "react";
-import logo from "./assets/logoVerticalWithoutBackground.png";
+import logo from "../assets/logoVerticalWithoutBackground.png";
 import { useNavigate } from "react-router-dom";
 import { useFirebase } from "../context/firebase";
 import { Formik, Form } from "formik";
@@ -7,7 +7,7 @@ import FormikControl from '../formik/FormikControl'
 import { useSelector } from "react-redux";
 import Loader from "../reusableComponents/Loader";
 import CustomModal from "../utils/Modal";
-import loginImage from "./assets/loginpage.webp";
+import loginImage from "../assets/loginpage.webp";
 import "./styles/LoginPage.css";
 import "./styles/AgeConfirmation.css";
 import { LOGIN_PAGE_SCHEMA } from "../values/ValidationSchemas";

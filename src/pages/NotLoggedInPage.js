@@ -1,7 +1,7 @@
 import React from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Footer from "../reusableComponents/Footer";
-import pagenotfound from "./assets/notloggedin.svg";
+import pagenotfound from "../assets/notloggedin.svg";
 import { toAbsoluteURL } from "../helper/Helper";
 const Notloggedin = () => {
   return (

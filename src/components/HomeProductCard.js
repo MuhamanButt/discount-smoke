@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./styles/HomeProductCard.css";
 import "../skeletons/styles/ProductPageSkeleton.css";
-import alternate from "./assets/imageAlternate.svg";
+import alternate from "../assets/imageAlternate.svg";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";

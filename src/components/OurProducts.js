@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Heading from "../reusableComponents/Heading";
-import image from "./assets/7.webp";
-import imageUnderSM from "./assets/productsbannerUnderSM.webp";
+import image from "../assets/7.webp";
+import imageUnderSM from "../assets/productsbannerUnderSM.webp";
 import { useFirebase } from "../context/firebase";
 import "./styles/OurProducts.css";
 import { useState } from "react";

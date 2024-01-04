@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink,useNavigate } from "react-router-dom";
-import navbarlogo from "../logoWithoutBackground.png";
+import navbarlogo from "../assets/logoWithoutBackground.webp";
 import { toAbsoluteURL } from "../helper/Helper";
 import SearchBar from "../components/SearchBar";
 

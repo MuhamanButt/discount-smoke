@@ -1,7 +1,7 @@
 import React from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Footer from "../reusableComponents/Footer";
-import pagenotfound from "./assets/pagenotfound.png";
+import pagenotfound from "../assets/pagenotfound.png";
 const NoMatchPage = () => {
   return (
     <div>

@@ -4,3 +4,9 @@
 .safety-images div img {
   width: 100%;
 }
+
+@media screen and (max-width:390px){
+  .safety-images div {
+    padding: 20px 0px;
+  }
+}

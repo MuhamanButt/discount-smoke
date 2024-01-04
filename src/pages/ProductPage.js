@@ -5,7 +5,7 @@ import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
 import ProductCard from "../reusableComponents/ProductCard";
 import { useFirebase } from "../context/firebase";
-import datacoming from "./assets/underConstruction.svg";
+import datacoming from "../assets/underConstruction.svg";
 import ProductPageSkeleton from "../skeletons/ProductPageSkeleton";
 import { toAbsoluteURL } from "../helper/Helper";
 import { useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/AgeConfirmation.css";
-import logo from "./assets/logoVerticalWithoutBackground.png";
+import logo from "../assets/logoVerticalWithoutBackground.png";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useNavigate } from "react-router-dom";

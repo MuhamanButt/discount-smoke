@@ -1,13 +1,11 @@
 import React from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useState } from 'react';
-import navbarlogo from "../logoWithoutBackground.png";
+import navbarlogo from "../assets/logoVerticalWithoutBackground.webp";
 import Nav from "react-bootstrap/Nav";
 import { toAbsoluteURL } from "../helper/Helper";
 import styles from './styles/NavbarLessThanMd.module.css'
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavLink,useNavigate } from "react-router-dom";
-import HrTag from '../reusableComponents/HrTag';
+import { NavLink } from "react-router-dom";
 import SearchBar from './SearchBar';
 import { WHITE } from '../values/Colors';
 

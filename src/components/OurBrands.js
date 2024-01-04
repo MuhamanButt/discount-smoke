@@ -1,11 +1,11 @@
 import React from "react";
 import Heading from "../reusableComponents/Heading";
-import brandlogo1 from "./assets/brandLogo1.webp";
-import brandlogo2 from "./assets/brandLogo2.webp";
-import brandlogo3 from "./assets/brandLogo3.webp";
-import brandlogo4 from "./assets/brandLogo4.webp";
-import brandlogo5 from "./assets/brandLogo5.webp";
-import brandlogo6 from "./assets/brandLogo6.webp";
+import brandlogo1 from "../assets/brandLogo1.webp";
+import brandlogo2 from "../assets/brandLogo2.webp";
+import brandlogo3 from "../assets/brandLogo3.webp";
+import brandlogo4 from "../assets/brandLogo4.webp";
+import brandlogo5 from "../assets/brandLogo5.webp";
+import brandlogo6 from "../assets/brandLogo6.webp";
 import { useState, useEffect } from "react";
 import "./styles/OurBrands.css";
 import Slider from "../reusableComponents/Slider";
