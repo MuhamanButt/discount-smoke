@@ -58,9 +58,9 @@ const UpdateOffer = () => {
         selectedBrand: productInfo.selectedBrand,
         selectedFlavors: Array.isArray(productInfo.selectedFlavors) ? productInfo.selectedFlavors : [],
         offerDescription: productInfo.OfferDescription,
-        RemainingMinutes: calculateRemainingMinutes(productInfo.ExpirationTime),
-        RemainingHours: calculateRemainingHours(productInfo.ExpirationTime),
-        RemainingDays: calculateRemainingDays(productInfo.ExpirationTime),
+        remainingMinutes: calculateRemainingMinutes(productInfo.ExpirationTime),
+        remainingHours: calculateRemainingHours(productInfo.ExpirationTime),
+        remainingDays: calculateRemainingDays(productInfo.ExpirationTime),
         offerId: productInfo.identity,
         image: '',
       });
@@ -82,9 +82,10 @@ const UpdateOffer = () => {
 
     fetch();
   }, [Brands,Flavors]);
-  const onSubmit=async({offerDescription,RemainingHours,RemainingDays,productName,description,features,selectedFlavors,selectedBrand,image,offerId})=>{
+  const onSubmit=async({offerDescription,remainingHours,remainingDays,productName,description,features,selectedFlavors,selectedBrand,image,offerId})=>{
+    console.log("submitted")
     setLoaderState(true);
-    const ExpirationTime = calculateExpiration(RemainingHours, RemainingDays);
+    const ExpirationTime = calculateExpiration(remainingHours, remainingDays);
     if(await firebase.updateOffer(productName,description,features,selectedBrand,selectedFlavors,offerDescription,ExpirationTime,offerId,image))
     {
       setshowSuccessModal(false)
@@ -101,6 +102,7 @@ const UpdateOffer = () => {
     setLoaderState(false);
   }
   const interfaceDetails=ADD_UPDATE_PRODUCT_INTERFACE
+  const validationSchema=()=>ADD_OFFER_SCHEMA
   return (
     <div style={{ backgroundColor: "white" }}>
       <MyNavbar status={true} />
@@ -115,25 +117,25 @@ const UpdateOffer = () => {
             {LoaderState?<FormShimmer/>:
             <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
             validateOnBlur={false}
             onSubmit={onSubmit}
             enableReinitialize
-            validationSchema={ADD_OFFER_SCHEMA}
           >
             {(formik)=>{
               return <Form>
                  <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>
-                 <FormikControl control="input" type="RemainingDays" name="RemainingDays" label="Remaining Days" interfaceDetails={interfaceDetails}/>
-                 <FormikControl control="input" type="RemainingHours" name="RemainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
+                 <FormikControl control="input" type="remainingDays" name="remainingDays" label="Remaining Days" interfaceDetails={interfaceDetails} />
+                 <FormikControl control="input" type="remainingHours" name="remainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
                  <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/> 
                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/> 
                  <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"200px"}/> 
                  <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors}/>
                  <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands} allowSingleOption={true}/>
-                 <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik}/>
+                 <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik} notRequired={true}/>
                  <div className="row justify-content-center">
                     <div className="col-12 col-md-6 mb-4 text-center">
-                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Add Offer</button>
+                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Update Offer</button>
                     </div>
                   </div>
               </Form>
