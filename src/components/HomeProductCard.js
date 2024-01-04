@@ -9,6 +9,7 @@ import alternate from "../assets/imageAlternate.svg";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 const HomeProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,11 +36,7 @@ const HomeProductCard = ({ product }) => {
   return (
       <Card className="home-product-card">
         {LoaderState ? (
-          <Card.Img
-            variant="top"
-            className="home-product-card-img w-50 mx-auto my-auto"
-            src={alternate} // Use the stored imageURL
-          />
+          <ShimmerThumbnail className={"home-product-card-img"}/>
         ) : (
           <Card.Img
             variant="top"

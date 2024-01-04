@@ -1,6 +1,6 @@
 .home-product-card-img {
   border-radius: 10px 10px 0px 0px;
-  height: 120px;
+  height: 120px !important;
   object-fit: contain;
 }
 .home-product-card-color {

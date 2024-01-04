@@ -15,6 +15,9 @@ import { setOffers } from "../redux/Offers/OffersAction";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
 import { setSelectedCategory } from "../redux/SelectedCategory/SelectedCategoryActions";
+import ButtonShimmer from "../shimmers/ButtonShimmer";
+import ProductCardShimmer from "../shimmers/ProductCardShimmer";
+import ProductCardPageShimmer from "../shimmers/ProductCardPageShimmer";
 
 const ProductPage = ({ category }) => {
 
@@ -87,13 +90,13 @@ const ProductPage = ({ category }) => {
       )}
       <Title name={category}></Title>
       <div className="row m-0">
-        <div className="col-3 d-md-block d-none">
+        <div className="col-3 d-lg-block d-none">
           <SearchBar category={category}/>
         </div>
-        <div className="col-12 col-md-9 p-0" style={{ minHeight: "500px" }}>
+        <div className="col-12 col-lg-9 p-0" style={{ minHeight: "500px" }}>
           <div className="row m-0 overflow-x-hidden px-3 px-md-0">
             {!ProductsData ? (
-              <ProductPageSkeleton/>
+              <ProductCardPageShimmer numberOfItems={10}/>
             ) : (
               <>
                 {ProductsData.length == 0 ? (

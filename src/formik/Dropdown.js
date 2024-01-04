@@ -10,7 +10,6 @@ const DropdownInput = (props) => {
   const { labelDesign, fieldDesign, inputDesign } = interfaceDetails;
 
   useEffect(() => {
-    console.log("arrayOfAvailableOptions",arrayOfAvailableOptions)
     if (options==null) 
         setOptions(arrayOfAvailableOptions);
   }, [options]);
@@ -61,6 +60,7 @@ const DropdownInput = (props) => {
                   </button>
                 ))}
               </div>
+              <ErrorMessage name={name} component={TextError} />
             </>
           )}
         </FieldArray>

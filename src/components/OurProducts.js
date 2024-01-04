@@ -65,12 +65,13 @@ const OurProducts = () => {
   const determineItemsToMap = () => {
     const viewportWidth = window.innerWidth;
     if (viewportWidth < 576) {
-      return 1;
+      return 2;
     } else if (viewportWidth < 768) {
       return 3;
     } else {
       return 4;
     }
+    
   };
   return (
     <div style={{ backgroundColor: "#ffffff" }} className="pb-1">
@@ -100,8 +101,9 @@ const OurProducts = () => {
                   // </button>
               ]}/>
               {LoaderState ? (
-                <OurProductSkeleton number={determineItemsToMap()}></OurProductSkeleton>
-              ) : ( (dataToShow && dataToShow.length > 0)?(<OurProductSubcomponent
+                <OurProductSkeleton number={determineItemsToMap()}/>
+              ) 
+              : ( (dataToShow && dataToShow.length > 0)?(<OurProductSubcomponent
                   dataToShow={dataToShow}
                 ></OurProductSubcomponent>):(
                   <div className="row" style={{height:"100px"}}>
@@ -110,7 +112,8 @@ const OurProducts = () => {
                     </div>
                   </div>
                 )
-              )}
+              )
+            }
             </div>
           </div>
         </div>

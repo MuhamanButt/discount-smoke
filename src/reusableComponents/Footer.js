@@ -3,6 +3,7 @@ import "./styles/Footer.css";
 import logo from "./assets/logoVerticalWithoutBackground.png";
 import { NavLink } from "react-router-dom";
 import { toAbsoluteURL } from "../helper/Helper";
+import { DropdownDivider } from "react-bootstrap";
 const Footer = () => {
   return (
     <div className="row footer-main m-0 py-4">
@@ -24,45 +25,57 @@ const Footer = () => {
               <i className="fa-regular fa-clock"/>Mon - Sun (9AM to 9PM)
             </p>
           </div>
-          <div className="col-4 col-md-3 footer-links align-self-center mt-md-0 mt-4">
+          <div className="col-9 col-sm-4 col-md-3 footer-links align-self-center mt-md-0 mt-4">
             <NavLink to={"/home"}>
-              <p>Home</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Home</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/aboutUs"}>
-              <p>About Us</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>About Us</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/cigars"}>
-              <p>Premium Cigars</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Premium Cigars</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/disposableVapes"}>
-              <p>Disposable Vapes</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Disposable Vapes</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/cigarettes"}>
-              <p>Cigarettes</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Cigarettes</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/hookah"}>
-              <p>Hookah</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Hookah</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
           </div>
 
-          <div className="col-4 col-sm-3 footer-links align-self-center mt-sm-0 mt-4">
+          <div className="col-9 col-sm-4 col-md-3 footer-links align-self-center mt-md-0 mt-4">
             <NavLink to={"/product/starterDevices"}>
-              <p>Starter Devices</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Starter Devices</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/vapeJuice"}>
-              <p>Vape Juice</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Vape Juice</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/pods"}>
-              <p>Pods</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Pods</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/coils"}>
-              <p>Coils</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Coils</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/kratom"}>
-              <p>Kratom</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Kratom</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
             <NavLink to={"/product/hookahFlavors"}>
-              <p>Hookah Flavors</p>
+              <p><i className="fa-solid fa-angle-right me-4"/>Hookah Flavors</p>
+            <hr style={{color:"white",margin:'5px 0px'}}/>
             </NavLink>
           </div>
         </div>

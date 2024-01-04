@@ -16,6 +16,7 @@ import { useFirebase } from "../context/firebase";
 import CustomModal from "../utils/Modal";
 import { ADD_PRODUCT_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_PRODUCT_INTERFACE, ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
+import FormShimmer from "../shimmers/FormShimmer";
 
 const AddProduct = ({category}) => {
   const firebase=useFirebase();
@@ -25,6 +26,7 @@ const AddProduct = ({category}) => {
   const [Flavors, setFlavors] = useState(null);
   const [Brands, setBrands] = useState(null);
   const onSubmit = async ({productName,description,features,selectedFlavors,selectedBrand,image}) => {
+    console.log(selectedBrand)
     setLoading(true);
     if(await firebase.addNewProduct( productName, description, features, selectedBrand, selectedFlavors, image, category))
     {
@@ -65,7 +67,7 @@ const AddProduct = ({category}) => {
       <div className="col-lg-9 col-12 col-md-8">
         <div className="row m-0 justify-content-center">
           <div className="col-11">
-          {Loading?<Loader/>:
+          {Loading?<FormShimmer/>:
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}

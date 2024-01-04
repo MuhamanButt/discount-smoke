@@ -40,7 +40,7 @@ const ProductViewPage = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "#efefef" }}>
+      <div style={{ backgroundColor: "white" }}>
         <MyNavbar status={true}></MyNavbar>
         <Title name={Product.ProductName}></Title>
         <div className="row m-0">

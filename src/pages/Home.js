@@ -126,6 +126,7 @@ const Home = () => {
       </Modal>
       <div className="position-relative">
         <div className="position-fixed bottom-0 end-0 text-center me-3 mb-3" onClick={showMessageModal} >
+          
           <i className="fa-solid fa-message messaging-icon"/>
         </div>
       </div>

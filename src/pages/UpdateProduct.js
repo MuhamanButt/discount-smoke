@@ -14,6 +14,8 @@ import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
+import { ADD_PRODUCT_SCHEMA } from "../values/ValidationSchemas";
+import FormShimmer from "../shimmers/FormShimmer";
 const UpdateProduct = () => {
   const navigate=useNavigate()
   const { productID, category } = useParams();
@@ -42,9 +44,7 @@ const UpdateProduct = () => {
     if(await firebase.updateProduct( productName, description, features, selectedBrand, selectedFlavors,category,productID, image )){
       setshowSuccessModal(false)
       setshowSuccessModal(true)
-      setTimeout(() => {
-        navigate(`/product/view/${productID}`)
-      }, 2000);
+      setTimeout(() => {navigate(`/product/view/${productID}`)}, 2000);
       setLoaderState(false);
     }
     else{
@@ -63,7 +63,7 @@ const UpdateProduct = () => {
       description: data.Description || '',
       features: data.Features || '',
       selectedFlavors: Array.isArray(data.selectedFlavors) ? data.selectedFlavors : [],
-      selectedBrand: data.selectedBrand || '',
+      selectedBrand: [data.selectedBrand] ,
       image: '',
       productID: productID,
       category: category
@@ -96,12 +96,13 @@ const UpdateProduct = () => {
           <div className="row m-0 justify-content-center">
             <div className="col-11">
               {LoaderState ? (
-                <FormPageSkeleton/>
+                <FormShimmer/>
               ) : (
                 <Formik
             initialValues={initialValues}
             validateOnBlur={false}
             enableReinitialize
+            validationSchema={ADD_PRODUCT_SCHEMA}
             onSubmit={onSubmit}
           >
             {(formik)=>{
@@ -109,8 +110,8 @@ const UpdateProduct = () => {
                  <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/>
                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/>
                  <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"500px"}/>
-                 <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors?Flavors:[]}/>
-                 <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands?Brands:[]} allowSingleOption={true}/>
+                 <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors}/>
+                 <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands} allowSingleOption={true}/>
                  <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik} notRequired={true}/>
                  <div className="row justify-content-center">
                     <div className="col-12 col-md-6 mb-4 text-center">

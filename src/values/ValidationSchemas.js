@@ -23,14 +23,17 @@ export const FLAVOR_NAME_SCHEMA=Yup.object({
   flavorName:Yup.string().required("Please enter a flavor name ")
 })
 
-export const ADD_PRODUCT_SCHEMA=Yup.object({
-  productName:Yup.string().required("Please enter product name...").max(50,"Name must be less than 50 characters"),
-  description:Yup.string().required("Please enter description...").max(300,"Description must be less than 300 characters"),
-})
+export const ADD_PRODUCT_SCHEMA = Yup.object({
+  productName: Yup.string().required('Please enter the product name.').max(50, 'Name must be less than 50 characters.'),
+  description: Yup.string().required('Please enter the description.').max(300, 'Description must be less than 300 characters.'),
+  selectedBrand: Yup.array().of(Yup.string()).required('Please select at least one brand.').min(1, 'Please select at least one brand.'),
+});
+
 export const ADD_OFFER_SCHEMA=Yup.object({
   offerDescription:Yup.string().required("Please enter offer description...").max(100,"Description must be less than 100 characters"),
   productName:Yup.string().required("Please enter product name...").max(50,"Name must be less than 50 characters"),
   description:Yup.string().required("Please enter description...").max(300,"Description must be less than 300 characters"),
   remainingDays:Yup.number().min(0,"Please enter valid number of days").required("Please enter valid number of days"),
-  remainingHours:Yup.number().min(0,"Please enter valid number of hours").required("Please enter valid number of hours")
+  remainingHours:Yup.number().min(0,"Please enter valid number of hours").required("Please enter valid number of hours"),
+  selectedBrand: Yup.array().of(Yup.string()).required('Please select at least one brand.').min(1, 'Please select at least one brand.'),
 })

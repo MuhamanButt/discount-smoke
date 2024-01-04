@@ -15,6 +15,7 @@ import { CONVERT_HOURS_DAYS_TO_TIMESTAMP } from "../utils/genericFunctions";
 import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 import { ADD_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
+import FormShimmer from "../shimmers/FormShimmer";
 const AddOffer = () => {
 
   const firebase = useFirebase();
@@ -62,7 +63,7 @@ const AddOffer = () => {
         </div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">
-          {Loading?<Loader/>:
+          {Loading?<FormShimmer/>:
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
 import { useSelector } from "react-redux";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import {ShimmerThumbnail} from "react-shimmer-effects";
 import alternate from "./assets/imageAlternate.svg";
 import { DANGER, SUCCESS } from "../values/Colors";
 import ConfirmationModal from "../utils/ConfirmationModal";
@@ -101,15 +102,22 @@ const ProductCard = ({ product }) => {
             <i className="fa-solid fa-ellipsis-vertical float-end" style={{paddingRight: "10px",paddingTop: "10px",fontSize: "15px",}}onClick={() => handleoffCanvasShow()}/>
           </Card.Text>
         )}
-        <Card.Img variant="top" onClick={viewHandler} src={LoaderState ? alternate : ImageURL} className={`product-card-img ${LoaderState ? "w-50 my-auto mx-auto" : ""}`}/>
+        {LoaderState? <ShimmerThumbnail className={"product-card-img"}/>:
+         <Card.Img variant="top" onClick={viewHandler} src={ImageURL} className={`product-card-img ${LoaderState ? "w-50 my-auto mx-auto" : ""}`}/>}
+        
         <Card.Body className="product-card-body d-flex flex-column justify-content-between" onClick={viewHandler}>
-          <div>
+          <div> 
+            <div className="row">
+              <div className="col text-center mb-2 mt-3">
+              <Card.Text className="product-card-brandName">{product.category}</Card.Text>
+              </div>
+            </div>
             <Card.Title className="product-card-color"><h4 className="product-card-heading"><strong>{product.ProductName}</strong></h4></Card.Title>
             <Card.Text className="product-card-brandName"><strong>Brand : </strong> {product.selectedBrand}</Card.Text>
             <Card.Text className="product-card-description">{product.Description.length > 100? `${product.Description.slice(0, 100)}. . .`: product.Description}</Card.Text>
           </div>
-          <div className="text-center mt-2">
-            <Button className="product-card-btn" onClick={viewHandler}>View</Button>
+          <div className="text-center my-2">
+            <Button className="product-card-btn " onClick={viewHandler}>View</Button>
           </div>
         </Card.Body>
       </Card>

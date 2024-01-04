@@ -16,6 +16,8 @@ import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 import FormikControl from '../formik/FormikControl'
 import Loader from "../reusableComponents/Loader";
 import { UPDATE_OFFER_INITIAL_VALUES } from "../values/InitialValues";
+import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
+import FormShimmer from "../shimmers/FormShimmer";
 const UpdateOffer = () => {
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
@@ -100,7 +102,7 @@ const UpdateOffer = () => {
   }
   const interfaceDetails=ADD_UPDATE_PRODUCT_INTERFACE
   return (
-    <div style={{ backgroundColor: "#efefef" }}>
+    <div style={{ backgroundColor: "white" }}>
       <MyNavbar status={true} />
       {showErrorModal&&<CustomModal text="There is an error updating product Please try again" timer={2000} imageID={"ERR"}/>}
       {showSuccessModal&&<CustomModal text="Product updated successfully" timer={2000} imageID={"MSGST"}/>}
@@ -110,12 +112,13 @@ const UpdateOffer = () => {
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">
             <div className="col-11">
-            {LoaderState?<Loader/>:
+            {LoaderState?<FormShimmer/>:
             <Formik
             initialValues={initialValues}
             validateOnBlur={false}
             onSubmit={onSubmit}
             enableReinitialize
+            validationSchema={ADD_OFFER_SCHEMA}
           >
             {(formik)=>{
               return <Form>
