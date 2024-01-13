@@ -12,7 +12,7 @@ const AgeConfirmation = () => {
   return (
     <div className="AgeConfirmationPage row justify-content-center m-0">
       <div className="col align-self-center text-center ageconfirmationtext">
-        <img src={logo} className="AgeConfirmationPage-img mb-5" />=
+        <img src={logo} className="AgeConfirmationPage-img mb-5" />
         <p style={{color:WHITE}}>{AGE_CONFIRMATION_QUESTION}</p>
         <ButtonGroup aria-label="Basic example" className="buttonGroup">
           <Button

@@ -81,13 +81,6 @@ const ProductPage = ({ category }) => {
   return (
     <div style={{ backgroundColor: "#ffffff" }}>
       <MyNavbar status={true}></MyNavbar>
-      {showProgressBar && (
-        <ProgressBar
-          now={ProgressBarLoading}
-          animated
-          className="progressBar"
-        />
-      )}
       <Title name={category}></Title>
       <div className="row m-0">
         <div className="col-3 d-lg-block d-none">

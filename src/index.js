@@ -10,18 +10,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import CloudinaryProvider from "./context/cloudinary";
+import { ConfigProvider } from "antd";
+import { LIGHTER_BLUE, LIGHT_BLUE, SUBTLE_BLUE } from "./values/Colors";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-   <PersistGate loading={null} persistor={persistor}>
-    <CloudinaryProvider>
-      <FirebaseProvider>
-        <App />
-      </FirebaseProvider>
-      </CloudinaryProvider>
-    </PersistGate>
-  </Provider>
+  
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <CloudinaryProvider>
+          <FirebaseProvider>
+            <App />
+          </FirebaseProvider>
+        </CloudinaryProvider>
+      </PersistGate>
+    </Provider>
 );
 
 reportWebVitals();

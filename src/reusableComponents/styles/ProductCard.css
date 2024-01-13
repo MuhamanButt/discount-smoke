@@ -6,7 +6,26 @@
 .product-card-color {
   color: var(--darkBlue) !important;
 }
-
+.offcanvas-body > button:nth-child(9)
+{
+  
+  color: green !important;
+  border: 1px solid green !important;
+  margin-left: 10px;
+}
+.offcanvas-body > button:nth-child(8)
+{
+  color: red !important;
+  border: 1px solid red !important;
+}
+body > div:nth-child(8) > div > div.ant-popover-content > div > div > div > div.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-primary.ant-btn-sm
+{
+  background-color: var(--danger) !important;
+}
+body > div:nth-child(8) > div > div.ant-popover-content > div > div > div > div.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-default.ant-btn-sm
+{
+  color: black !important;
+}
 .product-card-brandName {
   color: var(--darkBlue);
   font-size: 10px;

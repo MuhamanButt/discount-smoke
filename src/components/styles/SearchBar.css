@@ -1,19 +1,15 @@
 .search-bar {
-    background-color: white !important;
-    color: black !important;
-    height: 30px;
-  }
-  .search-bar::placeholder {
-    color: black !important;
-  }
-  .search-bar-text {
-    background-color: black !important;
-    font-weight: 500 !important;
-    color: white !important;
-    z-index: 2;
-  }
-  .spinner-border{
-    height: 15px !important;
-    width: 15px !important;
-    border-width: 2px !important;
-  }
+  margin-bottom: 10px;
+}
+.search-bar button {
+  background-color: black;
+  color: white !important;
+  font-weight: 500;
+}
+.search-bar .ant-input-affix-wrapper-focused,.ant-input-affix-wrapper {
+  border-color: var(--darkBlue) !important;
+}
+
+.search-bar .ant-input-search-button {
+  border-color: rgb(0, 0, 0) !important;
+}

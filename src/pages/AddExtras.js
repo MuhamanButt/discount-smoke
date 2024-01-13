@@ -67,6 +67,7 @@ const brandOnSubmit = async (values) => {
     fetch();
   },[updateFlag]);
 
+  useEffect(()=>{},[PreviousFlavors,PreviousBrands])
   return (
     <div style={{ backgroundColor: WHITE }}>
       <MyNavbar status={true} />

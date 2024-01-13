@@ -5,7 +5,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "./styles/Navbar.css";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { NavLink,useNavigate } from "react-router-dom";
+import {ExclamationCircleTwoTone} from '@ant-design/icons';
 import navbarlogo from "../logoWithoutBackground.png";
+import { Button, Popconfirm, ConfigProvider } from 'antd';
+
 import { toAbsoluteURL } from "../helper/Helper";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -79,6 +82,7 @@ const MyNavbar = ({ status }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
 useEffect(()=>{
 },[showDropdown])
   return (
@@ -116,10 +120,9 @@ useEffect(()=>{
                             {numberOfMessages}</span>
                         )}
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={logoutHandler}>
-                        <i className="fa-solid fa-right-from-bracket me-3"></i>
-                        Logout
-                      </Dropdown.Item>
+                        <Popconfirm placement={"bottomRight"} title={"Are you sure you want to logout?"} okText={"Logout"} onConfirm={logoutUser} cancelText="Cancel" zIndex={5000} className="dropdown-item" icon={<ExclamationCircleTwoTone  twoToneColor="#ff0000" />}>
+                          <Button><i className="fa-solid fa-right-from-bracket me-3"></i> Logout</Button>
+                        </Popconfirm>
                     </Dropdown.Menu>
                     {numberOfMessages != 0 && (
                       <span className="position-absolute top-50 start-0 translate-middle badge rounded-pill bg-danger"style={{ zIndex: "20" }}>

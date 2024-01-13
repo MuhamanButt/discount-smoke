@@ -29,22 +29,22 @@ const navigate=useNavigate();
         </Offcanvas.Header>
         <Offcanvas.Body className={`${styles.offcanvas_body}`}>
         <SearchBar inNavbar={true}/>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/home"}><i className="fa-solid fa-angle-right me-4"/>Home</Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cigars"}><i className="fa-solid fa-angle-right me-4"/>Cigars</Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/disposableVapes"}><i className="fa-solid fa-angle-right me-4"/>Dispossable Vapes</Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/starterDevices"} ><i className="fa-solid fa-angle-right me-4"/>Starter devices</Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/vapeJuice"}><i className="fa-solid fa-angle-right me-4"/>Vape Juice</Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/pods"}><i className="fa-solid fa-angle-right me-4"/>Pods</Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/coils"}><i className="fa-solid fa-angle-right me-4"/>Coils</Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/candlesAndIncense"}><i className="fa-solid fa-angle-right me-4"/>Candles and Incense</Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/hookah"} ><i className="fa-solid fa-angle-right me-4"/>Hookah </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/hookahFlavors"} ><i className="fa-solid fa-angle-right me-4"/>Hookah Flavors </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cigaretteMachines"} ><i className="fa-solid fa-angle-right me-4"/>Cigarette Machines </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/glassCleaners"} ><i className="fa-solid fa-angle-right me-4"/>Glass Cleaners </Nav.Link>
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/kratom"} ><i className="fa-solid fa-angle-right me-4"/>Kratom </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/chewingTobacco"} ><i className="fa-solid fa-angle-right me-4"/>Chewing Tobacco </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/rollYourOwn"} ><i className="fa-solid fa-angle-right me-4"/>Roll your Own </Nav.Link>  
-            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cbdGummies"} ><i className="fa-solid fa-angle-right me-4"/>CBD Gummies </Nav.Link>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/home"}><i className="fa-solid fa-angle-right me-4"/>Home</Nav.Link><hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cigars"}><i className="fa-solid fa-angle-right me-4"/>Cigars</Nav.Link><hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/disposableVapes"}><i className="fa-solid fa-angle-right me-4"/>Dispossable Vapes</Nav.Link>           <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/starterDevices"} ><i className="fa-solid fa-angle-right me-4"/>Starter devices</Nav.Link><hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/vapeJuice"}><i className="fa-solid fa-angle-right me-4"/>Vape Juice</Nav.Link><hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/pods"}><i className="fa-solid fa-angle-right me-4"/>Pods</Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/coils"}><i className="fa-solid fa-angle-right me-4"/>Coils</Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/candlesAndIncense"}><i className="fa-solid fa-angle-right me-4"/>Candles and Incense</Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/hookah"} ><i className="fa-solid fa-angle-right me-4"/>Hookah </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/hookahFlavors"} ><i className="fa-solid fa-angle-right me-4"/>Hookah Flavors </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cigaretteMachines"} ><i className="fa-solid fa-angle-right me-4"/>Cigarette Machines </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/glassCleaners"} ><i className="fa-solid fa-angle-right me-4"/>Glass Cleaners </Nav.Link><hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/kratom"} ><i className="fa-solid fa-angle-right me-4"/>Kratom </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/chewingTobacco"} ><i className="fa-solid fa-angle-right me-4"/>Chewing Tobacco </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/rollYourOwn"} ><i className="fa-solid fa-angle-right me-4"/>Roll your Own </Nav.Link>  <hr style={{margin:"3px 0px"}}/>
+            <Nav.Link className={`btn-one mb-2 ${styles.navbar_btn}`} as={NavLink} to={"/product/cbdGummies"} ><i className="fa-solid fa-angle-right me-4"/>CBD Gummies </Nav.Link><hr style={{margin:"3px 0px"}}/>
                   
         </Offcanvas.Body>
       </Offcanvas>

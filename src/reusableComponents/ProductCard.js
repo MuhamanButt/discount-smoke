@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useFirebase } from "../context/firebase";
 import { useState } from "react";
 import "./styles/ProductCard.css";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import {ExclamationCircleTwoTone} from '@ant-design/icons';
+import navbarlogo from "../logoWithoutBackground.png";
+import { Button, Popconfirm, ConfigProvider } from 'antd';
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +45,7 @@ const ProductCard = ({ product }) => {
     navigate(`/product/view/${product.identity}`);
   };
   const updateHandler = () => {
+    console.log("update handler called")
     navigate(`/product/update/${product.category}/${product.identity}`);
   };
   useEffect(() => {
@@ -59,11 +63,11 @@ const ProductCard = ({ product }) => {
   }, [product]);
   return (
     <div className="col-6 col-sm-4 col-lg-3 product-card-col px-1 px-lg-2"id={`${product.identity}`}>
-      <div className="row">
+      {/* <div className="row">
         <div className="col drop-shadow">
           {show&&<ConfirmationModal query={`Are you sure you want to delete ${product.ProductName}`} confirmationOption={"Delete"} onConfirmHandler={deleteProduct}/>}
         </div>
-      </div>
+      </div> */}
       <Offcanvas show={offCanvasShow} onHide={handleoffCanvasClose} scroll={false} backdrop={true}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title className="w-100">
@@ -90,15 +94,16 @@ const ProductCard = ({ product }) => {
               ))}
               </p>
           )}
-        <Button className="product-card-delete-btn btn-one " onClick={deleteHandler} style={{backgroundColor:`${DANGER} !important`}}>
-          <i className="fa-solid fa-trash me-4"/>Delete</Button>
-        <Button className="product-card-update-btn btn-one" onClick={updateHandler} style={{backgroundColor:`${SUCCESS} !important`}}>
-          <i className="fa-solid fa-pen me-4"/>Update</Button>
+           <Popconfirm placement={"bottomRight"} title={"Are you sure you want to Delete?"} okText={"Delete"}  cancelText="Cancel" onConfirm={deleteProduct} icon={<ExclamationCircleTwoTone  twoToneColor="#ff0000" />}>
+             <Button><i className="fa-solid fa-trash me-3"></i> Delete</Button>
+           </Popconfirm>
+          <Button onClick={updateHandler}><i className="fa-solid fa-pen me-3" ></i> Update</Button>
+        
       </Offcanvas.Body>
       </Offcanvas>
       <Card style={{ width: "100%", height: "auto" }} className="product-card">
         {isLoggedIn && (
-          <Card.Text className="product-card-brandName">
+          <Card.Text className="product-card-brandName position-absolute w-100 text-end">
             <i className="fa-solid fa-ellipsis-vertical float-end" style={{paddingRight: "10px",paddingTop: "10px",fontSize: "15px",}}onClick={() => handleoffCanvasShow()}/>
           </Card.Text>
         )}

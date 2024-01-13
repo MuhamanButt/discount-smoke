@@ -20,6 +20,21 @@
 .dropdown-toggle::after {
   display: none;
 }
+body > div:nth-child(6) > div > div.ant-popover-content > div > div > div > div.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-primary.ant-btn-sm
+{
+  color: white !important;
+  background-color: var(--danger);
+}
+body > div:nth-child(6) > div > div.ant-popover-content > div > div > div > div.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-default.ant-btn-sm
+{
+  color: black !important;
+}
+:where(.css-dev-only-do-not-override-910b9e).ant-btn-default {
+  background: #ffffff00;
+  border-color: #d9d9d900;
+  color: rgb(255 255 255 / 88%);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+}
 .hr {
   border: 1px solid rgb(255, 255, 255);
 }
@@ -60,7 +75,7 @@
     height: 30px;
   }
   .nav-link,.dropdown-item,.assistance {
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 }
 @media screen and (max-width: 500px) {

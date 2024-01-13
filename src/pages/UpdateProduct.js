@@ -63,7 +63,7 @@ const UpdateProduct = () => {
       description: data.Description || '',
       features: data.Features || '',
       selectedFlavors: Array.isArray(data.selectedFlavors) ? data.selectedFlavors : [],
-      selectedBrand: [data.selectedBrand] ,
+      selectedBrand: data.selectedBrand,
       image: '',
       productID: productID,
       category: category
@@ -109,13 +109,13 @@ const UpdateProduct = () => {
               return <Form>
                  <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/>
                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/>
-                 <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"500px"}/>
+                 <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} />
                  <FormikControl control="dropdown" type="selectedFlavors" name="selectedFlavors" label="Select Flavors" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Flavors}/>
                  <FormikControl control="dropdown" type="selectedBrand" name="selectedBrand" label="Select Brand" interfaceDetails={interfaceDetails} arrayOfAvailableOptions={Brands} allowSingleOption={true}/>
                  <FormikControl control="image" type="image" name="image" label="Image" interfaceDetails={interfaceDetails} height={"200px"} formik={formik} notRequired={true}/>
                  <div className="row justify-content-center">
                     <div className="col-12 col-md-6 mb-4 text-center">
-                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Add Product</button>
+                      <button type="submit" className={styles.add_product_btn} disabled={formik.isSubmitting}>Update Product</button>
                     </div>
                   </div>
               </Form>

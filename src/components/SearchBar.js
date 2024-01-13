@@ -6,6 +6,8 @@ import { useFirebase } from "../context/firebase";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import SearchBarProductList from "./SearchBarProductList";
 import SideBarAccordion from "../reusableComponents/SideBarAccordion";
+import { Input, Space } from 'antd';
+const { Search } = Input;
 const SearchBar = ({ inNavbar,category }) => {
   const dispatch = useDispatch();
   const firebase = useFirebase();
@@ -53,21 +55,15 @@ const SearchBar = ({ inNavbar,category }) => {
     <div className="row justify-content-center">
       <div className="col-11">
         <div className="searchBar">
-          <InputGroup className="mb-3">
-            <Form.Control
-              placeholder="Search for a Product"
-              className="search-bar"
-              onChange={(e) => changeHandler(e)}
-              value={`${LoaderState ? "" : SearchBarText}`}
-            />
-            <InputGroup.Text className="search-bar-text">
-              {LoaderState ? (
-                <span className="spinner-border p-0" role="status"></span>
-              ) : (
-                <i className="fa-solid fa-magnifying-glass"></i>
-              )}
-            </InputGroup.Text>
-          </InputGroup>
+          <Search
+            placeholder="Search for a Product"
+            allowClear
+            value={`${LoaderState ? "" : SearchBarText}`}
+            loading={LoaderState}
+            onChange={(e) => changeHandler(e)}
+            style={{width: "100%",}}
+            className="search-bar"
+          />
         </div>
         {dataListStatus ? (
           <div
@@ -76,7 +72,7 @@ const SearchBar = ({ inNavbar,category }) => {
             style={{ minHeight: "650px" }}
           >
             <div className="col p-0">
-              <SearchBarProductList data={dataToShow} inNavbar={inNavbar}/>
+              <SearchBarProductList data={dataToShow} inNavbar={inNavbar} />
             </div>
           </div>
         ) : inNavbar ? (
@@ -84,7 +80,7 @@ const SearchBar = ({ inNavbar,category }) => {
         ) : (
           <div className="row m-0">
             <div className="col p-0">
-              <SideBarAccordion category={category}/>
+              <SideBarAccordion category={category} />
             </div>
           </div>
         )}

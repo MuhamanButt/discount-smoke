@@ -54,51 +54,50 @@ const ProductViewPage = () => {
               style={{ maxWidth: "800px" }}
             >
               <div className="col">
-                <div className="row justify-content-center mb-4">
+                <div className="row justify-content-center ">
                   <div
-                    className="col-10 col-sm-4 d-flex align-items-center justify-content-center text-center mb-sm-0"
+                    className="col-10 col-sm-4 d-flex align-self-center justify-content-center text-center mb-sm-0"
                     style={{ height: "250px" }}
                   >
                     <img src={ImageURL} alt="" className="pc-img" />
                   </div>
                   <div className="col-10 col-sm-6 align-self-center px-3 mb-3">
-                    <h3 className="pc-productName mt-5 mt-sm-0">{Product.ProductName}</h3>
+                    <p className="pc-text mb-0 mt-1 mt-sm-0">{Product.category}</p>
+                    <h3 className="pc-productName mt-0 mt-sm-0">
+                      {Product.ProductName}
+                    </h3>
                     <p className="pc-brandName">
-                      <strong>Brand : </strong>
+                      <strong>By : </strong>
                       {Product.selectedBrand}
                     </p>
                     <p className="pc-text">{Product.Description}</p>
-                  </div>
-                </div>
-                <HrTag></HrTag>
-                <div className="row justify-content-center mt-4">
-                  <div className="col-10">
-                    <div className="pc-flavors">
-                      {Product.selectedFlavors &&
-                      Product.selectedFlavors.length > 0 ? (
-                        <>
-                          <h3 className="pc-subHeading">Available Flavors:</h3>
-                          {Product.selectedFlavors.map((flavor, index) => (
-                            <div
-                              className="flavorButtons col pc-text"
-                              key={index}
-                            >
-                              {flavor}
-                            </div>
-                          ))}
-                        </>
-                      ) : (
-                        ""
-                      )}
+                    <div className="row justify-content-center mt-0">
+                      <div className="col-12 pc-flavors">
+                        {Product.selectedFlavors &&
+                        Product.selectedFlavors.length > 0 ? (
+                          <>
+                            <h3 className="pc-subHeading">Flavors:</h3>
+                            {Product.selectedFlavors.map((flavor, index) => (
+                              <div
+                                className="flavorButtons col pc-text"
+                                key={index}
+                              >
+                                {flavor}
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
+                <HrTag></HrTag>
 
                 <div className="row justify-content-center mb-4 mt-4">
                   <div className="col-10">
-                    <h3 className="pc-subHeading">
-                     Description :
-                    </h3>
+                    <h3 className="pc-subHeading">Description :</h3>
                     <div className="pc-text">
                       <div className="row m-0">
                         <div className="col p-0 pc-features">

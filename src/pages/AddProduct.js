@@ -17,6 +17,7 @@ import CustomModal from "../utils/Modal";
 import { ADD_PRODUCT_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_PRODUCT_INTERFACE, ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 import FormShimmer from "../shimmers/FormShimmer";
+import { SUPER_WHITE, WHITE } from "../values/Colors";
 
 const AddProduct = ({category}) => {
   const firebase=useFirebase();
@@ -55,7 +56,7 @@ const AddProduct = ({category}) => {
   const initialValues = ADD_PRODUCT_INITIAL_VALUES
   const validationSchema = () => ADD_PRODUCT_SCHEMA
   return (
-    <div style={{ backgroundColor: "#efefef" }}>
+    <div style={{ backgroundColor:SUPER_WHITE }}>
     <MyNavbar status={true}/>
     {showErrorModal&&<CustomModal text="There is an error adding product Please try again" timer={2000} imageID={"ERR"}/>}
     {showSuccessModal&&<CustomModal text="Product added successfully" timer={2000} imageID={"MSGST"}/>}
