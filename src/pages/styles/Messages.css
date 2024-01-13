@@ -19,10 +19,28 @@
   }
   
 .message-table-header th {
-  color: var(--blue) !important;
+  color: var(--white) !important;
+  background-color: rgb(0, 38, 94) !important;
 }
-
+.message-table-header{
+}
 .navbtn:hover{
     cursor: pointer;
     font-weight: 700;
+}
+@media screen and (max-width: 670px){
+  .ant-table-tbody{
+    font-size: 10px !important;
+  }
+  .ant-table-cell{
+    padding: 10px 5px !important;
+  }
+  .ant-table-thead
+  {
+    font-size: 8px !important;
+  }
+  .ant-table-pagination
+  {
+    font-size: 8px !important;
+  }
 }

@@ -7,9 +7,13 @@ import { useFirebase } from "../context/firebase";
 import { useState } from "react";
 import LoaderDark from "../reusableComponents/LoaderDark";
 import MessageComponent from "../components/MessageComponent";
-import { Table } from "react-bootstrap";
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import './styles/Messages.css'
+import { GREY } from "../values/Colors";
+import { Space, Switch, Table } from 'antd';
+import { Button, Popconfirm,message  } from 'antd';
+import { CONVERT_TIMESTAMP_TO_DATE_TIME } from "../utils/genericFunctions";
 const Messages = ({ category }) => {
   const navigate=useNavigate();
   const [showAfterLG, setshowAfterLG] = useState(window.innerWidth >= 992);
@@ -17,6 +21,9 @@ const Messages = ({ category }) => {
   const [Messages, setMessages] = useState(null);
   const [LoaderState, setLoaderState] = useState(true);
   const [showAfterMD, setshowAfterMD] = useState(window.innerWidth >= 576);
+  const [checkStrictly, setCheckStrictly] = useState(false);
+ 
+  const dataSource = [] ;
   useEffect(() => {
     const fetch = async () => {
       setLoaderState(true);
@@ -27,7 +34,14 @@ const Messages = ({ category }) => {
          messages = await firebase.getViewedMessages();
       }
       messages.sort((a, b) => b.TimeStamp - a.TimeStamp);
-      setMessages(messages);
+      messages.map((message,key)=>{dataSource.push({key:key,ContactNo:message.ContactNo,
+        Description:message.Description,
+        Email:message.Email,
+        Name:message.Name,
+        Status:message.Status,
+        TimeStamp:CONVERT_TIMESTAMP_TO_DATE_TIME(message.TimeStamp),
+        id:message.id,})})
+      setMessages(dataSource);
       setLoaderState(false);
     };
     fetch();
@@ -52,6 +66,58 @@ const Messages = ({ category }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const statusHandler = async (status, id) => {
+    console.log('statusHandler')
+    if (status === "viewed") {
+      await firebase.markMessageAsNew(id);
+    } else {
+      await firebase.markMessageAsViewed(id);
+    }
+  
+    // Set the 'hidden' property for the specific row
+    setMessages((prevMessages) =>
+      prevMessages.map((message) =>
+        message.id === id ? { ...message, hidden: true } : message
+      )
+    );
+  };
+  
+  const columnsBelowLg = [ 
+    {title: 'Description', dataIndex: 'Description', key: 'Description', width: '40%',
+      render: (text, record) => (
+        <span>{text.slice(0, 100)}{text.length > 100 && "..."}</span>
+      ),
+    },
+    {title : 'Email' , dataIndex : 'Email' , key : 'Email' ,width:"20%"} ,
+    {title : 'Actions' , dataIndex : '' , key : 'action' ,width:"10%",
+    render: (record) => (
+      <span>
+        <i className="fa-solid me-2 fa-marker contactUs-font" onClick={() => statusHandler(record.Status, record.id)} />
+      </span>
+    ),
+  },
+  ] ;
+
+ const columnsAboveLg = [ 
+  {title : 'Name' , dataIndex : 'Name' , key : 'Name' ,width:"10%" } ,
+  {title : 'ContactNo' , dataIndex : 'ContactNo' , key : 'ContactNo' ,width:"10%" } ,
+  {title: 'Description', dataIndex: 'Description', key: 'Description', width: '40%',
+  render: (text, record) => (
+    <span>{text.slice(0, 100)}{text.length > 100 && "..."}</span>
+  ),
+},
+  {title : 'Email' , dataIndex : 'Email' , key : 'Email' ,width:"10%" } ,
+  {title : 'TimeStamp' , dataIndex : 'TimeStamp' , key : 'TimeStamp' ,width:"10%" } ,
+  {title : 'Actions' , dataIndex : '' , key : 'action' ,width:"10%",
+    render: (record) => (
+      <span>
+        <i className="fa-solid me-2 fa-marker contactUs-font" onClick={() => statusHandler(record.Status, record.id)} />
+      </span>
+    ),
+  },
+];
+
+
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />
@@ -69,28 +135,41 @@ const Messages = ({ category }) => {
               {LoaderState ? (
                 <LoaderDark></LoaderDark>
               ) : (
-                <Table responsive="lg" hover >
-                  <thead>
-                    <tr className="message-table-header">
-                      <th>#</th>
-                      <th colSpan="2">Description</th>
-                      <th className={`${!showAfterLG ? "d-none" : ""}`}>Name</th>
-                      <th>Email</th>
-                      <th className={`${!showAfterLG ? "d-none" : ""}`}>Contact</th>
-                      <th className={`${!showAfterLG ? "d-none" : ""}`}>Date</th>
-                      <th className="text-center">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="contactUs-body">
-                  {Messages.map((message, index) => (
-                    <MessageComponent
-                      data={message}
-                      key={index}
-                      index={index}
-                    ></MessageComponent>
-                  ))}
-                  </tbody>
-                </Table>
+                <Table
+                  columns={showAfterLG ? columnsAboveLg : columnsBelowLg}
+                  expandable={{
+                    expandedRowRender: (record) => (
+                      <MessageComponent data={record}></MessageComponent>
+                    ),
+                    rowExpandable: (record) => record.name !== 'Not Expandable',
+                  }}
+                  dataSource={Messages}
+                  rowClassName={(record) => record.hidden ? 'd-none' : ''}
+                />
+                
+             
+                // <Table responsive="lg" hover >
+                //   <thead>
+                //     <tr className="message-table-header">
+                //       <th>#</th>
+                //       <th colSpan="2">Description</th>
+                //       <th className={`${!showAfterLG ? "d-none" : ""}`}>Name</th>
+                //       <th>Email</th>
+                //       <th className={`${!showAfterLG ? "d-none" : ""}`}>Contact</th>
+                //       <th className={`${!showAfterLG ? "d-none" : ""}`}>Date</th>
+                //       <th className="text-center">Actions</th>
+                //     </tr>
+                //   </thead>
+                //   <tbody className="contactUs-body">
+                //   {Messages.map((message, index) => (
+                //     <MessageComponent
+                //       data={message}
+                //       key={index}
+                //       index={index}
+                //     ></MessageComponent>
+                //   ))}
+                //   </tbody>
+                // </Table>
               )}
             </div>
           </div>

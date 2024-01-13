@@ -5,6 +5,8 @@ import Modal from "react-bootstrap/Modal";
 import MessageInfoModal from "../reusableComponents/MessageInfoModal";
 import { CONVERT_TIMESTAMP_TO_DATE_TIME } from "../utils/genericFunctions";
 import ConfirmationModal from "../utils/ConfirmationModal";
+import { Button, Popconfirm, ConfigProvider } from 'antd';
+import { ExclamationCircleTwoTone } from "@ant-design/icons";
 
 const MessageComponent = ({ data, index }) => {
   const [showAfterLG, setshowAfterLG] = useState(window.innerWidth >= 992);
@@ -57,16 +59,7 @@ const MessageComponent = ({ data, index }) => {
     return "";
   };
 
-  const statusHandler = async () => {
-    if (data.Status === "viewed") {
-      firebase.markMessageAsNew(data.id);
-      document.getElementById(`message-${data.id}`).classList.add("d-none");
-    } else {
-      firebase.markMessageAsViewed(data.id);
-      document.getElementById(`message-${data.id}`).classList.add("d-none");
-    }
-    handleCloseMarkModal();
-  };
+  
   const deleteMessage = async () => {
     handleCloseDeleteModal();
     await firebase.deleteMessageByIdentity(data.id);
@@ -76,40 +69,23 @@ const MessageComponent = ({ data, index }) => {
     handleShowMarkModal();
   };
   return (
-    <>
-     {showDeleteModal&&<ConfirmationModal query={"Are you sure you want to delete this Message?"} confirmationOption={"Delete"} onConfirmHandler={deleteMessage}/>}
-     {showMarkModal&&<ConfirmationModal query={`Mark Message As ${data.Status == "new" ? "viewed" : "new"}`} confirmationOption={`Mark As ${data.Status == "new" ? "viewed" : "new"}`} onConfirmHandler={statusHandler}/>}
-      <Modal show={show} onHide={handleClose} size="xl" centered backdrop={true}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <div
-            className="row"
-            id={`message-${data.id}`}
-            key={`message-${data.id}`}
-          >
-            <MessageInfoModal title={"ID"} value={data.id} col={12}/>
-            <MessageInfoModal title={"Date"} value={CONVERT_TIMESTAMP_TO_DATE_TIME(data.TimeStamp)} col={6}/>
-            <MessageInfoModal title={"Name"} value={data.Name} col={6}/>
-            <MessageInfoModal title={"Contact No"} value={data.ContactNo} col={6}/>
-            <MessageInfoModal title={"Email"} value={data.Email} col={6}/>
-            <MessageInfoModal title={"Description"} value={getDescription()} col={12}/>
-          </div>
-        </Modal.Body>
-      </Modal>
-      <tr id={`message-${data.id}`}>
-        <td className=" contactUs-font">{index + 1}</td>
-        <td className=" contactUs-font text-start" colSpan="2">{data.Description.slice(0, 100)}...</td>
-        <td className={`${!showAfterLG ? "d-none" : ""} contactUs-font`}>{data.Name.slice(0, 15)}...</td>
-        <td className=" contactUs-font">{data.Email.slice(0, 15)}...</td>
-        <td className={`${!showAfterLG ? "d-none" : ""} contactUs-font`}>{data.ContactNo}</td>
-        <td className={`${!showAfterLG ? "d-none" : ""} contactUs-font`}>{CONVERT_TIMESTAMP_TO_DATE_TIME(data.TimeStamp)}</td>
-        <td className="p-1 text-center">
-          <i className="fa-solid me-2 fa-marker contactUs-font" onClick={markMessage}/>
-          <i className="fa-solid me-2 fa-eye contactUs-font" onClick={showModal}/>
-          <i className="fa-solid me-2 fa-trash contactUs-font" onClick={showDelete}/>
-        </td>
-      </tr>
-    </>
+    <span className="message-component">
+        <p ><strong>Identity : </strong>{data.id}</p>
+        <p ><strong>Name : </strong>{data.Name}</p>
+        <p ><strong>ContactNo : </strong>{data.ContactNo}</p>
+        <p ><strong>Email : </strong>{data.Email}</p>
+        <p ><strong>TimeStamp : </strong>{data.TimeStamp}</p>
+        <p ><strong>Description : </strong>{data.Description}</p>
+        <Popconfirm
+          placement="topRight"
+          title={"Are you sure you want to delete this Message?"}
+          okText="Delete"
+          cancelText="Cancel"
+          onConfirm={deleteMessage}
+          icon={<ExclamationCircleTwoTone  twoToneColor="#ff0000" />}>
+          <Button danger><i className="fa-solid me-2 fa-trash"/> Delete Message</Button>
+        </Popconfirm>
+    </span>
   );
 };
 

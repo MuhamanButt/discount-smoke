@@ -6,14 +6,15 @@
 .product-card-color {
   color: var(--darkBlue) !important;
 }
-.offcanvas-body > button:nth-child(9)
+.product-card-off-canvas-options > button:nth-child(2)
 {
   
   color: green !important;
   border: 1px solid green !important;
   margin-left: 10px;
 }
-.offcanvas-body > button:nth-child(8)
+
+.product-card-off-canvas-options > button:nth-child(1)
 {
   color: red !important;
   border: 1px solid red !important;

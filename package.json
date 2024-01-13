@@ -20,6 +20,7 @@
     "react-bootstrap": "^2.9.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.20.0",
     "react-html-parser": "^2.0.2",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.2",

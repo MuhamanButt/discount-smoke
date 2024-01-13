@@ -94,11 +94,12 @@ const ProductCard = ({ product }) => {
               ))}
               </p>
           )}
+          <span className="product-card-off-canvas-options text-center">
            <Popconfirm placement={"bottomRight"} title={"Are you sure you want to Delete?"} okText={"Delete"}  cancelText="Cancel" onConfirm={deleteProduct} icon={<ExclamationCircleTwoTone  twoToneColor="#ff0000" />}>
              <Button><i className="fa-solid fa-trash me-3"></i> Delete</Button>
            </Popconfirm>
           <Button onClick={updateHandler}><i className="fa-solid fa-pen me-3" ></i> Update</Button>
-        
+          </span>
       </Offcanvas.Body>
       </Offcanvas>
       <Card style={{ width: "100%", height: "auto" }} className="product-card">

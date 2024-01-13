@@ -15,6 +15,10 @@ font-size: 12px !important;
 .contactUs-body tr td{
     align-self: center;
 }
+.message-component{
+    font-size: 12px !important;
+    padding: 20px 10px;
+}
 .card-title{
     color: var(--blue) !important;
 }

@@ -122,6 +122,7 @@ export const FirebaseProvider = (props) => {
     return dataArray;
   };
   const markMessageAsViewed = async (identity) => {
+    console.log("called")
     const messageCollectionRef = collection(firestore, "Messages");
     const docRef = doc(messageCollectionRef, identity);
     setDoc(docRef, { Status: "viewed" }, { merge: true })
