@@ -19,25 +19,21 @@ import { ADD_PRODUCT_INTERFACE, ADD_UPDATE_PRODUCT_INTERFACE } from "../values/I
 import FormShimmer from "../shimmers/FormShimmer";
 import { SUPER_WHITE, WHITE } from "../values/Colors";
 
+import { Button, message } from 'antd';
 const AddProduct = ({category}) => {
   const firebase=useFirebase();
-  const [showErrorModal, setshowErrorModal] = useState(false);
-  const [showSuccessModal, setshowSuccessModal] = useState(false);
   const [Loading, setLoading] = useState(true);
   const [Flavors, setFlavors] = useState(null);
   const [Brands, setBrands] = useState(null);
+  const [messageApi, contextHolder] = message.useMessage();
   const onSubmit = async ({productName,description,features,selectedFlavors,selectedBrand,image}) => {
     console.log(selectedBrand)
     setLoading(true);
-    if(await firebase.addNewProduct( productName, description, features, selectedBrand, selectedFlavors, image, category))
-    {
-      setshowSuccessModal(false)
-      setshowSuccessModal(true)
+    if(await firebase.addNewProduct( productName, description, features, selectedBrand, selectedFlavors, image, category)){
+      messageApi.open({type: 'success',content: 'Product added successfully...',duration: 2,});
     }
-    else
-    {
-      showErrorModal(false)
-      showErrorModal(true)
+    else{
+      messageApi.open({type: 'error',content: 'Product cannot be added...',duration: 2,});
     }
     setLoading(false);
   }
@@ -58,17 +54,17 @@ const AddProduct = ({category}) => {
   return (
     <div style={{ backgroundColor:SUPER_WHITE }}>
     <MyNavbar status={true}/>
-    {showErrorModal&&<CustomModal text="There is an error adding product Please try again" timer={2000} imageID={"ERR"}/>}
-    {showSuccessModal&&<CustomModal text="Product added successfully" timer={2000} imageID={"MSGST"}/>}
     <Title name={`Add Product (${category})`}/>
     <div className="row m-0">
       <div className="col-4 col-lg-3 d-md-block d-none">
         <SearchBar/>
+        {contextHolder}
       </div>
       <div className="col-lg-9 col-12 col-md-8">
         <div className="row m-0 justify-content-center">
           <div className="col-11">
           {Loading?<FormShimmer/>:
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}

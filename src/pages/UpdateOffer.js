@@ -18,6 +18,7 @@ import Loader from "../reusableComponents/Loader";
 import { UPDATE_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
 import FormShimmer from "../shimmers/FormShimmer";
+import { Button, message } from 'antd';
 const UpdateOffer = () => {
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
@@ -28,6 +29,7 @@ const UpdateOffer = () => {
   const [showErrorModal, setshowErrorModal] = useState(false);
   const [showSuccessModal, setshowSuccessModal] = useState(false);
   const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   function calculateExpiration(hours, days) {
     const hoursInMillis = hours * 60 * 60 * 1000;
     const daysInMillis = days * 24 * 60 * 60 * 1000;
@@ -88,16 +90,11 @@ const UpdateOffer = () => {
     const ExpirationTime = calculateExpiration(remainingHours, remainingDays);
     if(await firebase.updateOffer(productName,description,features,selectedBrand,selectedFlavors,offerDescription,ExpirationTime,offerId,image))
     {
-      setshowSuccessModal(false)
-      setshowSuccessModal(true)
-      setTimeout(() => {
-        navigate(`/home`)
-      }, 2000);
+      messageApi.open({type: 'success',content: 'Offer updated successfully...',duration: 2,});
       setLoaderState(false);
     }
     else{
-      showErrorModal(false)
-      showErrorModal(true)
+      messageApi.open({type: 'error',content: 'Error : There is an error updating offer Please try again...',duration: 4,});
     }
     setLoaderState(false);
   }
@@ -110,7 +107,7 @@ const UpdateOffer = () => {
       {showSuccessModal&&<CustomModal text="Product updated successfully" timer={2000} imageID={"MSGST"}/>}
       <Title name={`Update Offer`} />
       <div className="row m-0">
-        <div className="col-4 col-lg-3 d-md-block d-none"><SearchBar /></div>
+        <div className="col-4 col-lg-3 d-md-block d-none"><SearchBar />{contextHolder}</div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">
             <div className="col-11">

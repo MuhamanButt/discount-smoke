@@ -5,13 +5,14 @@ import { useState } from "react";
 import Heading from "../reusableComponents/Heading";
 import giftImage from "../assets/gift.webp"
 import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { setProductInfo } from "../redux/ProductInfo/ProductInfoAction";
 import { useDispatch } from "react-redux";
 import alternate from "../assets/imageAlternate.svg";
 import "./styles/Offer.css";
 import { setOffers } from "../redux/Offers/OffersAction";
+import { Button, Popconfirm, ConfigProvider } from 'antd';
+import {ExclamationCircleTwoTone,EditOutlined} from '@ant-design/icons';
 import { DANGER, SUCCESS } from "../values/Colors";
 import { CONVERT_TIMESTAMP_TO_DAYS_HOURS_AND_MINUTES } from "../utils/genericFunctions";
 import ConfirmationModal from "../utils/ConfirmationModal";
@@ -30,15 +31,12 @@ const Offers = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const deleteOffer = async () => {
-    await firebase.deleteOffer(itemToDelete);
-    document.getElementById(itemToDelete).classList.add("d-none");
+
+  const deleteHandler = async(identity) => {
+    await firebase.deleteOffer(identity);
+    document.getElementById(identity).classList.add("d-none");
     handleClose();
     setRerenderer(!Rerenderer);
-  };
-  const deleteHandler = (identity) => {
-    setitemToDelete(identity);
-    handleShow();
   };
   const updateHandler = async (data) => {
     dispatch(setProductInfo(data));
@@ -89,12 +87,6 @@ const Offers = () => {
   }, [Data]);
   return (
     <>
-      <div className="row">
-        <div className="col drop-shadow">
-          {show&&<ConfirmationModal query={"Are you sure you want to delete this offer?"} confirmationOption={"Delete Offer"} onConfirmHandler={deleteOffer}/>}
-    
-        </div>
-      </div>
       {Data.length === 0 ? (
         ""
       ) : (
@@ -164,16 +156,13 @@ const Offers = () => {
                         </div>
                       </div>
                       {isLoggedIn && (
-                        <div className="row justify-content-evenly">
+                        <div className="row justify-content-evenly offer-actions">
                           <div className="col">
-                            <div className="row justify-content-center">
-                              <div className="col-5 col-sm-4 col-md-3">
-                                <Button style={{backgroundColor: DANGER,width: "100%",marginRight: "5px", }} onClick={() => deleteHandler(data.identity)} className="offer-btns">Delete Offer</Button>
-                              </div>
-                              <div className="col-6 col-sm-5 col-md-3">
-                                <Button style={{backgroundColor: SUCCESS,width: "100%", marginLeft: "5px",}}onClick={() => updateHandler(data)}className="offer-btns">Update Offer</Button>
-                              </div>
-                            </div>
+                              <Popconfirm placement={"bottomRight"} title={"Are you sure you want to Delete?"} okText={"Delete"}  cancelText="Cancel" onConfirm={() => deleteHandler(data.identity)} icon={<ExclamationCircleTwoTone  twoToneColor="#ff0000" />}>
+                                    <Button className="offer-actions-delete"><i className="fa-solid fa-trash me-3"></i> Delete</Button>
+                              </Popconfirm>
+                              
+                              <Button onClick={() => updateHandler(data)} icon={<EditOutlined />}className="offer-actions-edit"> Update Offer</Button>
                           </div>
                         </div>)}
                     </div>

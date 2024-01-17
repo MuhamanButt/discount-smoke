@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import FormPageSkeleton from "../skeletons/FormPageSkeleton";
 import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 import { ADD_PRODUCT_SCHEMA } from "../values/ValidationSchemas";
+import { Button, message } from 'antd';
 import FormShimmer from "../shimmers/FormShimmer";
 const UpdateProduct = () => {
   const navigate=useNavigate()
@@ -27,6 +28,7 @@ const UpdateProduct = () => {
   const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
   const [showErrorModal, setshowErrorModal] = useState(false);
   const [showSuccessModal, setshowSuccessModal] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const [initialValues, setInitialValues] = useState({
     productName: '',
     description: '',
@@ -42,14 +44,10 @@ const UpdateProduct = () => {
   const onSubmit=async({productName,description,features,selectedFlavors,selectedBrand,image,productID,category})=>{
     setLoaderState(true);
     if(await firebase.updateProduct( productName, description, features, selectedBrand, selectedFlavors,category,productID, image )){
-      setshowSuccessModal(false)
-      setshowSuccessModal(true)
-      setTimeout(() => {navigate(`/product/view/${productID}`)}, 2000);
-      setLoaderState(false);
+      messageApi.open({type: 'success',content: 'Product updated successfully...',duration: 2,});
     }
     else{
-      showErrorModal(false)
-      showErrorModal(true)
+      messageApi.open({type: 'error',content: 'Error : Product cannot be updated...',duration: 2,});
     }
     setLoaderState(false);
   }
@@ -90,7 +88,7 @@ const UpdateProduct = () => {
       <Title name={`Update`} />
       <div className="row m-0">
         <div className="col-4 col-lg-3 d-md-block d-none">
-          <SearchBar />
+          <SearchBar />{contextHolder}
         </div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">

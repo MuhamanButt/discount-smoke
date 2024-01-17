@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {ShimmerThumbnail} from "react-shimmer-effects";
 import alternate from "./assets/imageAlternate.svg";
-import { DANGER, SUCCESS } from "../values/Colors";
+import { DANGER, SUCCESS, WHITE } from "../values/Colors";
 import ConfirmationModal from "../utils/ConfirmationModal";
 import { CONVERT_TIMESTAMP_TO_DATE_TIME } from "../utils/genericFunctions";
 

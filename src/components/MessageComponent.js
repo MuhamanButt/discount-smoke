@@ -8,7 +8,7 @@ import ConfirmationModal from "../utils/ConfirmationModal";
 import { Button, Popconfirm, ConfigProvider } from 'antd';
 import { ExclamationCircleTwoTone } from "@ant-design/icons";
 
-const MessageComponent = ({ data, index }) => {
+const MessageComponent = ({ data, rerender }) => {
   const [showAfterLG, setshowAfterLG] = useState(window.innerWidth >= 992);
   const [showAfterMD, setshowAfterMD] = useState(window.innerWidth >= 576);
 
@@ -63,13 +63,13 @@ const MessageComponent = ({ data, index }) => {
   const deleteMessage = async () => {
     handleCloseDeleteModal();
     await firebase.deleteMessageByIdentity(data.id);
-    document.getElementById(`message-${data.id}`).classList.add("d-none");
+    rerender(data);
   };
   const markMessage = async () => {
     handleShowMarkModal();
   };
   return (
-    <span className="message-component">
+    <span className="message-component " >
         <p ><strong>Identity : </strong>{data.id}</p>
         <p ><strong>Name : </strong>{data.Name}</p>
         <p ><strong>ContactNo : </strong>{data.ContactNo}</p>

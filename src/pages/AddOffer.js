@@ -16,24 +16,22 @@ import { ADD_UPDATE_PRODUCT_INTERFACE } from "../values/InterfaceDetails";
 import { ADD_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
 import FormShimmer from "../shimmers/FormShimmer";
+import { Button, message } from 'antd';
 const AddOffer = () => {
 
   const firebase = useFirebase();
   const [Loading, setLoading] = useState(true);
   const [Flavors, setFlavors] = useState(null);
   const [Brands, setBrands] = useState(null);
-  const [showErrorModal, setshowErrorModal] = useState(false);
-  const [showSuccessModal, setshowSuccessModal] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const onSubmit=async({offerDescription,remainingDays,remainingHours,productName,description,features,selectedFlavors,selectedBrand,image})=>{
     setLoading(true);
     const ExpirationTime = CONVERT_HOURS_DAYS_TO_TIMESTAMP(remainingHours, remainingDays)
     if(await firebase.addNewOffer( productName, description, features, selectedBrand, selectedFlavors,offerDescription,ExpirationTime, image)){
-      setshowSuccessModal(false)
-      setshowSuccessModal(true)
+      messageApi.open({type: 'success',content: 'Offer added successfully...',duration: 2,});
     }
     else{
-      showErrorModal(false)
-      showErrorModal(true)
+      messageApi.open({type: 'error',content: 'Error : There is an error adding offer Please try again...',duration: 4,});
     }
     setLoading(false);
   }
@@ -54,12 +52,10 @@ const AddOffer = () => {
   return (
     <div style={{ backgroundColor: "#efefef" }}>
       <MyNavbar status={true} />
-      {showErrorModal&&<CustomModal text="There is an error adding offer Please try again" timer={2000} imageID={"ERR"}/>}
-      {showSuccessModal&&<CustomModal text="Offer added successfully" timer={2000} imageID={"MSGST"}/>}
       <Title name={`Add New Offer`} />
       <div className="row m-0">
         <div className="col-4 col-lg-3 d-md-block d-none">
-          <SearchBar />
+          <SearchBar />{contextHolder}
         </div>
         <div className="col-lg-9 col-12 col-md-8">
           <div className="row m-0 justify-content-center">

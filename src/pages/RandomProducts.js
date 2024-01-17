@@ -10,6 +10,7 @@ import ProductPageSkeleton from "../skeletons/ProductPageSkeleton";
 import { useSelector } from "react-redux";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useDispatch } from "react-redux";
+import ProductCardPageShimmer from "../shimmers/ProductCardPageShimmer";
 import { setOffers } from "../redux/Offers/OffersAction";
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
@@ -107,7 +108,7 @@ const RandomProducts = () => {
         <div className="col-12 col-md-9 p-0" style={{ minHeight: "500px" }}>
           <div className="row m-0 overflow-x-hidden px-3 px-md-0">
             {!ProductsData ? (
-              <ProductPageSkeleton></ProductPageSkeleton>
+              <ProductCardPageShimmer numberOfItems={10}/>
             ) : (
               <>
                 {ProductsData.length == 0 ? (
