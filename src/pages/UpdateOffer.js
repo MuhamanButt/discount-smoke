@@ -19,6 +19,7 @@ import { UPDATE_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
 import FormShimmer from "../shimmers/FormShimmer";
 import { Button, message } from 'antd';
+import { DatePicker } from "antd";
 const UpdateOffer = () => {
   const productInfo = useSelector((state) => state.productInfo.productInfo);
   const firebase = useFirebase();
@@ -26,29 +27,9 @@ const UpdateOffer = () => {
   const [LoaderState, setLoaderState] = useState(false);
   const [Flavors, setFlavors] = useState(null);
   const [Brands, setBrands] = useState(null);
-  const [showErrorModal, setshowErrorModal] = useState(false);
-  const [showSuccessModal, setshowSuccessModal] = useState(false);
   const [flavorsAddedFirstTime, setflavorsAddedFirstTime] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  function calculateExpiration(hours, days) {
-    const hoursInMillis = hours * 60 * 60 * 1000;
-    const daysInMillis = days * 24 * 60 * 60 * 1000;
-    return Date.now() + hoursInMillis + daysInMillis;
-  }
-  const calculateRemainingHours = (timestamp) => {
-    const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / 3600000) - (Math.floor(timeDifference / 86400000) * 24);
-  };
-  
-  const calculateRemainingDays = (timestamp) => {
-    const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / 86400000);
-  };
-  
-  const calculateRemainingMinutes = (timestamp) => {
-    const timeDifference = timestamp - Date.now();
-    return Math.floor(timeDifference / 60000) - ((Math.floor(timeDifference / 3600000) * 60));
-  };
+  const [Timestamp, setTimestamp] = useState(Date.now());
   
   const [initialValues, setInitialValues] = useState(UPDATE_OFFER_INITIAL_VALUES);
   useEffect(() => {
@@ -59,14 +40,12 @@ const UpdateOffer = () => {
         features: productInfo.Features,
         selectedBrand: productInfo.selectedBrand,
         selectedFlavors: Array.isArray(productInfo.selectedFlavors) ? productInfo.selectedFlavors : [],
+        Timestamp:productInfo.ExpirationTime,
         offerDescription: productInfo.OfferDescription,
-        remainingMinutes: calculateRemainingMinutes(productInfo.ExpirationTime),
-        remainingHours: calculateRemainingHours(productInfo.ExpirationTime),
-        remainingDays: calculateRemainingDays(productInfo.ExpirationTime),
         offerId: productInfo.identity,
         image: '',
       });
-
+      setTimestamp(productInfo.ExpirationTime)
       setLoaderState(true);
 
       if (!Brands) {
@@ -84,11 +63,10 @@ const UpdateOffer = () => {
 
     fetch();
   }, [Brands,Flavors]);
-  const onSubmit=async({offerDescription,remainingHours,remainingDays,productName,description,features,selectedFlavors,selectedBrand,image,offerId})=>{
+  const onSubmit=async({offerDescription,productName,description,features,selectedFlavors,selectedBrand,image,offerId})=>{
     console.log("submitted")
     setLoaderState(true);
-    const ExpirationTime = calculateExpiration(remainingHours, remainingDays);
-    if(await firebase.updateOffer(productName,description,features,selectedBrand,selectedFlavors,offerDescription,ExpirationTime,offerId,image))
+    if(await firebase.updateOffer(productName,description,features,selectedBrand,selectedFlavors,offerDescription,Timestamp,offerId,image))
     {
       messageApi.open({type: 'success',content: 'Offer updated successfully...',duration: 2,});
       setLoaderState(false);
@@ -98,13 +76,16 @@ const UpdateOffer = () => {
     }
     setLoaderState(false);
   }
+  const onChange = (date, dateString) => {
+    const selectedDate = date?.toDate();
+    const timestamp = selectedDate.getTime();
+    setTimestamp(timestamp)
+  };
   const interfaceDetails=ADD_UPDATE_PRODUCT_INTERFACE
   const validationSchema=()=>ADD_OFFER_SCHEMA
   return (
     <div style={{ backgroundColor: "white" }}>
       <MyNavbar status={true} />
-      {showErrorModal&&<CustomModal text="There is an error updating product Please try again" timer={2000} imageID={"ERR"}/>}
-      {showSuccessModal&&<CustomModal text="Product updated successfully" timer={2000} imageID={"MSGST"}/>}
       <Title name={`Update Offer`} />
       <div className="row m-0">
         <div className="col-4 col-lg-3 d-md-block d-none"><SearchBar />{contextHolder}</div>
@@ -122,8 +103,7 @@ const UpdateOffer = () => {
             {(formik)=>{
               return <Form>
                  <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>
-                 <FormikControl control="input" type="remainingDays" name="remainingDays" label="Remaining Days" interfaceDetails={interfaceDetails} />
-                 <FormikControl control="input" type="remainingHours" name="remainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
+                 <DatePicker onChange={onChange} showTime format="YYYY-MM-DD HH:mm"/>
                  <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/> 
                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/> 
                  <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"200px"}/> 

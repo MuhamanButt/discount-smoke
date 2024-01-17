@@ -24,8 +24,6 @@ export const ADD_PRODUCT_INITIAL_VALUES= {
   }
   export const ADD_OFFER_INITIAL_VALUES={
     offerDescription:'',
-    remainingDays:0,
-    remainingHours:0,
     productName:'',
     description:'',
     features:'',
@@ -39,8 +37,6 @@ features: '',
 selectedBrand:'',
 selectedFlavors: [],
 offerDescription:'',
-RemainingMinutes:0,
-RemainingHours:0,
-RemainingDays:0,
+Timestamp:Date.now(),
 offerId: '',
 image: '',}

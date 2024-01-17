@@ -17,17 +17,20 @@ import { ADD_OFFER_INITIAL_VALUES } from "../values/InitialValues";
 import { ADD_OFFER_SCHEMA } from "../values/ValidationSchemas";
 import FormShimmer from "../shimmers/FormShimmer";
 import { Button, message } from 'antd';
+import { DatePicker, Space } from 'antd';
+const { RangePicker } = DatePicker;
 const AddOffer = () => {
 
   const firebase = useFirebase();
   const [Loading, setLoading] = useState(true);
   const [Flavors, setFlavors] = useState(null);
   const [Brands, setBrands] = useState(null);
+  const [Timestamp, setTimestamp] = useState(Date.now());
+
   const [messageApi, contextHolder] = message.useMessage();
   const onSubmit=async({offerDescription,remainingDays,remainingHours,productName,description,features,selectedFlavors,selectedBrand,image})=>{
     setLoading(true);
-    const ExpirationTime = CONVERT_HOURS_DAYS_TO_TIMESTAMP(remainingHours, remainingDays)
-    if(await firebase.addNewOffer( productName, description, features, selectedBrand, selectedFlavors,offerDescription,ExpirationTime, image)){
+    if(await firebase.addNewOffer( productName, description, features, selectedBrand, selectedFlavors,offerDescription,Timestamp, image)){
       messageApi.open({type: 'success',content: 'Offer added successfully...',duration: 2,});
     }
     else{
@@ -35,7 +38,11 @@ const AddOffer = () => {
     }
     setLoading(false);
   }
-  
+  const onChange = (date, dateString) => {
+    const selectedDate = date?.toDate();
+    const timestamp = selectedDate.getTime();
+    setTimestamp(timestamp)
+  };
   useEffect(() => {
     const fetch = async () => {
       if(!(Flavors&&Brands)) {
@@ -69,8 +76,7 @@ const AddOffer = () => {
             {(formik)=>{
               return <Form>
                  <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>
-                 <FormikControl control="input" type="remainingDays" name="remainingDays" label="Remaining Days" interfaceDetails={interfaceDetails}/>
-                 <FormikControl control="input" type="remainingHours" name="remainingHours" label="Remaining Hours" interfaceDetails={interfaceDetails}/>
+                 <DatePicker onChange={onChange} showTime format="YYYY-MM-DD HH:mm"/>
                  <FormikControl control="input" type="productName" name="productName" label="Product Name" interfaceDetails={interfaceDetails} totalCharacters={50}/>
                  <FormikControl control="textarea" type="description" name="description" label="Description" interfaceDetails={interfaceDetails} totalCharacters={300} height={"200px"}/>
                  <FormikControl control="quill" type="features" name="features" label="Features" interfaceDetails={interfaceDetails} height={"200px"}/>
