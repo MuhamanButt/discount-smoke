@@ -74,16 +74,11 @@ const ProductViewPage = () => {
                     <div className="row justify-content-center mt-0">
                       <div className="col-12 pc-flavors">
                         {Product.selectedFlavors &&
-                        Product.selectedFlavors.length > 0 ? (
+                          Product.selectedFlavors.length > 0 ? (
                           <>
                             <h3 className="pc-subHeading">Flavors:</h3>
                             {Product.selectedFlavors.map((flavor, index) => (
-                              <div
-                                className="flavorButtons col pc-text"
-                                key={index}
-                              >
-                                {flavor}
-                              </div>
+                              <div className="flavorButtons col pc-text" key={index}>{flavor}</div>
                             ))}
                           </>
                         ) : (

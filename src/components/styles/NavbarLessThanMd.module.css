@@ -7,10 +7,20 @@
 .offcanvas_body{
     color: rgb(207, 207, 207) !important;
 }
+#root > div > div.row.m-0 > div > div.row.m-0.navbar-fade > div > div > div > ul > li.ant-menu-item.ant-menu-item-only-child
+{
+    text-align:center !important;
+}
 .navbar_btn{
     font-size: 18px !important;
-    font-weight: 200 !important;
+    font-weight: 400 !important;
+    margin-top: 2px;
+    width: auto;
 }
 .navbarLogo{
     height: 50px;
+}
+.ant-menu
+{
+    height: 100vh !important;
 }

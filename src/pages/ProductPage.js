@@ -33,6 +33,7 @@ const ProductPage = ({ category }) => {
   const onChange = (page) => {
     setPaginatedProductData(ProductsData?.slice(((page-1)*15),((page-1)*15)+15))
     setCurrent(page);
+    window.scrollTo({top: 0,behavior: "smooth"});
   };
   const data = useSelector((state) => state.searchbarData.productInfo);
   function filterArrayByCategory(array, category) {
@@ -64,7 +65,7 @@ const ProductPage = ({ category }) => {
     };
   }, []);
   useEffect(()=>{
-
+    window.scrollTo({top: 0,behavior: "smooth"});
   },[Rerenderer,PaginatedProductData])
   useEffect(() => {
     const fetch = async () => {
@@ -109,11 +110,7 @@ const ProductPage = ({ category }) => {
                 {PaginatedProductData.length == 0 ? (
                   <div className="row m-0" style={{ height: "70vh" }}>
                     <div className="col text-center align-self-center">
-                      <img
-                        src={toAbsoluteURL(datacoming)}
-                        alt=""
-                        style={{ height: "100%", maxWidth: "70%" }}
-                      />
+                      <img src={toAbsoluteURL(datacoming)} alt="" style={{ height: "100%", maxWidth: "70%" }}/>
                     </div>
                   </div>
                 ) : (

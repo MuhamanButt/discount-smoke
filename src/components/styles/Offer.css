@@ -20,41 +20,39 @@
   font-size: 14px;
   color: var(--blue);
 }
-.offer-actions button{
-margin: 0px 10px
-
+.offer-actions button {
+  margin: 0px 10px;
 }
-.offer-countdown > div > div > span{
+.offer-countdown > div > div > span {
   font-weight: 500;
   font-size: 40px;
   letter-spacing: 5px;
   color: var(--blue);
-
 }
-.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-primary.ant-btn-sm
-{
+.ant-popconfirm-buttons
+  > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-primary.ant-btn-sm {
   background-color: var(--danger) !important;
 }
-.ant-popconfirm-buttons > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-default.ant-btn-sm
-{
+.ant-popconfirm-buttons
+  > button.ant-btn.css-dev-only-do-not-override-910b9e.ant-btn-default.ant-btn-sm {
   color: black !important;
 }
-.offer-actions-delete:hover{
+.offer-actions-delete:hover {
   border: 1px solid red !important;
   color: red !important;
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.114));
 }
-.offer-actions-edit:hover{
+.offer-actions-edit:hover {
   border: 1px solid rgb(24, 210, 0) !important;
   color: rgb(24, 210, 0) !important;
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.114));
 }
-.offer-actions-delete{
+.offer-actions-delete {
   border: 1px solid red;
   color: red;
   background-color: white !important;
 }
-.offer-actions-edit{
+.offer-actions-edit {
   border: 1px solid rgb(24, 210, 0);
   color: rgb(24, 210, 0);
   background-color: white !important;
@@ -72,9 +70,7 @@ margin: 0px 10px
   margin-top: 5px;
   display: inline-block;
 }
-.offer-description
-{
-  
+.offer-description {
 }
 @media screen and (max-width: 660px) {
   .offer-productName {
@@ -121,6 +117,7 @@ margin: 0px 10px
   }
 }
 
-.carousel-control-prev,.carousel-control-next{
+.carousel-control-prev,
+.carousel-control-next {
   display: none !important;
 }

@@ -20,7 +20,6 @@ import { CommentOutlined, MessageOutlined,WhatsAppOutlined } from '@ant-design/i
 import { FloatButton, Switch } from 'antd';
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
-import CustomModal from "../utils/Modal";
 const Home = () => {
   const dispatch = useDispatch();
   const userEntranceTime = useSelector((state) => state.userEntranceTime.time);
@@ -29,7 +28,6 @@ const Home = () => {
   const [Rerenderer, setRerenderer] = useState(false); 
   const [open, setOpen] = useState(false);
   const onChange = () => {
-    console.log("changed")
     setOpen(!open);
   };
   function getRandomNumber() {
@@ -101,23 +99,10 @@ const Home = () => {
           <ContactUs closeHandler={closeModal} />
         </Modal.Body>
       </Modal>
-      <FloatButton.Group
-        open={open}
-        onClick={onChange}
-        trigger="click"
-        style={{ right: 12,bottom:24}}
-        icon={<CommentOutlined style={{color:"white"}}/>}
-      >
-       <FloatButton icon={<MessageOutlined style={{color:"white"}}/>} onClick={showMessageModal}/>
-       
-      <FloatButton icon={<WhatsAppOutlined style={{color:"white"}}/>} onClick={navigateToWhatsApp} />
+      <FloatButton.Group open={open} onClick={onChange} trigger="click" style={{ right: 12,bottom:24}} icon={<CommentOutlined style={{color:"white"}}/>}>
+        <FloatButton icon={<MessageOutlined style={{color:"white"}}/>} onClick={showMessageModal}/>
+        <FloatButton icon={<WhatsAppOutlined style={{color:"white"}}/>} onClick={navigateToWhatsApp} />
       </FloatButton.Group>
-      
-      {/* <div className="position-relative">
-        <div className="position-fixed bottom-0 end-0 text-center me-3 mb-3" onClick={showMessageModal} >
-          <i className="fa-solid fa-message messaging-icon"/>
-        </div>
-      </div> */}
     </>
   );
 };
