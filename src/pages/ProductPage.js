@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MyNavbar from "../reusableComponents/Navbar";
 import Title from "../reusableComponents/Title";
+import { Pagination } from 'antd';
 import SearchBar from "../components/SearchBar";
 import Footer from "../reusableComponents/Footer";
 import ProductCard from "../reusableComponents/ProductCard";
@@ -23,11 +24,16 @@ const ProductPage = ({ category }) => {
 
   const dispatch=useDispatch();
   const userEntranceTime=useSelector((state)=>state.userEntranceTime.time)
-  const [ProgressBarLoading, setProgressBarLoading] = useState(0);
   const [showProgressBar, setshowProgressBar] = useState(false);
   const firebase = useFirebase();
   const [ProductsData, setProductsData] = useState(null);
   const [Rerenderer, setRerenderer] = useState(false);
+  const [PaginatedProductData, setPaginatedProductData] = useState(null);
+  const [current, setCurrent] = useState(1);
+  const onChange = (page) => {
+    setPaginatedProductData(ProductsData?.slice(((page-1)*15),((page-1)*15)+15))
+    setCurrent(page);
+  };
   const data = useSelector((state) => state.searchbarData.productInfo);
   function filterArrayByCategory(array, category) {
     return array.filter((item) =>
@@ -59,25 +65,33 @@ const ProductPage = ({ category }) => {
   }, []);
   useEffect(()=>{
 
-  },[Rerenderer])
+  },[Rerenderer,PaginatedProductData])
   useEffect(() => {
     const fetch = async () => {
       setshowProgressBar(true);
-      setProgressBarLoading(20);
       setProductsData(null);
       if (data.length > 0) {
-        setProductsData(filterArrayByCategory(data, category));
-        setProgressBarLoading(40);
+        let filtered = filterArrayByCategory(data, category)
+        setProductsData(filtered);
+        setPaginatedProductData(filtered.slice(0,15))
       } else {
-        setProgressBarLoading(30);
         const result = await firebase.getProductsByCategory(category);
         setProductsData(result);
+        setPaginatedProductData(result.slice(0,15))
       }
-      setProgressBarLoading(100);
       setshowProgressBar(false);
     };
     fetch();
   }, [category]);
+  const itemRender = (_, type, originalElement) => {
+    if (type === 'prev') {
+      return <a>Previous</a>;
+    }
+    if (type === 'next') {
+      return <a>Next</a>;
+    }
+    return originalElement;
+  };
   return (
     <div style={{ backgroundColor: "#ffffff" }}>
       <MyNavbar status={true}></MyNavbar>
@@ -88,11 +102,11 @@ const ProductPage = ({ category }) => {
         </div>
         <div className="col-12 col-lg-9 p-0" style={{ minHeight: "500px" }}>
           <div className="row m-0 overflow-x-hidden px-3 px-md-0">
-            {!ProductsData ? (
+            {!PaginatedProductData ? (
               <ProductCardPageShimmer numberOfItems={10}/>
             ) : (
               <>
-                {ProductsData.length == 0 ? (
+                {PaginatedProductData.length == 0 ? (
                   <div className="row m-0" style={{ height: "70vh" }}>
                     <div className="col text-center align-self-center">
                       <img
@@ -103,12 +117,15 @@ const ProductPage = ({ category }) => {
                     </div>
                   </div>
                 ) : (
-                  ProductsData.map((product, index) => (
+                  PaginatedProductData.map((product, index) => (
                     <ProductCard product={product} key={index}></ProductCard>
                   ))
                 )}
               </>
             )}
+            <div className="col-12 pe-4 pb-4 text-end">
+            {PaginatedProductData?.length != 0 &&<Pagination current={current} pageSize={15} onChange={onChange} total={ProductsData?.length||0} itemRender={itemRender}/>}
+            </div>
           </div>
         </div>
       </div>

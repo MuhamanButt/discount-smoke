@@ -4,37 +4,10 @@ import { setLoginTime } from "../redux/LoginTime/LoginTimeAction";
 import { useSelector } from "react-redux";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  getDoc,
-  query,
-  where,
-  deleteDoc,
-  setDoc,
-  collectionGroup,
-  orderBy,
-  limit,
+import {getFirestore,collection,addDoc,getDocs,doc,getDoc,query,where,deleteDoc,setDoc,collectionGroup,orderBy,limit,
 } from "firebase/firestore";
-import {
-  Auth,
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-  listAll,
-  getMetadata,
-} from "firebase/storage";
+import {Auth,getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged,} from "firebase/auth";
+import {getStorage,ref,uploadBytes,getDownloadURL,deleteObject,listAll,getMetadata,} from "firebase/storage";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { useNavigate } from "react-router-dom";
@@ -107,7 +80,6 @@ export const FirebaseProvider = (props) => {
       });
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
   };
@@ -260,7 +232,6 @@ export const FirebaseProvider = (props) => {
       const results = await getDocs(offerCollectionRef);
 
       results.forEach((doc) => {
-        // Access the data of each document using doc.data()
         dataArray.push(doc.data());
       });
     } catch (error) {

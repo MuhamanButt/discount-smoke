@@ -99,7 +99,7 @@ const UpdateOffer = () => {
             validateOnBlur={false}
             onSubmit={onSubmit}
             enableReinitialize
-          >
+            >
             {(formik)=>{
               return <Form>
                  <FormikControl control="input" type="offerDescription" name="offerDescription" label="Offer Description" interfaceDetails={interfaceDetails} totalCharacters={100}/>

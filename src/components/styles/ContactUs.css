@@ -1,16 +1,11 @@
 .contactUs-description{
     text-align: center;
 }
-.send-msg-btn{
+  .contact-us-submit-button button
+  {
+    border: 1px solid #00d019;
+    color: #00d019;
     width: 100%;
-    background-color: var(--success);
-    border: 1px solid #008e11;
-    color: white;
-    border-radius: 5px;
-    font-weight: 300;
-    font-size: 14px;
-    align-self: center;
-    padding: 5px 10px;
   }
 @media screen and (max-width:576px)
 {

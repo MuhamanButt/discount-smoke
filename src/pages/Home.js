@@ -16,6 +16,8 @@ import ContactUs from "../components/ContactUs";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setOffers } from "../redux/Offers/OffersAction";
+import { CommentOutlined, MessageOutlined,WhatsAppOutlined } from '@ant-design/icons';
+import { FloatButton, Switch } from 'antd';
 import { setSearchBarData } from "../redux/SearchBarData/SearchBarDataAction";
 import { setUserEntranceTime } from "../redux/UserEntranceTime/UserEntranceTimeActions";
 import CustomModal from "../utils/Modal";
@@ -24,11 +26,12 @@ const Home = () => {
   const userEntranceTime = useSelector((state) => state.userEntranceTime.time);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [MessageModal, setMessageModal] = useState(false);
-  const [Rerenderer, setRerenderer] = useState(false);
-  const [showSuccessfulModal, setshowSuccessfulModal] = useState(false);
-  const [showErrorModal, setshowErrorModal] = useState(false);
-  const [ModalText, setModalText] = useState("");
-  const [ModalTimer, setModalTimer] = useState(2000);
+  const [Rerenderer, setRerenderer] = useState(false); 
+  const [open, setOpen] = useState(false);
+  const onChange = () => {
+    console.log("changed")
+    setOpen(!open);
+  };
   function getRandomNumber() {
     const random = Math.random();
     const randomNumber = Math.floor(random * 4);
@@ -76,33 +79,13 @@ const Home = () => {
     const intervalId = setInterval(changeBackgroundImage, 3500);
     return () => clearInterval(intervalId);
   }, []);
-  const invokeModal = (text, timer, id) => {
-    if ("Message sent successfully!!" == text) {
-      setMessageModal(false);
-    }
-    if (text == "There is an error sending the message") {
-      setshowErrorModal(true);
-      setTimeout(() => {
-        setshowErrorModal(false);
-      }, timer);
-    } else {
-      setshowSuccessfulModal(true);
-      setTimeout(() => {
-        setshowSuccessfulModal(false);
-      }, timer);
-    }
-    setModalText(text);
-    setModalTimer(timer);
+  const navigateToWhatsApp = () => {
+    window.open("https://api.whatsapp.com/send?phone=923224922848", "_blank");
   };
   return (
     <>
       <div className="row m-0 ">
-        <div
-          className="col p-0 homepage-background"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-           {showSuccessfulModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"MSGST"}/>}
-         {showErrorModal&& <CustomModal text={ModalText} timer={ModalTimer} imageID={"ERR"}/>}
+        <div className="col p-0 homepage-background" style={{ backgroundImage: `url(${backgroundImage})` }}>
           <MyNavbar status={false}/>
           <HomePageMain />
           <Offers/>
@@ -112,24 +95,29 @@ const Home = () => {
           <Footer />
         </div>
       </div>
-      <Modal
-        show={MessageModal}
-        onHide={() => setMessageModal(false)}
-        size="xl"
-        centered
-        backdrop={true}
-      >
+      <Modal show={MessageModal} onHide={() => setMessageModal(false)} size="xl" centered backdrop={true}>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <ContactUs closeHandler={closeModal} modalInvoker={invokeModal} />
+          <ContactUs closeHandler={closeModal} />
         </Modal.Body>
       </Modal>
-      <div className="position-relative">
+      <FloatButton.Group
+        open={open}
+        onClick={onChange}
+        trigger="click"
+        style={{ right: 12,bottom:24}}
+        icon={<CommentOutlined style={{color:"white"}}/>}
+      >
+       <FloatButton icon={<MessageOutlined style={{color:"white"}}/>} onClick={showMessageModal}/>
+       
+      <FloatButton icon={<WhatsAppOutlined style={{color:"white"}}/>} onClick={navigateToWhatsApp} />
+      </FloatButton.Group>
+      
+      {/* <div className="position-relative">
         <div className="position-fixed bottom-0 end-0 text-center me-3 mb-3" onClick={showMessageModal} >
-          
           <i className="fa-solid fa-message messaging-icon"/>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

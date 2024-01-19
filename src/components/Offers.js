@@ -16,6 +16,8 @@ import {ExclamationCircleTwoTone,EditOutlined} from '@ant-design/icons';
 import { DANGER, SUCCESS } from "../values/Colors";
 import { CONVERT_TIMESTAMP_TO_DAYS_HOURS_AND_MINUTES } from "../utils/genericFunctions";
 import ConfirmationModal from "../utils/ConfirmationModal";
+import { Col, Row, Statistic } from 'antd';
+
 const Offers = () => {
   const offers = useSelector((state) => state.offers.offers);
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ const Offers = () => {
   const [show, setShow] = useState(false);
   const [itemToDelete, setitemToDelete] = useState("");
   const [LoaderState, setLoaderState] = useState(true);
+  const { Countdown } = Statistic;
+  const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Dayjs is also OK
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,7 +51,11 @@ const Offers = () => {
       return CONVERT_TIMESTAMP_TO_DAYS_HOURS_AND_MINUTES(timestamp)
     }
   };
- 
+  const onChange = (val) => {
+    if (typeof val === 'number' && 4.95 * 1000 < val && val < 5 * 1000) {
+      console.log('changed!');
+    }
+  };
   const isOfferValid = async (timestamp, identity) => {
     const currentTime = new Date().getTime();
     const timeDifference = timestamp - currentTime;
@@ -63,6 +71,7 @@ const Offers = () => {
       dispatch(setOffers(result));
       setData(result);
       setRerenderer(true);
+      console.log(Date(result[0].ExpirationTime))
     };
     if (offers.length > 0) {
       setData(offers);
@@ -113,8 +122,14 @@ const Offers = () => {
                           <img src={giftImage} alt="" className="w-100" />
                         </div>
                       </div>
-                      <div className="row justify-content-center">
-                        <div className="col-2 col-sm-1 text-center">
+                      <div className="row justify-content-center offer-countdown">
+                         <Countdown
+                           value={Date.now() + (data?.ExpirationTime - Date.now())}
+                           onFinish={() => console.log('Countdown finished')}
+                           onChange={onChange}
+                         />
+
+                        {/* <div className="col-2 col-sm-1 text-center">
                           <strong>
                             {" "}
                             <h3 className="m-0">
@@ -134,7 +149,7 @@ const Offers = () => {
                         <div className="col-2 col-sm-1 text-center">
                           <strong><h3 className="m-0">{getRemainingTime(data.ExpirationTime,data.identity).remainingMinutes}</h3></strong>
                           <p>Mins</p>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row justify-content-center mb-4">
                         <div className="col-9">
